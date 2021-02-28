@@ -46,23 +46,14 @@ class Window extends React.Component {
         });
     }
 
-    insertNewResponse(code, command) {
+    insertNewResponse(code) {
         let newState = this.state.history;
 
-        if(code === 'contact') {
-            newState.push(
-                <Prompt key={newState.length} code='contact'>
-                    {command}
-                </Prompt>
-            );
-        }
-        else if (code === 'error') {
-            newState.push(
-                <Prompt key={newState.length}>
-                    {command}
-                </Prompt>
-            );
-        }
+        newState.push(
+            <Prompt key={newState.length} code={code}>
+                {code}
+            </Prompt>
+        );
 
         this.setState({
             history: newState,
@@ -71,20 +62,16 @@ class Window extends React.Component {
     }
 
     _handleKeyPress(e) {
-        const state = this.state;
+        const input = this.state.input;
 
         if (e.key === 'Enter') {
-            switch (state.input) {
+            switch (input) {
                 case 'clear':
                     this.resetState();
                     break;
 
-                case 'contact':
-                    this.insertNewResponse('contact', state.input);
-                    break;
-
                 default:
-                    this.insertNewResponse('error', state.input);
+                    this.insertNewResponse(input);
                     break;
             }
         }

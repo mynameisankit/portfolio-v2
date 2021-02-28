@@ -1,0 +1,17 @@
+.result {
+    margin: 0px;
+    color: #61AFEF;
+}
+
+.error {
+    color: red;
+}
+
+.link {
+    color: #98C379;
+    transition: 200ms ease-in-out;
+}
+
+.link:hover {
+    color: #61AFEF;
+}

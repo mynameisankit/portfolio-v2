@@ -1,57 +1,40 @@
 import React from 'react';
 import { Col } from 'react-bootstrap';
+import Commands from './Commands';
 import Styles from './prompt.module.css';
 
 function prompt(props) {
-    let children;
     const code = props.code;
+    
+    let children = [
+        (<p key={0} className={Styles.result}>
+            {`Name@Ankit/Portfolio : ~$\xa0\xa0 ${code === 'default' ? 'default' : props.children} `}
+        </p>)
+    ];
 
-    if (code === 'default') {
-        children = (
-            <React.Fragment>
-                <p className={Styles.result}>
-                    Portfolio Version 2.0.1
-                </p>
-                <p className={Styles.result}>
-                    Welcome to my Portfolio
-                </p>
-                <p className={Styles.result}>
-                    Type 'help' to get the list of available commands.
-                </p>
-            </React.Fragment>
-        );
+    if (code === 'help') {
+        children.push(<Commands.Help key={1} />);
+    }
+    else if (code === 'default') {
+        children.push(<Commands.Defaults key={1} />);
     }
     else if (code === 'contact') {
-        children = (
-            <React.Fragment>
-                <p className={Styles.result}>
-                    {`Name@Ankit/Portfolio : ~$\xa0\xa0 ${props.children} `}
-                </p>
-                <p className={Styles.result}>
-                    E-Mail: <u><a href='mailto:ankit.kumar19@iiitg.ac.in'>ankit.kumar19@iiitg.ac.in</a></u>
-                </p>
-                <p className={Styles.result}>
-                    Instagram: my.name.is.ankit
-                </p>
-                <p className={Styles.result}>
-                    Github: mynameisankit
-                </p>
-                <p className={Styles.result}>
-                    Github: linkedin.com/in/mynameisankit/
-                </p>
-            </React.Fragment>
-        );
+        children.push(<Commands.Contact key={2} />);
+    }
+    else if (code === 'hi' || code === 'hello') {
+        children.push(<Commands.Greet key={3} />);
+    }
+    else if(code === 'bio') {
+        children.push(<Commands.Bio key={4} />);
+    }
+    else if(code === 'skills') {
+        children.push(<Commands.Skills key={4} />);
     }
     else {
-        children = (
-            <React.Fragment>
-                <p className={Styles.result}>
-                    {`Name@Ankit/Portfolio : ~$\xa0\xa0 ${props.children} `}
-                </p>
-                <p className={`${Styles.result} ${Styles.error}`}>
-                    {`${props.children} : Command Not Found`}
-                </p>
-            </React.Fragment>
+        children.push(
+            <Commands.Error key={5}>
+                {props.children}
+            </Commands.Error>
         );
     }
 
