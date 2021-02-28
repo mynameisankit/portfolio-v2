@@ -1,0 +1,13 @@
+.ribbon {
+    background-color: #abb2bf;
+    font-family: var(--monteserrat);
+}
+
+.heading {
+    margin-top: 0.5vh;
+    margin-bottom: 0.5vh;
+}
+
+.col {
+    text-align: center;
+}

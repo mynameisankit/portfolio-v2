@@ -1,0 +1,22 @@
+.command {
+    font-family: var(--monteserrat);
+    font-size: 20px;
+}
+
+.output {
+    background-color: transparent;
+    border: 0px;
+    color: #abb2bf;
+    font-weight: 600;
+    padding: 0px;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+}
+
+.result {
+    margin: 0px;
+}
+
+.error {
+    color: red;
+}
