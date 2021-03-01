@@ -5,7 +5,7 @@ function Error(props) {
     return (
         <React.Fragment>
             <p className={`${Styles.result} ${Styles.error}`}>
-                {`${props.children} : Command Not Found`}
+                {`${props.children} : Command / Option Not Found`}
             </p>
         </React.Fragment>
     );
