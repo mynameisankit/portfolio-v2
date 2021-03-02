@@ -1,0 +1,14 @@
+.navColour {
+    color: #ABB2BF!important;
+    font-family: var(--monteserrat);
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.hamburger {
+    color: #ABB2BF!important;
+}
+
+.collapse {
+    text-align: center;
+}

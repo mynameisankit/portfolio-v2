@@ -11,9 +11,6 @@ class Window extends React.Component {
             input: '',
         };
 
-        //Reference to Input
-        this.inputRef = React.createRef();
-
         //Timer
         this.timer = null;
 
@@ -82,6 +79,8 @@ class Window extends React.Component {
         this.inputRef = ref;
         if (this.inputRef) {
             this.inputRef.focus();
+            //Not working - Find out why???
+            //this.inputRef.scrollIntoView(true);
         }
     }
 
