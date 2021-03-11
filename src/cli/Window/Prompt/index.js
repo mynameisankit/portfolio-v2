@@ -29,7 +29,7 @@ function prompt(props) {
     else if(command === 'bio') {
         children.push(<Commands.Bio key={4} />);
     }
-    else if(command == 'skills') {
+    else if(command === 'skills') {
         console.log(options);
 
         children.push(

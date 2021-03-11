@@ -40,7 +40,7 @@ function Navigation(props) {
 
     const navs = links.map(link => {
         return (
-            <Nav.Link className={Styles.navColour} key={link.text} >
+            <Nav.Link className={Styles.nav} key={link.text} >
                 {link.text}
             </Nav.Link>
         );
@@ -50,7 +50,7 @@ function Navigation(props) {
         <Navbar variant='dark' collapseOnSelect expand="lg" className={Styles.navbarWrapper}>
 
             {/* Brand */}
-            <Navbar.Brand className={Styles.navColour}>
+            <Navbar.Brand className={Styles.navC}>
                 Portfolio
             </Navbar.Brand>
 

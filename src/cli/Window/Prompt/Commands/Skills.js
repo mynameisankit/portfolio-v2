@@ -38,6 +38,9 @@ function Skills(props) {
                     </Line>
                 );
                 break;
+
+            default: 
+                break;
         }
     }
     else {

@@ -1,13 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Telex&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap');
 
 :root {
+    /* Fonts */
     --monteserrat: 'Montserrat', sans-serif;
     --telex: 'Telex', sans-serif;
     --open-sans: 'Open Sans', sans-serif;
+    --work-sans: 'Work Sans', sans-serif;
+
+    /* Colour */
+    --project-font-colour: #ccd6f6;
 }
 
 body {
     background-color: #323741;
+    overflow-x: hidden;
 }

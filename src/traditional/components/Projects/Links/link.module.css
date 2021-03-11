@@ -1,0 +1,21 @@
+.button, .button:hover, .button:active, .button:focus {
+    background-color: transparent!important;
+    border: none!important;
+    font-size: 30px;
+    padding: 0px;
+    line-height: normal;
+    outline: none!important;
+    box-shadow: none!important;
+}
+
+.list_item {
+    list-style: none;
+    display: inline;
+    margin: auto 20px;
+    color: var(--project-font-colour);
+}
+
+.icon {
+    text-align: center;
+    font-size: 50px;
+}

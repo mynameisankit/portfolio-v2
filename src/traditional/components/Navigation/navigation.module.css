@@ -1,6 +1,10 @@
-.navColour {
+.navbarWrapper {
+    box-shadow: 0 10px 30px -10px black;
+}
+
+.nav {
     color: #ABB2BF!important;
-    font-family: var(--monteserrat);
+    font-family: var(--open-sans);
     font-size: 17px;
     font-weight: 500;
 }
