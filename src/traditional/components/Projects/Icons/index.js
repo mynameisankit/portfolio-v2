@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
+import Styles from './icon.module.css';
 
 import {
     FaGithub as Github,
@@ -27,8 +28,6 @@ import {
     DiRuby as Ruby,
     DiGitBranch as Git
 } from "react-icons/di";
-
-import Styles from './link.module.css';
 
 function List(props) {
     let { children, align } = props;

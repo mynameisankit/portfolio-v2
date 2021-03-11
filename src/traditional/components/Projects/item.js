@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Row, Col, Image } from 'react-bootstrap';
-import Links from './Links';
+import Icons from './Icons';
 import Styles from './projects.module.css';
 
 class Project extends React.Component {
@@ -61,7 +61,7 @@ class Project extends React.Component {
 
                                 {/* Links */}
                                 <div className={Styles.project_link} >
-                                    <Links align='center'>
+                                    <Icons align='center'>
                                         {[
                                             {
                                                 type: 'github',
@@ -71,12 +71,12 @@ class Project extends React.Component {
                                                 link: '#'
                                             }
                                         ]}
-                                    </Links>
+                                    </Icons>
                                 </div >
                             </div>
 
                             {/* Technology Stack */}
-                            <Links align={width > breakpoint ? 'right' : 'center'}>
+                            <Icons align={width > breakpoint ? 'right' : 'center'}>
                                 {[
                                     {
                                         type: 'html',
@@ -88,7 +88,7 @@ class Project extends React.Component {
                                         type: 'firebase',
                                     }
                                 ]}
-                            </Links>
+                            </Icons>
                         </div>
 
                     </Col>
