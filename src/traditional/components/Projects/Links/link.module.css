@@ -1,11 +1,14 @@
+/* Overriding Default Button Behaviour */
 .button, .button:hover, .button:active, .button:focus {
     background-color: transparent!important;
     border: none!important;
-    font-size: 30px;
-    padding: 0px;
     line-height: normal;
     outline: none!important;
     box-shadow: none!important;
+}
+
+.button {
+    padding: 0px;
 }
 
 .list_item {
@@ -15,7 +18,26 @@
     color: var(--project-font-colour);
 }
 
-.icon {
-    text-align: center;
-    font-size: 50px;
+.list {
+    padding-inline-start: 0px;
+}
+
+@media only screen and (max-width: 1200px) {
+    .button {
+        font-size: 40px;
+    }
+
+    .icon {
+        font-size: 40px;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .button {
+        font-size: 35px;
+    }
+
+    .icon {
+        font-size: 50px;
+    }
 }
