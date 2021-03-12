@@ -33,27 +33,28 @@ class Project extends React.Component {
         const width = this.state.width;
         const breakpoint = 1200;
         const data = props.children;
-        //const { align } = props;
 
-        // if (align !== 'left') {
-        //     children.reverse();
-        // }
+        //The Alignment is with respect to image
+        let { align } = props;
+        align = (align === 'left');
 
         return (
             <Container fluid className={Styles.container} >
                 <Row>
-                    <Col xs={12} className={`${Styles.col_container} ${width < breakpoint ? Styles.content_box : null}`}>
-                        
+                    <Col xs={12} className={`${Styles.col_container} ${width < breakpoint ? Styles.content_box : ''}`}>
+                        {/* Content */}
+
                         {/* Image */}
-                        <div key={1} className={Styles.imageContainer}>
+                        <div key={1} className={align ? Styles.imageContainer_left : Styles.imageContainer_right}>
                             <Image src={data.image} className={Styles.image} />
                         </div>
 
-                        {/* Content */}
-                        <div className={Styles.contentWrapper}>
-                            <h1 className={Styles.heading}>Yuvaan 2020</h1>
+                        <div className={align ? Styles.contentWrapper_right : Styles.contentWrapper_left}>
+                            <h1 className={`${Styles.heading} ${align ? Styles.heading_right : Styles.heading_left}`}>
+                                Yuvaan 2020
+                            </h1>
 
-                            <div className={width > breakpoint ? Styles.content_box : null}>
+                            <div className={`${align ? Styles.content_pad_right : Styles.content_pad_left} ${Styles.content} ${width > breakpoint ? Styles.content_box : ''}`}>
                                 {/* Project Description */}
                                 <p className={Styles.description}>
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nec ex sagittis, pellentesque magna ut, interdum ante. Mauris malesuada maximus enim mollis tincidunt. Phasellus ac hendrerit nibh. Integer eget rutrum massa. Fusce non arcu fermentum, facilisis risus vitae, ultricies sapien. Proin quis ipsum enim. Quisque sollicitudin orci est, sit amet vestibulum purus egestas et. Aliquam volutpat quam eu mauris ullamcorper, vel accumsan lacus.
@@ -76,7 +77,7 @@ class Project extends React.Component {
                             </div>
 
                             {/* Technology Stack */}
-                            <Icons align={width > breakpoint ? 'right' : 'center'}>
+                            <Icons align={width > breakpoint ? (align ? 'right' : 'left') : 'center'}>
                                 {[
                                     {
                                         type: 'html',

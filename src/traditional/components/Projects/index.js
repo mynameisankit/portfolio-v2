@@ -18,9 +18,10 @@ class Projects extends React.Component {
 
         const children = [];
 
+        //The Alignment is with respect to image
         for (let i in data) {
             children.push(
-                <Project key={i} align={parseInt(i) % 2 ? 'left' : 'right'}>
+                <Project key={i} align={parseInt(i) % 2 ? 'right' : 'left'}>
                     {{
                         image: Yuvaan,
                     }}
