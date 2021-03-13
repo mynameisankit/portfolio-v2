@@ -1,5 +1,5 @@
 .col_container {
-    color: var(--project-font-colour);
+    color: var(--font-colour);
 }
 
 .imageContainer {
@@ -19,7 +19,7 @@
 
 .content_box {
     box-shadow: 0 19px 38px rgba(0,0,0,0.40), 0 15px 12px rgba(0,0,0,0.30);
-    background-color: #1d2025;
+    background-color: var(--light-dark);
     border-radius: 5px;
     margin-bottom: 20px;
 }

@@ -24,10 +24,6 @@ function Terminal(props) {
         <Switch>
 
             { /* Main Page Layout */ }
-            <Route path='/' exact>
-                {mainComponent}
-            </Route>
-
             <Route path='/cli'>
                 {mainComponent}
             </Route>
