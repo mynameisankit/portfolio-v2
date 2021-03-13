@@ -1,0 +1,23 @@
+.container {
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.25), 0 6px 6px rgba(0,0,0,0.30);
+    background-color: rgb(29, 32, 37);
+    padding: 30px 30px;
+}
+
+.wrapper {
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.icon {
+    width: 90px;
+    height: 120px;
+}
+
+.heading {
+    font-family: var(--work-sans);
+}

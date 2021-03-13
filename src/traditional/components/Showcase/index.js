@@ -34,6 +34,8 @@ class Showcase extends React.Component {
                         type: 'firebase',
                     }, {
                         type: 'bootstrap',
+                    }, {
+                        type: 'jquery',
                     }
                 ],
 

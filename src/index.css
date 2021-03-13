@@ -16,7 +16,9 @@
 
     /* Colour */
     --font-colour: #ccd6f6;
+    --slate: #ccd6f6;
     --light-dark: rgb(29, 32, 37);
+    --light-blue: #56B6C2;
 }
 
 body {

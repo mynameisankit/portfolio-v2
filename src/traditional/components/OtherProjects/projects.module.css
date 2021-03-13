@@ -1,13 +1,11 @@
 .col {
-    margin-bottom: 20px;
-    margin-top: 20px;
+    margin-bottom: 15px;
+    margin-top: 15px;
     box-sizing: border-box;
     padding-left: 25px;
     padding-right: 25px;
-}
-
-.col {
-    height: 400px;
+    font-family: var(--open-sans);
+    height: 330px;
 }
 
 .projectWrapper {
@@ -60,13 +58,13 @@
 .heading {
     color: #ccd6f6;
     text-align: left;
-    font-size: 25px;
+    font-size: 22px;
     margin-top: 20px;
 }
 
 .description {
     color: #a8b2d1;
-    font-size: 15px;
+    font-size: 14px;
     text-align: left;
 }
 
@@ -96,6 +94,7 @@
     width: 100%;
     list-style: none;
     padding: 0px;
+    font-size: 14px;
     font-family: var(--roboto-mono);
 }
 

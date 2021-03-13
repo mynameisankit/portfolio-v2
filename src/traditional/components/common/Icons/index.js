@@ -14,6 +14,8 @@ import {
     FaNodeJs as Node,
     FaCuttlefish as C,
     FaRegFolder as Folder,
+    FaSass as Sass,
+    FaDatabase as Database,
 } from "react-icons/fa";
 
 import {
@@ -25,6 +27,7 @@ import {
     SiPython as Python,
     SiMaterialUi as MaterialUi,
     SiRails as Rails,
+    SiJquery as Jquery,
 } from "react-icons/si";
 
 import {
@@ -43,8 +46,6 @@ function List(props) {
     const style = {
         textAlign: align,
     };
-
-    console.log(children, typeof children, type, link);
 
     if (children && children instanceof Object) {
         children = children.map(item => (
@@ -86,6 +87,7 @@ function Icon(props) {
             break;
 
         case 'js':
+        case 'javascript':
             icon = <JS title='JavaScript' />;
             break;
 
@@ -158,7 +160,19 @@ function Icon(props) {
             break;
 
         case 'folder':
-            icon = <Folder title='folder' />;
+            icon = <Folder title='Folder' />;
+            break;
+
+        case 'jquery':
+            icon = <Jquery title='JQuery' />;
+            break;
+
+        case 'sass':
+            icon = <Sass title='Sass' />;
+            break;
+
+        case 'database':
+            icon = <Database title='Database' />;
             break;
 
         default:
@@ -183,7 +197,7 @@ function Icon(props) {
         }
     }
     else {
-        if(link) {
+        if (link) {
             return (
                 <Button className={`${className} ${Styles.button}`} {...rest}>
                     {icon}
