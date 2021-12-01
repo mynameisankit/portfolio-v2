@@ -1,6 +1,7 @@
 //Schemas
 import featured from './featured';
 import projects from './projects';
+import blogs from './blogs';
 
 const config = {
     cms_manual_init: true,
@@ -13,7 +14,8 @@ const config = {
     public_folder: 'images',
     collections: [
         featured,
-        projects
+        projects,
+        blogs
     ],
 };
 
