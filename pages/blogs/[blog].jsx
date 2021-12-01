@@ -1,3 +1,5 @@
+//Utility Imports
+import { MDXProvider } from '@mdx-js/react';
 //Server Side Imports
 import readDirSync from '../../lib/readDirSync';
 import retrieveDataSync from '../../lib/retrieveDataSync';
@@ -8,14 +10,17 @@ import createURL from '../../lib/createURL';
 //Client Side Imports
 import React from 'react';
 import { MDXRemote } from 'next-mdx-remote';
+//MDX Components
+import MDXComponents from '../../components/MDXComponents';
 
 function Blog({ source, frontMatter }) {
     return (
-        <MDXRemote
-            {...source}
-            scope={frontMatter}
-            lazy
-        />
+        <MDXProvider components={MDXComponents}>
+            <MDXRemote
+                {...source}
+                scope={frontMatter}
+            />
+        </MDXProvider>
     );
 }
 
