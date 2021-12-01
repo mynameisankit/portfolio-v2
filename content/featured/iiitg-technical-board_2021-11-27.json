@@ -1,0 +1,12 @@
+{
+  "title": "IIITG Technical Board",
+  "abstract": "Lorem Ipsum",
+  "thumbnail": "images/admin-panel.png",
+  "github": "https://github.com/IIITG-Open-Source/Technical-Board-Portal",
+  "techStack": [
+    "JavaScript",
+    "React.js",
+    "Firebase",
+    "Material-UI"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "title": "Conway's Game Of Life",
+  "abstract": "Simulator made on React.js of the cellular automaton Game of Life, also known simply as Life, by John Conway.",
+  "techStack": [
+    "React.js",
+    "Styled-Components"
+  ],
+  "extLink": "https://play-game-of-life.netlify.app/",
+  "github": "https://github.com/mynameisankit/conways-game-of-life",
+  "duration": ""
+}

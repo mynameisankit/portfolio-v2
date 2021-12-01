@@ -1,0 +1,14 @@
+{
+  "techStack": [
+    "JavaScript",
+    "React.js",
+    "Next.js",
+    "Material-UI",
+    "NetlifyCMS",
+    "MDX"
+  ],
+  "title": "Portfolio v2",
+  "abstract": "My Portfolio",
+  "thumbnail": "images/construction.jpg",
+  "github": "https://github.com/mynameisankit/portfolio-v2"
+}

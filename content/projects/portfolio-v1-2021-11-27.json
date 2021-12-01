@@ -1,0 +1,13 @@
+{
+  "title": "Portfolio v1",
+  "abstract": "The first iteration of my personal portfolio.",
+  "github": "https://github.com/mynameisankit/portfolio-v1",
+  "githubAPI": "",
+  "extLink": "https://mynameisankit.github.io/portfolio-v1/",
+  "techStack": [
+    "HTML",
+    "CSS",
+    "JavaScript"
+  ],
+  "duration": "July 2020 - August 2020"
+}
