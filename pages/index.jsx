@@ -3,6 +3,7 @@ const retrieveDataSync = require('../lib/retrieveDataSync');
 //Client-Side Imports
 import React from 'react';
 //Custom Components
+import Intro from '../components/home/Intro';
 import Featured from '../components/home/Featured';
 import Projects from '../components/home/Projects';
 import Contact from '../components/home/Contact';
@@ -12,6 +13,7 @@ function Home(props) {
 
     return (
         <React.Fragment>
+            <Intro />
             <Featured>
                 {featured}
             </Featured>

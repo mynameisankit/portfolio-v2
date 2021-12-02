@@ -5,6 +5,7 @@
     "dev": "next dev",
     "dev:watch": "next-remote-watch ./content/blogs",
     "build": "next build",
+    "export": "next build && next export",
     "start": "next start",
     "lint": "next lint"
   },

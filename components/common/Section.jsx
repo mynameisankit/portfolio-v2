@@ -13,7 +13,7 @@ function Section(props) {
             sx={{
                 ...sx,
                 height: '100%',
-                ...(gutterBottom && {marginBottom: theme.spacing(4)})
+                ...(gutterBottom && {marginBottom: theme.spacing(6)})
             }}>
             {children}
         </Container>

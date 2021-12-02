@@ -98,6 +98,7 @@ function Blogs(props) {
         }
 
         const minRows = props.minRows;
+        //TODO: Paginate logically instead of physical
         //Paginate each tag
         for (let tag in taggedArticles) {
             const paginated = [];
