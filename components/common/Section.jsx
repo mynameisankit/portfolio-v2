@@ -3,7 +3,7 @@ import Container from '@mui/material/Container';
 import { useTheme } from '@mui/material/styles';
 
 function Section(props) {
-    const { id, sx, gutterBottom, maxWidth, children } = props;
+    const { id, sx, children, gutterBottom, maxWidth } = props;
     const theme = useTheme();
 
     return (
@@ -12,7 +12,7 @@ function Section(props) {
             id={id}
             sx={{
                 ...sx,
-                height: '100%',
+                minHeight: '100vh',
                 ...(gutterBottom && {marginBottom: theme.spacing(6)})
             }}>
             {children}

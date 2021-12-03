@@ -16,7 +16,7 @@ const theme = createTheme({
         background: {
             default: '#253237',
         },
-    },
+    }
 });
 
 export default responsiveFontSizes(theme);
