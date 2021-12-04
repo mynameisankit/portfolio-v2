@@ -7,7 +7,9 @@ const globalStyles = {
         background: '#888',
         borderRadius: 2,
     },
-    '::-webkit-scrollbar-thumb:hover': { background: '#555' }
+    '::-webkit-scrollbar-thumb:hover': {
+        background: '#555'
+    }
 };
 
 export default globalStyles;

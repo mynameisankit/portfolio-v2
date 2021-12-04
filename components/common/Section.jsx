@@ -13,6 +13,8 @@ function Section(props) {
             sx={{
                 ...sx,
                 minHeight: '100vh',
+                display: 'flex',
+                alignItems: 'center',
                 ...(gutterBottom && {marginBottom: theme.spacing(6)})
             }}>
             {children}

@@ -60,7 +60,6 @@ function Terminal(props) {
     const { initialMessage, commands } = props;
     const [output, setOutput] = useState([]);
     const [ready, setReady] = useState(false);
-    const theme = useTheme();
 
     //Initial Messages
     useEffect(() => {
@@ -153,28 +152,41 @@ function Terminal(props) {
     //Scroll to the bottom of the terminal
     const outputBox = useRef(null);
     useEffect(() => {
-        if (outputBox.current)
-            outputBox.current.scrollTop = outputBox.current.scrollHeight;
+        if (outputBox.current) {
+            outputBox.current.scroll({
+                top: outputBox.current.scrollHeight,
+                behavior: 'smooth'
+            });
+        }
     }, [output]);
+
+    const inputField = useRef(null);
+    const handleFocus = () => {
+        if (inputField.current)
+            inputField.current.focus();
+    };
 
     return (
         <ThemeProvider theme={codeTheme}>
-            <Box sx={{
-                borderRadius: 1,
-                height: 375,
-                width: 750,
-                display: 'flex',
-                flexDirection: 'column',
-                overflow: 'hidden',
-                boxShadow: 20,
-            }}>
+            <Box
+                sx={{
+                    height: 400, width: 1,
+                    position: 'relative',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    userSelect: 'none',
+                    overflowY: 'scroll',
+                }}
+                onClick={handleFocus}
+            >
                 {/* Title Bar */}
                 <Box sx={{
                     position: 'relative',
                     display: 'flex',
                     alignItems: 'center',
                     backgroundColor: 'primary.main',
-                    color: 'background.default'
+                    color: 'background.default',
+                    zIndex: 1
                 }}>
                     <Box sx={{
                         position: 'absolute',
@@ -199,6 +211,7 @@ function Terminal(props) {
                         overflowY: 'scroll',
                         backgroundColor: 'background.default',
                         color: 'primary.main',
+                        zIndex: 1
                     }}
                     ref={outputBox}
                 >
@@ -218,6 +231,7 @@ function Terminal(props) {
                             <Typography variant='body1' sx={{ color: 'info.main' }}>{prompt.current}:~$</Typography>
                             {/* Note - Uncontrolled Component to avoid typing logic */}
                             <InputBase
+                                inputRef={inputField}
                                 onKeyUp={handleInput}
                                 onChange={handleInput}
                                 fullWidth

@@ -31,12 +31,34 @@ import { SiGnubash } from '@react-icons/all-files/si/SiGnubash';
 import { SiC } from '@react-icons/all-files/si/SiC';
 import { DiGitBranch } from '@react-icons/all-files/di/DiGitBranch';
 import { IoLogoMarkdown } from '@react-icons/all-files/io/IoLogoMarkdown';
+//Material-UI Icons
+import InstagramIcon from '@mui/icons-material/Instagram';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import GitHubIcon from '@mui/icons-material/GitHub';
 
+//TODO: Refactor the code here
 function ReactIcons(props) {
     const { icon, ...rest } = props;
     let Component = null;
 
     switch (icon) {
+        case 'instagram':
+            Component = InstagramIcon;
+            break;
+
+        case 'facebook':
+            Component = FacebookIcon;
+            break;
+
+        case 'linkedin':
+            Component = LinkedInIcon;
+            break;
+
+        case 'github':
+            Component = GitHubIcon;
+            break;
+
         case 'Meteor':
         case 'Meteor.js':
             Component = SiMeteor;

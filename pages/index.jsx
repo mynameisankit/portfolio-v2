@@ -9,11 +9,13 @@ import Projects from '../components/home/Projects';
 import Contact from '../components/home/Contact';
 
 function Home(props) {
-    const { data: { featured, projects } } = props;
+    const { data: { featured, projects, socialMedia } } = props;
 
     return (
         <React.Fragment>
-            <Intro />
+            <Intro 
+                socialMedia={socialMedia}
+            />
             <Featured>
                 {featured}
             </Featured>
@@ -29,11 +31,22 @@ export async function getStaticProps(context) {
     const directories = {
         "featured": null,
         "projects": null,
+        "socialMedia": {
+            fileName: 'socialMedia.json'
+        }
     };
 
     const data = {};
-    for (let i in directories)
-        data[i] = retrieveDataSync(i, 'JSON');
+    for (let i in directories) {
+        let fileName;
+
+        if (directories[i] instanceof Object)
+            fileName = directories[i].fileName;
+        else
+            fileName = i;
+
+        data[i] = retrieveDataSync(fileName, 'JSON');
+    }
 
     return { props: { data } };
 }
