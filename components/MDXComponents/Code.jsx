@@ -2,13 +2,16 @@ import React from 'react';
 import Highlight, { defaultProps } from 'prism-react-renderer';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
 import { styled } from '@mui/material/styles';
+//Material-UI Icons
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 const Pre = styled('pre')`
   text-align: left;
-  margin: 1em 0;
   padding: 0.5em;
   overflow: scroll;
+  margin: 0 0 1.5em 0;
 `;
 
 const Line = styled(Box)`
@@ -27,6 +30,19 @@ const LineContent = styled(Box)`
   display: table-cell;
 `;
 
+const HelperBox = styled(Box)(({ theme }) => ({
+    display: 'flex',
+    alignItems: 'center',
+    padding: `0px ${theme.spacing(2)} 0px ${theme.spacing(2)}`,
+    backgroundColor: theme.palette.secondary.main,
+    borderRadius: '15px 15px 0px 0px',
+}));
+
+function copyText(text) {
+    navigator?.clipboard.writeText(text);
+    return;
+}
+
 function Code(props) {
     let { children: { props: { children: code, className: language } } } = props;
 
@@ -35,12 +51,27 @@ function Code(props) {
     language = language.replace(/language-/, '');
 
     return (
-        <Box>
-            <Typography>{language}</Typography>
+        <Box sx={{ mt: 2 }}>
+            <Box sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-between'
+            }}>
+                <HelperBox>
+                    <IconButton size='large' onClick={() => copyText(code)}>
+                        <ContentCopyIcon />
+                    </IconButton>
+                </HelperBox>
+                <HelperBox>
+                    <Typography variant='h6' align='right'>
+                        {language}
+                    </Typography>
+                </HelperBox>
+            </Box>
             <Highlight {...defaultProps} code={code} language={language}>
-                {
-                    ({ className, style, tokens, getLineProps, getTokenProps }) => (
-                        <Pre className={className} style={style}>
+                {({ className, style, tokens, getLineProps, getTokenProps }) => (
+                    <Pre className={className} style={style}>
+                        <React.Fragment>
                             {tokens.map((line, i) => (
                                 <Line key={i} {...getLineProps({ line, key: i })}>
                                     <LineNo>{i + 1}</LineNo>
@@ -50,10 +81,11 @@ function Code(props) {
                                         ))}
                                     </LineContent>
                                 </Line>
+
                             ))}
-                        </Pre>
-                    )
-                }
+                        </React.Fragment>
+                    </Pre>
+                )}
             </Highlight>
         </Box>
     );

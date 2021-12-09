@@ -69,8 +69,7 @@ body {
 ```
 
 ```css
-@import url("https://fonts.googleapis.com/css2?family=Pangolin&display=swap") l
-  .typed > p {
+.typed > p {
   font-family: "Pangolin", cusrive;
 }
 
@@ -82,15 +81,16 @@ body {
 
 I will make the **position** of the paragraph element **absolute** so that they stack over each other and the maximum width of the containing box will be equal to the maximum width of all the paragraph elements and then set the **visibility** property to **hidden**.
 
-**Note —** The font used is a **Google Font** and don’t forget to the set **position** of the containing element to **relative** so that paragraphs position themselves according to it.
+**Note —** Don’t forget to the set **position** of the containing element to **relative** so that paragraphs position themselves according to it.
 
 **Step 3(Optional)** — I will use JavaScript **“strict mode”** and write all the code inside an Immediately Invoked Function Expression (IIFE)to avoid polluting the global namespace.
 
 
 ```js
 "use strict";
+(function () {
 
-(function () {})();
+})();
 ```
 
 **Step 4** — I will make two arrays: One named **_“contentArray”_** to store the strings contained inside the **_“p”_** element with the class name **_“text”_** and second named **_“typedElement”_** which will store all the element objects with the CSS selector **_“.typed >.text”_** and then insert the text content into the **_“typedElement”_** array using **textContent** property of the element object using a for loop.

@@ -1,12 +1,13 @@
 //Utility Imports
 import dayjs from 'dayjs';
 import cloneDeep from 'lodash/fp/cloneDeep';
+import upperFirst from 'lodash/fp/upperFirst';
 //Server Side Imports
 import retrieveDataSync from '../../lib/retrieveDataSync';
 import matter from 'gray-matter';
 import createURL from '../../lib/createURL';
 //Client Side Imports
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useReducer } from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
@@ -28,9 +29,7 @@ import Post from '../../components/blogs/Post';
 
 //Sort in-place by date
 function sortByDate(data, order) {
-    const newData = cloneDeep(data);
-
-    newData?.sort((a, b) => {
+    data?.sort((a, b) => {
         let { date: date1 } = a;
         let { date: date2 } = b;
 
@@ -40,12 +39,10 @@ function sortByDate(data, order) {
         const diff = date1.diff(date2, 'day');
 
         if (diff)
-            return (order === 'Newest') ? -diff : diff;
+            return (order === 'newest') ? -diff : diff;
         else
             return 0;
     });
-
-    return newData;
 }
 
 function LabeledIcon(props) {
@@ -69,11 +66,25 @@ function LabeledIcon(props) {
     );
 }
 
+function reducer(state, action) {
+    const { type, field, payload } = action;
+
+    switch (type) {
+        case 'button': case 'select':
+            return { ...state, [field]: payload };
+        case 'pagination': return { ...state, page: payload };
+        default: return state;
+    }
+}
+
 function Blogs(props) {
     const [blogs, setBlogs] = useState(props.blogs);
-    const [page, setPage] = useState(1);
-    const [category, setCategory] = useState('All');
-    const [order, setOrder] = useState('Newest');
+    const [settings, dispatch] = useReducer(reducer, {
+        page: 1,
+        category: 'All',
+        order: 'newest',
+        rows: 10
+    });
 
     //Create a hash map to quickly find the corresponding articles
     //Using useRef to create instance variable
@@ -82,51 +93,43 @@ function Blogs(props) {
 
         //Find the articles to each corresponding tag
         for (let i in blogs) {
-            for (let j in blogs[i]) {
-                const curr = blogs[i][j];
+            const curr = blogs[i];
 
-                //Iterate through the tags
-                for (let k in curr.tags) {
-                    const tag = curr.tags[k];
+            //Iterate through the tags
+            for (let k in curr.tags) {
+                const tag = curr.tags[k];
 
-                    if (!taggedArticles[tag])
-                        taggedArticles[tag] = [curr];
-                    else
-                        taggedArticles[tag].push(curr);
-                }
-            }
-        }
-
-        const minRows = props.minRows;
-        //TODO: Paginate logically instead of physical
-        //Paginate each tag
-        for (let tag in taggedArticles) {
-            const paginated = [];
-
-            for (let i in taggedArticles[tag]) {
-                const curr = taggedArticles[tag][i];
-
-                if (i % minRows == 0)
-                    paginated.push([curr]);
+                if (!taggedArticles[tag])
+                    taggedArticles[tag] = [curr];
                 else
-                    paginated[parseInt(i / minRows)].push(curr);
+                    taggedArticles[tag].push(curr);
             }
-
-            taggedArticles[tag] = paginated;
         }
 
         return taggedArticles;
     })());
 
+    const { page, rows, category, order } = settings;
+
+    //Side-effect when tag is changed
     useEffect(() => {
-        const blogs = (category === 'All') ? props.blogs : tags.current[category];
-        const sortedBlogs = [];
+        const blogs = cloneDeep((category === 'All') ? props.blogs : tags.current[category]);
+        sortByDate(blogs, order);
+        setBlogs(blogs);
 
-        for (let i in blogs)
-            sortedBlogs[i] = sortByDate(blogs[i], order);
+    }, [settings.category, settings.order]);
 
-        setBlogs(sortedBlogs);
-    }, [category, order, page, props.blogs]);
+    // Current Blogs
+    const currBlogs = [];
+    for (let i = ((page - 1) * rows); i < Math.min(blogs.length, page * rows); i++) {
+        const blog = blogs[i];
+
+        currBlogs.push(
+            <Grid item xs={12} lg={4} md={6} key={blog.title}>
+                <Post>{blog}</Post>
+            </Grid>
+        );
+    }
 
     return (
         <Section id='blogs' sx={{ mt: 4 }}>
@@ -149,7 +152,11 @@ function Blogs(props) {
                                         variant='contained'
                                         startIcon={<ReactIcons icon={curr} />}
                                         disabled={curr === category}
-                                        onClick={(event) => setCategory(curr)}
+                                        onClick={(event) => dispatch({
+                                            type: 'button',
+                                            field: 'category',
+                                            payload: curr
+                                        })}
                                     >
                                         {curr}
                                     </Button>
@@ -163,8 +170,12 @@ function Blogs(props) {
                             <InputLabel>Order By</InputLabel>
                             <Select
                                 label='Order By'
-                                onChange={event => setOrder(event.target.value)}
-                                value={order}
+                                onChange={event => dispatch({
+                                    type: 'select',
+                                    field: 'order',
+                                    payload: event.target.value
+                                })}
+                                value={upperFirst(order)}
                             >
                                 <MenuItem value='Newest'>Newest</MenuItem>
                                 <MenuItem value='Oldest'>Oldest</MenuItem>
@@ -175,15 +186,7 @@ function Blogs(props) {
                 {/* All Posts */}
                 <Grid container spacing={3} sx={{ mt: 1, position: 'relative' }}>
                     {/* <FlipMove typeName={null}> */}
-                    {blogs?.[page - 1]?.length ? (
-                        blogs[page - 1].map(blog => (
-                            <Grid item xs={12} lg={4} md={6} key={blog.title}>
-                                <Post>
-                                    {blog}
-                                </Post>
-                            </Grid>
-                        ))
-                    ) : (
+                    {currBlogs.length ? currBlogs : (
                         <Grid item xs={12}>
                             <Typography gutterBottom variant='h4'>No articles with the tag &quot;{category}&quot; found</Typography>
                         </Grid>
@@ -195,12 +198,16 @@ function Blogs(props) {
                     }}>
                         <Stack spacing={2}>
                             <Pagination
-                                count={(blogs ? blogs.length : 0) + !Boolean(blogs.length)}
+                                count={Math.ceil(blogs ? blogs.length / 10 : 0)}
                                 color='secondary'
                                 size='large'
                                 showFirstButton
                                 showLastButton
-                                onChange={(event, value) => setPage(value)}
+                                onChange={(event, value) => dispatch({
+                                    type: 'pagination',
+                                    field: 'page',
+                                    payload: value
+                                })}
                                 page={page}
                             />
                         </Stack>
@@ -213,13 +220,12 @@ function Blogs(props) {
 
 export async function getStaticProps(context) {
     const files = retrieveDataSync('blogs');
-    const minRows = 10;
 
     const blogs = [];
     const tags = new Set();
 
-    //Paginate each article
-    files.forEach((source, idx) => {
+    //Parse and store each article in the array
+    files.forEach(source => {
         const { data: curr } = matter(source);
 
         //Note - Date causes serialization issues
@@ -231,23 +237,16 @@ export async function getStaticProps(context) {
 
         //Create URLs
         curr.url = createURL('/blogs', curr.title);
-
-        if (idx % minRows == 0) {
-            const prev = (idx / minRows) - 1;
-            if (prev >= 0)
-                blogs[prev] = sortByDate(blogs[prev], 'Newest');
-
-            blogs.push([curr]);
-        }
-        else
-            blogs[parseInt(idx / minRows)].push(curr);
+        blogs.push(curr);
     });
+
+    //Sort all the article by newest date
+    sortByDate(blogs, 'newest');
 
     return {
         props: {
             blogs,
-            tags: Array.from(tags),
-            minRows
+            tags: Array.from(tags)
         },
     };
 }

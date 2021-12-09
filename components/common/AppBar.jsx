@@ -1,21 +1,17 @@
 import React from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import MuiAppBar from '@mui/material/AppBar';
 import MuiLink from '@mui/material/Link';
 import Toolbar from '@mui/material/Toolbar';
 import Box from '@mui/material/Box';
 
 function AppBar(props) {
-    const { children } = props;
+    const { children, currentRoute } = props;
     const routes = [...children];
     routes.unshift({
         'name': 'home',
         'url': '/'
     });
-
-    const router = useRouter();
-    const { pathname: currentRoute } = router;
 
     return (
         <MuiAppBar position='relative' color='transparent'
@@ -42,7 +38,7 @@ function AppBar(props) {
                         return (
                             <Link key={url} href={url} passHref>
                                 <MuiLink sx={{
-                                    ...(currentRoute === url && {
+                                    ...(`/${currentRoute}` === url && {
                                         color: 'red'
                                     })
                                 }}>

@@ -1,5 +1,6 @@
 //Client-side imports
 import React from 'react';
+import { useRouter } from 'next/router';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -11,12 +12,20 @@ import theme from '../styles/theme';
 import Head from '../components/common/Head';
 import globalStyles from '../styles/global';
 import AppBar from '../components/common/AppBar';
+import Footer from '../components/common/Footer';
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 
 function MyApp(props) {
     const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+
+    const router = useRouter();
+
+    let { pathname: currentRoute } = router;
+    const URLMatcher = /^\/([-\w]*).*$/;
+    //Get the top-most route
+    currentRoute = URLMatcher.exec(currentRoute)[1].toLowerCase();
 
     return (
         <CacheProvider value={emotionCache}>
@@ -27,10 +36,15 @@ function MyApp(props) {
                 {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
                 <CssBaseline />
                 <GlobalStyles styles={globalStyles} />
-                <AppBar>
-                    {['projects', 'blogs']}
-                </AppBar>
+                {currentRoute !== 'admin' && (
+                    <AppBar>
+                        {['projects', 'blogs']}
+                    </AppBar>
+                )}
                 <Component {...pageProps} />
+                {currentRoute !== 'admin' && (
+                    <Footer />
+                )}
             </ThemeProvider>
         </CacheProvider>
     );
