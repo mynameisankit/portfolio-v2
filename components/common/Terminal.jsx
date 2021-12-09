@@ -2,9 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import InputBase from '@mui/material/InputBase';
-import { useTheme, styled, ThemeProvider } from '@mui/material/styles';
+import { styled, ThemeProvider } from '@mui/material/styles';
 //Custom Theme
-import codeTheme from '../../styles/codeTheme';
+import theme from '../../styles/theme/code';
 //Utility Imports
 import lowerCase from 'lodash/fp/lowerCase';
 
@@ -167,7 +167,7 @@ function Terminal(props) {
     };
 
     return (
-        <ThemeProvider theme={codeTheme}>
+        <ThemeProvider theme={theme}>
             <Box
                 sx={{
                     height: 400, width: 1,

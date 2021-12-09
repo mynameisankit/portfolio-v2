@@ -130,81 +130,83 @@ function Blogs(props) {
 
     return (
         <Section id='blogs' sx={{ mt: 4 }}>
-            {/* Filters */}
-            <Grid container spacing={3}>
-                <Grid item xs={12}>
-                    <LabeledIcon icon={DragIndicatorIcon}>Tags</LabeledIcon>
-                    <Box sx={{
-                        display: 'flex',
-                        gap: 2,
-                        flexWrap: 'wrap',
-                    }}>
-                        {Object.entries(tags.current).concat([['All']]).map(tag => {
-                            const curr = tag[0];
-
-                            return (
-                                <Button
-                                    key={curr}
-                                    variant='contained'
-                                    startIcon={<ReactIcons icon={curr} />}
-                                    disabled={curr === category}
-                                    onClick={(event) => setCategory(curr)}
-                                >
-                                    {curr}
-                                </Button>
-                            );
-                        })}
-                    </Box>
-                </Grid>
-                <Grid item xs={12}>
-                    <LabeledIcon icon={SortIcon}>Sort</LabeledIcon>
-                    <FormControl>
-                        <InputLabel>Order By</InputLabel>
-                        <Select
-                            label='Order By'
-                            onChange={event => setOrder(event.target.value)}
-                            value={order}
-                        >
-                            <MenuItem value='Newest'>Newest</MenuItem>
-                            <MenuItem value='Oldest'>Oldest</MenuItem>
-                        </Select>
-                    </FormControl>
-                </Grid>
-            </Grid>
-            {/* All Posts */}
-            <Grid container spacing={3} sx={{ mt: 1, position: 'relative' }}>
-                {/* <FlipMove typeName={null}> */}
-                {blogs?.[page - 1]?.length ? (
-                    blogs[page - 1].map(blog => (
-                        <Grid item xs={12} lg={4} md={6} key={blog.title}>
-                            <Post>
-                                {blog}
-                            </Post>
-                        </Grid>
-                    ))
-                ) : (
+            <Box>
+                {/* Filters */}
+                <Grid container spacing={3}>
                     <Grid item xs={12}>
-                        <Typography gutterBottom variant='h4'>No articles with the tag &quot;{category}&quot; found</Typography>
+                        <LabeledIcon icon={DragIndicatorIcon}>Tags</LabeledIcon>
+                        <Box sx={{
+                            display: 'flex',
+                            gap: 2,
+                            flexWrap: 'wrap',
+                        }}>
+                            {Object.entries(tags.current).concat([['All']]).map(tag => {
+                                const curr = tag[0];
+
+                                return (
+                                    <Button
+                                        key={curr}
+                                        variant='contained'
+                                        startIcon={<ReactIcons icon={curr} />}
+                                        disabled={curr === category}
+                                        onClick={(event) => setCategory(curr)}
+                                    >
+                                        {curr}
+                                    </Button>
+                                );
+                            })}
+                        </Box>
                     </Grid>
-                )}
-                {/* </FlipMove> */}
-                <Grid item xs={12} sx={{
-                    display: 'flex',
-                    justifyContent: 'center'
-                }}>
-                    <Stack spacing={2}>
-                        <Pagination
-                            count={(blogs ? blogs.length : 0) + !Boolean(blogs.length)}
-                            color='secondary'
-                            size='large'
-                            showFirstButton
-                            showLastButton
-                            onChange={(event, value) => setPage(value)}
-                            page={page}
-                        />
-                    </Stack>
+                    <Grid item xs={12}>
+                        <LabeledIcon icon={SortIcon}>Sort</LabeledIcon>
+                        <FormControl>
+                            <InputLabel>Order By</InputLabel>
+                            <Select
+                                label='Order By'
+                                onChange={event => setOrder(event.target.value)}
+                                value={order}
+                            >
+                                <MenuItem value='Newest'>Newest</MenuItem>
+                                <MenuItem value='Oldest'>Oldest</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </Grid>
                 </Grid>
-            </Grid>
+                {/* All Posts */}
+                <Grid container spacing={3} sx={{ mt: 1, position: 'relative' }}>
+                    {/* <FlipMove typeName={null}> */}
+                    {blogs?.[page - 1]?.length ? (
+                        blogs[page - 1].map(blog => (
+                            <Grid item xs={12} lg={4} md={6} key={blog.title}>
+                                <Post>
+                                    {blog}
+                                </Post>
+                            </Grid>
+                        ))
+                    ) : (
+                        <Grid item xs={12}>
+                            <Typography gutterBottom variant='h4'>No articles with the tag &quot;{category}&quot; found</Typography>
+                        </Grid>
+                    )}
+                    {/* </FlipMove> */}
+                    <Grid item xs={12} sx={{
+                        display: 'flex',
+                        justifyContent: 'center'
+                    }}>
+                        <Stack spacing={2}>
+                            <Pagination
+                                count={(blogs ? blogs.length : 0) + !Boolean(blogs.length)}
+                                color='secondary'
+                                size='large'
+                                showFirstButton
+                                showLastButton
+                                onChange={(event, value) => setPage(value)}
+                                page={page}
+                            />
+                        </Stack>
+                    </Grid>
+                </Grid>
+            </Box>
         </Section>
     );
 }

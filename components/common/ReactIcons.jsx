@@ -36,6 +36,7 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
+import TwitterIcon from '@mui/icons-material/Twitter';
 
 //TODO: Refactor the code here
 function ReactIcons(props) {
@@ -43,6 +44,10 @@ function ReactIcons(props) {
     let Component = null;
 
     switch (icon) {
+        case 'twitter':
+            Component = TwitterIcon;
+            break;
+
         case 'instagram':
             Component = InstagramIcon;
             break;

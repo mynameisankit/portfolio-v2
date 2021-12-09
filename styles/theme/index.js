@@ -16,7 +16,13 @@ const theme = createTheme({
         background: {
             default: '#253237',
         },
-    }
+    },
+    typography: {
+        fontFamily: [
+            'Montserrat',
+            'sans-serif'
+        ].join(','),
+    },
 });
 
 export default responsiveFontSizes(theme);

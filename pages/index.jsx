@@ -13,9 +13,7 @@ function Home(props) {
 
     return (
         <React.Fragment>
-            <Intro 
-                socialMedia={socialMedia}
-            />
+            <Intro  socialMedia={socialMedia} />
             <Featured>
                 {featured}
             </Featured>

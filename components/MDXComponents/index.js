@@ -4,6 +4,8 @@ import Link from 'next/link';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import MuiLink from '@mui/material/Link';
+//Custom Components
+import Code from './Code';
 
 const MDXComponents = {
     ...(
@@ -16,7 +18,7 @@ const MDXComponents = {
         ), {})
     ),
     p: ({ children, ...rest }) => (
-        <Typography {...rest}>
+        <Typography variant='body1' {...rest}>
             {children}
         </Typography>
     ),
@@ -55,6 +57,7 @@ const MDXComponents = {
             />
         </Box>
     ),
+    pre: Code,
 };
 
 export default MDXComponents;

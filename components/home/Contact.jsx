@@ -18,8 +18,8 @@ import Section from '../common/Section';
 //Image
 import Decoration from '../../public/contact.png';
 
-const TextField = styled(MuiTextField)`
-`;
+const TextField = styled(MuiTextField)(({ theme }) => ({
+}));
 
 function Contact(props) {
     const params = ['Message', 'First Name', 'Last Name', 'Subject', 'E-Mail'];

@@ -1,3 +1,4 @@
+//Client-side imports
 import React from 'react';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import { ThemeProvider } from '@mui/material/styles';
@@ -5,10 +6,11 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider } from '@emotion/react';
 import createEmotionCache from '../styles/createEmotionCache';
 //Theme
-import theme from '../styles/mainTheme';
+import theme from '../styles/theme';
 //Custom Components
 import Head from '../components/common/Head';
 import globalStyles from '../styles/global';
+import AppBar from '../components/common/AppBar';
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -25,6 +27,9 @@ function MyApp(props) {
                 {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
                 <CssBaseline />
                 <GlobalStyles styles={globalStyles} />
+                <AppBar>
+                    {['projects', 'blogs']}
+                </AppBar>
                 <Component {...pageProps} />
             </ThemeProvider>
         </CacheProvider>

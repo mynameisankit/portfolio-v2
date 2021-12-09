@@ -130,7 +130,7 @@ function Projects(props) {
 
     return (
         <Section id='projects' gutterBottom>
-            <Grid container spacing={{ xs: 1, sm: 4 }}>
+            <Grid container spacing={{ xs: 2, sm: 4 }}>
                 <React.Fragment>
                     {data.map(project => (
                         <Grid item xs={12} md={6} lg={4} key={project.title}>
