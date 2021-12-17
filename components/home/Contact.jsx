@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
@@ -14,9 +14,9 @@ import { useForm, Controller } from 'react-hook-form';
 import emailjs from 'emailjs-com';
 import camelCase from 'lodash/fp/camelCase';
 //Custom Components
-import Section from '../common/Section';
+import Section from '@/components/common/Section';
 //Image
-import Decoration from '../../public/contact.png';
+import Decoration from '@/public/contact.png';
 
 const TextField = styled(MuiTextField)(({ theme }) => ({
 }));

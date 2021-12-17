@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import MuiLink from '@mui/material/Link';
 //Custom Components
-import Code from './Code';
+import Code from '@/components/MDXComponents/Code';
 
 const MDXComponents = {
     ...(

@@ -1,19 +1,20 @@
 //Server Side Imports
-const retrieveDataSync = require('../lib/retrieveDataSync');
+import path from 'path';
+import getJSON from '@/lib/getJSON';
 //Client-Side Imports
 import React from 'react';
 //Custom Components
-import Intro from '../components/home/Intro';
-import Featured from '../components/home/Featured';
-import Projects from '../components/home/Projects';
-import Contact from '../components/home/Contact';
+import Intro from '@/components/home/Intro';
+import Featured from '@/components/home/Featured';
+import Projects from '@/components/home/Projects';
+import Contact from '@/components/home/Contact';
 
 function Home(props) {
     const { data: { featured, projects, socialMedia } } = props;
 
     return (
         <React.Fragment>
-            <Intro  socialMedia={socialMedia} />
+            <Intro socialMedia={socialMedia} />
             <Featured>
                 {featured}
             </Featured>
@@ -26,25 +27,13 @@ function Home(props) {
 }
 
 export async function getStaticProps(context) {
-    const directories = {
-        "featured": null,
-        "projects": null,
-        "socialMedia": {
-            fileName: 'socialMedia.json'
-        }
+    const CWD = process.cwd();
+
+    const data = {
+        featured: getJSON(path.join(CWD, 'data', 'featured')),
+        projects: getJSON(path.join(CWD, 'data', 'projects')),
+        socialMedia: getJSON(path.join(CWD, 'data', 'socialMedia.json'))
     };
-
-    const data = {};
-    for (let i in directories) {
-        let fileName;
-
-        if (directories[i] instanceof Object)
-            fileName = directories[i].fileName;
-        else
-            fileName = i;
-
-        data[i] = retrieveDataSync(fileName, 'JSON');
-    }
 
     return { props: { data } };
 }

@@ -8,10 +8,10 @@ import IconButton from '@mui/material/IconButton';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 //Custom Components
-import Section from '../../components/common/Section';
-import Terminal from '../../components/common/Terminal';
-import ReactIcons from '../common/ReactIcons';
-import RaisedButton from '../common/Buttons/RaisedButton';
+import Section from '@/components/common/Section';
+import Terminal from '@/components/common/Terminal';
+import ReactIcons from '@/components/common/ReactIcons';
+import RaisedButton from '@/components/common/Buttons/RaisedButton';
 
 function Intro(props) {
     const { socialMedia } = props;

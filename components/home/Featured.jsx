@@ -13,9 +13,9 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkIcon from '@mui/icons-material/Link';
 //Custom Components
-import Section from '../common/Section';
-import ReactIcons from '../common/ReactIcons';
-import Tooltip from '../common/Tooltip';
+import Section from '@/components/common/Section';
+import ReactIcons from '@/components/common/ReactIcons';
+import Tooltip from '@/components/common/Tooltip';
 
 function Project(props) {
     const { children: data, direction } = props;

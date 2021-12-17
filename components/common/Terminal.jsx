@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import InputBase from '@mui/material/InputBase';
 import { styled, ThemeProvider } from '@mui/material/styles';
 //Custom Theme
-import theme from '../../styles/theme/code';
+import theme from '@/styles/theme/code';
 //Utility Imports
 import lowerCase from 'lodash/fp/lowerCase';
 

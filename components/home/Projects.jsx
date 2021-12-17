@@ -15,7 +15,7 @@ import LinkIcon from '@mui/icons-material/Link';
 //Colors
 import { blue } from '@mui/material/colors';
 //Custom Components
-import Section from '../common/Section';
+import Section from '@/components/common/Section';
 
 const LinkButton = styled(IconButton)`
     padding: 0px,

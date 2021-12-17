@@ -3,9 +3,9 @@ import dayjs from 'dayjs';
 import cloneDeep from 'lodash/fp/cloneDeep';
 import upperFirst from 'lodash/fp/upperFirst';
 //Server Side Imports
-import retrieveDataSync from '../../lib/retrieveDataSync';
-import matter from 'gray-matter';
-import createURL from '../../lib/createURL';
+import path from 'path';
+import getFiles from '@/lib/getFiles';
+import getFrontMatter from '@/lib/util/getFrontMatter';
 //Client Side Imports
 import React, { useState, useRef, useEffect, useReducer } from 'react';
 import Grid from '@mui/material/Grid';
@@ -23,9 +23,9 @@ import InputLabel from '@mui/material/InputLabel';
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 import SortIcon from '@mui/icons-material/Sort';
 //Custom Components
-import ReactIcons from '../../components/common/ReactIcons';
-import Section from '../../components/common/Section';
-import Post from '../../components/blogs/Post';
+import ReactIcons from '@/components/common/ReactIcons';
+import Section from '@/components/common/Section';
+import Post from '@/components/blogs/Post';
 
 //Sort in-place by date
 function sortByDate(data, order) {
@@ -78,7 +78,8 @@ function reducer(state, action) {
 }
 
 function Blogs(props) {
-    const [blogs, setBlogs] = useState(props.blogs);
+    const { blogs } = props;
+    const [currBlogs, setCurrBlogs] = useState(blogs);
     const [settings, dispatch] = useReducer(reducer, {
         page: 1,
         category: 'All',
@@ -113,18 +114,18 @@ function Blogs(props) {
 
     //Side-effect when tag is changed
     useEffect(() => {
-        const blogs = cloneDeep((category === 'All') ? props.blogs : tags.current[category]);
-        sortByDate(blogs, order);
-        setBlogs(blogs);
+        const newBlogs = cloneDeep((category === 'All') ? blogs : tags.current[category]);
+        sortByDate(newBlogs, order);
+        setCurrBlogs(newBlogs);
 
-    }, [settings.category, settings.order]);
+    }, [category, order]);
 
     // Current Blogs
-    const currBlogs = [];
-    for (let i = ((page - 1) * rows); i < Math.min(blogs.length, page * rows); i++) {
-        const blog = blogs[i];
+    const currPage = [];
+    for (let i = ((page - 1) * rows); i < Math.min(currBlogs.length, page * rows); i++) {
+        const blog = currBlogs[i];
 
-        currBlogs.push(
+        currPage.push(
             <Grid item xs={12} lg={4} md={6} key={blog.title}>
                 <Post>{blog}</Post>
             </Grid>
@@ -156,8 +157,7 @@ function Blogs(props) {
                                             type: 'button',
                                             field: 'category',
                                             payload: curr
-                                        })}
-                                    >
+                                        })}>
                                         {curr}
                                     </Button>
                                 );
@@ -186,7 +186,7 @@ function Blogs(props) {
                 {/* All Posts */}
                 <Grid container spacing={3} sx={{ mt: 1, position: 'relative' }}>
                     {/* <FlipMove typeName={null}> */}
-                    {currBlogs.length ? currBlogs : (
+                    {currPage.length ? currPage : (
                         <Grid item xs={12}>
                             <Typography gutterBottom variant='h4'>No articles with the tag &quot;{category}&quot; found</Typography>
                         </Grid>
@@ -218,37 +218,11 @@ function Blogs(props) {
     );
 }
 
-export async function getStaticProps(context) {
-    const files = retrieveDataSync('blogs');
-
-    const blogs = [];
-    const tags = new Set();
-
-    //Parse and store each article in the array
-    files.forEach(source => {
-        const { data: curr } = matter(source);
-
-        //Note - Date causes serialization issues
-        if (curr.date instanceof Date)
-            curr.date = (curr.date).toJSON();
-
-        for (let i in curr.tags)
-            tags.add(curr.tags[i]);
-
-        //Create URLs
-        curr.url = createURL('/blogs', curr.title);
-        blogs.push(curr);
-    });
-
-    //Sort all the article by newest date
-    sortByDate(blogs, 'newest');
-
-    return {
-        props: {
-            blogs,
-            tags: Array.from(tags)
-        },
-    };
+export async function getStaticProps() {
+    const ROOT = path.join(process.cwd(), 'data', 'blogs');
+    const files = getFrontMatter(getFiles(ROOT));
+    files.forEach(file => file.url = `/blogs/${file.url}`);
+    return { props: { blogs: files } };
 }
 
 export default Blogs;

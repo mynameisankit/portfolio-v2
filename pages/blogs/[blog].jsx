@@ -2,12 +2,11 @@
 import { MDXProvider } from '@mdx-js/react';
 import dayjs from 'dayjs';
 //Server Side Imports
-import readDirSync from '../../lib/readDirSync';
-import retrieveDataSync from '../../lib/retrieveDataSync';
+import fs from 'fs';
 import path from 'path';
-import matter from 'gray-matter';
+import getFiles from '@/lib/getFiles';
+import getFrontMatter from '@/lib/util/getFrontMatter';
 import { serialize } from 'next-mdx-remote/serialize';
-import createURL from '../../lib/createURL';
 //Client Side Imports
 import React, { useState, useEffect } from 'react';
 import { MDXRemote } from 'next-mdx-remote';
@@ -16,17 +15,17 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 //Custom Components
-import ReactIcons from '../../components/common/ReactIcons';
-import Footer from '../../components/blogs/Footer';
+import ReactIcons from '@/components/common/ReactIcons';
+import Footer from '@/components/blogs/Footer';
 //MDX Components
-import MDXComponents from '../../components/MDXComponents';
+import MDXComponents from '@/components/MDXComponents';
 
 function copyText(text) {
     navigator?.clipboard.writeText(text);
     return;
 }
 
-function Blog({ source, frontMatter }) {
+function Blog({ mdxSource, frontMatter }) {
     const [loaded, setLoaded] = useState(false);
     useEffect(() => setLoaded(true), []);
 
@@ -92,7 +91,7 @@ function Blog({ source, frontMatter }) {
             <Container id='body' maxWidth='lg' sx={{ mb: 4 }}>
                 <MDXProvider components={MDXComponents}>
                     <MDXRemote
-                        {...source}
+                        {...mdxSource}
                         scope={frontMatter}
                     />
                 </MDXProvider>
@@ -102,33 +101,28 @@ function Blog({ source, frontMatter }) {
     );
 }
 
-export async function getStaticProps(context) {
-    const { params } = context;
+export async function getStaticProps({ params }) {
     const { blog: title } = params;
-    const source = retrieveDataSync(path.join('blogs', `${title}.md`));
 
-    const { content, data } = matter(source);
-    const mdxSource = await serialize(content);
+    const ROOT = path.join(process.cwd(), 'data', 'blogs');
 
-    //Note - Date causes serialization issues
-    if (data.date instanceof Date)
-        data.date = (data.date).toJSON();
+    let filePath = path.join(ROOT, `${title}.md`);
+    if (!fs.existsSync(filePath))
+        filePath = path.join(ROOT, `${title}.mdx`);
 
-    return {
-        props: {
-            source: mdxSource,
-            frontMatter: data
-        },
-    };
+    const source = getFiles(filePath);
+    let { frontMatter, mdxSource } = getFrontMatter(source, true);
+    mdxSource = await serialize(mdxSource);
+
+    return { props: { mdxSource, frontMatter } };
 }
 
 export async function getStaticPaths() {
     //Generate routes for all blog pages
-    const files = readDirSync('blogs');
-    const paths = files.map(file => createURL('/blogs', file));
-
+    const ROOT = path.join(process.cwd(), 'data', 'blogs');
+    const files = getFrontMatter(getFiles(ROOT));
     return {
-        paths,
+        paths: files.map(file => ({ params: { blog: file.url } })),
         //TODO: Add a not found page for blogs
         fallback: false,
     };

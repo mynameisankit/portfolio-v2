@@ -9,10 +9,10 @@ import createEmotionCache from '../styles/createEmotionCache';
 //Theme
 import theme from '../styles/theme';
 //Custom Components
-import Head from '../components/common/Head';
-import globalStyles from '../styles/global';
-import AppBar from '../components/common/AppBar';
-import Footer from '../components/common/Footer';
+import Head from '@/components/common/Head';
+import globalStyles from '@/styles/global';
+import AppBar from '@/components/common/AppBar';
+import Footer from '@/components/common/Footer';
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();

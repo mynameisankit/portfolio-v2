@@ -13,7 +13,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 //Utility Imports
 import dayjs from 'dayjs';
 //Custom Components
-import ReactIcons from '../../components/common/ReactIcons';
+import ReactIcons from '@/components/common/ReactIcons';
 
 function Post(props) {
     const { children: data } = props;

@@ -3,11 +3,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "dev:watch": "next-remote-watch ./content/blogs",
+    "dev:watch": "next-remote-watch ./content",
     "build": "next build",
     "export": "next build && next export",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint --fix --dir pages --dir components --dir styles"
   },
   "dependencies": {
     "@emotion/cache": "^11.6.0",
@@ -21,12 +21,11 @@
     "@react-icons/all-files": "^4.1.0",
     "dayjs": "^1.10.7",
     "emailjs-com": "^3.2.0",
-    "gray-matter": "^4.0.3",
     "lodash": "^4.17.21",
     "netlify-cms-app": "^2.15.59",
     "next": "12.0.4",
-    "next-mdx-remote": "^3.0.8",
     "next-remote-watch": "^1.0.0",
+    "preact": "^10.6.4",
     "prism-react-renderer": "^1.2.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
@@ -34,6 +33,20 @@
   },
   "devDependencies": {
     "eslint": "7",
-    "eslint-config-next": "12.0.4"
+    "eslint-config-next": "12.0.4",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "gray-matter": "^4.0.3",
+    "lint-staged": "^12.1.2",
+    "next-mdx-remote": "^3.0.8",
+    "prettier": "^2.5.1"
+  },
+  "lint-staged": {
+    "*.+(js|jsx|ts|tsx)": [
+      "eslint --fix"
+    ],
+    "*.+(js|jsx|ts|tsx|json|css|md|mdx)": [
+      "prettier --write"
+    ]
   }
 }
