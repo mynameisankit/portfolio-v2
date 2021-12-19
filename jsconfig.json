@@ -8,7 +8,7 @@
       "@/lib/*": ["lib/*"],
       "@/styles/*": ["styles/*"],
       "@/cms/*": ["cms/*"],
-      "@/public/*": ["public/*"]
+      "@/images/*": ["public/images/*"]
     }
   }
 }

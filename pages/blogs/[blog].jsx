@@ -1,15 +1,13 @@
 //Utility Imports
-import { MDXProvider } from '@mdx-js/react';
 import dayjs from 'dayjs';
 //Server Side Imports
 import fs from 'fs';
 import path from 'path';
 import getFiles from '@/lib/getFiles';
 import getFrontMatter from '@/lib/util/getFrontMatter';
-import { serialize } from 'next-mdx-remote/serialize';
+import serialize from '@/lib/serialize';
 //Client Side Imports
 import React, { useState, useEffect } from 'react';
-import { MDXRemote } from 'next-mdx-remote';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
@@ -17,13 +15,7 @@ import Button from '@mui/material/Button';
 //Custom Components
 import ReactIcons from '@/components/common/ReactIcons';
 import Footer from '@/components/blogs/Footer';
-//MDX Components
-import MDXComponents from '@/components/MDXComponents';
-
-function copyText(text) {
-    navigator?.clipboard.writeText(text);
-    return;
-}
+import MDXLayoutRenderer from '@/components/MDXComponents/MDXLayoutRenderer';
 
 function Blog({ mdxSource, frontMatter }) {
     const [loaded, setLoaded] = useState(false);
@@ -77,24 +69,14 @@ function Blog({ mdxSource, frontMatter }) {
                         <Typography variant='h6'>
                             Published {loaded && `${diff[0]} ${diff[1]}`} ago on {date.format('DD MMMM YYYY')}
                         </Typography>
-                        <Button
-                            variant='contained'
-                            disableElevation
-                            onClick={() => copyText(window?.location.href)}
-                        >
-                            Share
-                        </Button>
                     </Box>
                 </Container>
             </Box>
             {/* Blog */}
             <Container id='body' maxWidth='lg' sx={{ mb: 4 }}>
-                <MDXProvider components={MDXComponents}>
-                    <MDXRemote
-                        {...mdxSource}
-                        scope={frontMatter}
-                    />
-                </MDXProvider>
+                <MDXLayoutRenderer
+                    mdxSource={mdxSource}
+                />
             </Container>
             <Footer />
         </React.Fragment>
@@ -112,7 +94,7 @@ export async function getStaticProps({ params }) {
 
     const source = getFiles(filePath);
     let { frontMatter, mdxSource } = getFrontMatter(source, true);
-    mdxSource = await serialize(mdxSource);
+    mdxSource = await serialize(mdxSource, frontMatter);
 
     return { props: { mdxSource, frontMatter } };
 }

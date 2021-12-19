@@ -16,7 +16,7 @@ import camelCase from 'lodash/fp/camelCase';
 //Custom Components
 import Section from '@/components/common/Section';
 //Image
-import Decoration from '@/public/contact.png';
+import Decoration from '@/images/contact.png';
 
 const TextField = styled(MuiTextField)(({ theme }) => ({
 }));

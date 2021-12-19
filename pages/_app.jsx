@@ -10,9 +10,11 @@ import createEmotionCache from '../styles/createEmotionCache';
 import theme from '../styles/theme';
 //Custom Components
 import Head from '@/components/common/Head';
-import globalStyles from '@/styles/global';
 import AppBar from '@/components/common/AppBar';
 import Footer from '@/components/common/Footer';
+//Styles
+import globalStyles from '@/styles/global';
+import prismStyles from '@/styles/prism.css';
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -35,7 +37,9 @@ function MyApp(props) {
             <ThemeProvider theme={theme}>
                 {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
                 <CssBaseline />
-                <GlobalStyles styles={globalStyles} />
+                <React.Fragment>
+                    {[globalStyles, prismStyles].map((styles, idx) => <GlobalStyles key={idx} styles={styles} />)}
+                </React.Fragment>
                 {currentRoute !== 'admin' && (
                     <AppBar>
                         {['projects', 'blogs']}
