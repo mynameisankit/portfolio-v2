@@ -17,11 +17,11 @@ import ReactIcons from '@/components/common/ReactIcons';
 import Footer from '@/components/blogs/Footer';
 import MDXLayoutRenderer from '@/components/MDXComponents/MDXLayoutRenderer';
 
-function Blog({ mdxSource, frontMatter }) {
+function Blog({ mdxSource, frontMatter, toc }) {
     const [loaded, setLoaded] = useState(false);
     useEffect(() => setLoaded(true), []);
 
-    const { title, abstract, tags } = frontMatter;
+    const { title, abstract, tags, readingTime: { text: readingTime } } = frontMatter;
     let { date: unformattedDate } = frontMatter;
     const date = dayjs(unformattedDate);
 
@@ -50,17 +50,9 @@ function Blog({ mdxSource, frontMatter }) {
                             {abstract}
                         </Typography>
                     )}
-                    <Box sx={{ display: 'flex', gap: 1 }}>
-                        {tags.map(tag => (
-                            <Button
-                                key={tag}
-                                variant='outlined'
-                                startIcon={<ReactIcons icon={tag} />}
-                            >
-                                {tag}
-                            </Button>
-                        ))}
-                    </Box>
+                    <Typography variant='subtitle1'>
+                        {readingTime}
+                    </Typography>
                     <Box sx={{
                         display: 'flex',
                         justifyContent: 'space-between',
@@ -76,6 +68,7 @@ function Blog({ mdxSource, frontMatter }) {
             <Container id='body' maxWidth='lg' sx={{ mb: 4 }}>
                 <MDXLayoutRenderer
                     mdxSource={mdxSource}
+                    toc={toc}
                 />
             </Container>
             <Footer />
@@ -94,9 +87,9 @@ export async function getStaticProps({ params }) {
 
     const source = getFiles(filePath);
     let { frontMatter, mdxSource } = getFrontMatter(source, true);
-    mdxSource = await serialize(mdxSource, frontMatter);
+    const { code, toc } = await serialize(mdxSource);
 
-    return { props: { mdxSource, frontMatter } };
+    return { props: { mdxSource: code, frontMatter, toc } };
 }
 
 export async function getStaticPaths() {

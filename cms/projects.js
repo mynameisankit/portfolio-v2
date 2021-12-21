@@ -23,17 +23,12 @@ const projects = {
             widget: 'string',
             required: false
         }, {
-            label: "GitHub Link",
-            name: "github",
+            label: "GitHub Repo Link",
+            name: "github_repo",
             widget: "string",
             required: false,
         },
         {
-            label: "GitHub API Link",
-            name: "githubAPI",
-            widget: "string",
-            required: false,
-        }, {
             label: "External Link",
             name: "extLink",
             widget: "string",

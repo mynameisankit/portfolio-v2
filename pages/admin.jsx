@@ -10,7 +10,7 @@ const CMS = dynamic(() =>
     { ssr: false, loading: () => <p>Loading...</p> }
 );
 
-function AdminPage(props) {
+function AdminPage() {
     return (
         <React.Fragment>
             <Head>

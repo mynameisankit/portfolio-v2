@@ -77,8 +77,7 @@ function reducer(state, action) {
     }
 }
 
-function Blogs(props) {
-    const { blogs } = props;
+function Blogs({ blogs }) {
     const [currBlogs, setCurrBlogs] = useState(blogs);
     const [settings, dispatch] = useReducer(reducer, {
         page: 1,
@@ -118,7 +117,7 @@ function Blogs(props) {
         sortByDate(newBlogs, order);
         setCurrBlogs(newBlogs);
 
-    }, [category, order]);
+    }, [category, order, blogs]);
 
     // Current Blogs
     const currPage = [];

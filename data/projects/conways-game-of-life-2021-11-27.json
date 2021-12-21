@@ -6,6 +6,6 @@
     "Styled-Components"
   ],
   "extLink": "https://play-game-of-life.netlify.app/",
-  "github": "https://github.com/mynameisankit/conways-game-of-life",
+  "github_repo": "conways-game-of-life",
   "duration": ""
 }

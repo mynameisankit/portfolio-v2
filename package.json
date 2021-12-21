@@ -19,16 +19,20 @@
     "@mui/material": "^5.2.2",
     "@mui/system": "^5.2.2",
     "@react-icons/all-files": "^4.1.0",
+    "axios": "^0.24.0",
     "dayjs": "^1.10.7",
     "emailjs-com": "^3.2.0",
     "lodash": "^4.17.21",
     "mdx-bundler": "^8.0.1",
     "netlify-cms-app": "^2.15.59",
     "next": "12.0.4",
+    "next-seo": "^4.28.1",
+    "octokat": "^0.10.0",
     "preact": "^10.6.4",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-hook-form": "^7.20.5"
+    "react-hook-form": "^7.20.5",
+    "swr": "^1.1.1"
   },
   "devDependencies": {
     "esbuild": "^0.14.5",
@@ -38,18 +42,20 @@
     "eslint-plugin-prettier": "^4.0.0",
     "gray-matter": "^4.0.3",
     "lint-staged": "^12.1.2",
+    "mdast-util-to-string": "^3.1.0",
     "next-remote-watch": "^1.0.0",
     "prettier": "^2.5.1",
     "reading-time": "^1.5.0",
     "rehype-autolink-headings": "^6.1.0",
     "rehype-citation": "^0.1.1",
+    "rehype-highlight": "^5.0.1",
     "rehype-katex": "^6.0.2",
-    "rehype-prism-plus": "^1.1.3",
     "rehype-slug": "^5.0.0",
     "remark-gfm": "^3.0.1",
     "remark-math": "^5.1.1",
     "remark-mdx-images": "^1.0.3",
-    "remark-toc": "^8.0.1"
+    "remark-normalize-headings": "^3.0.1",
+    "unist-util-visit": "^4.1.0"
   },
   "lint-staged": {
     "*.+(js|jsx|ts|tsx)": [

@@ -9,9 +9,7 @@ import Featured from '@/components/home/Featured';
 import Projects from '@/components/home/Projects';
 import Contact from '@/components/home/Contact';
 
-function Home(props) {
-    const { data: { featured, projects, socialMedia } } = props;
-
+function Home({ featured, projects, socialMedia }) {
     return (
         <React.Fragment>
             <Intro socialMedia={socialMedia} />
@@ -26,16 +24,15 @@ function Home(props) {
     )
 }
 
-export async function getStaticProps(context) {
+export async function getStaticProps() {
     const CWD = process.cwd();
-
-    const data = {
-        featured: getJSON(path.join(CWD, 'data', 'featured')),
-        projects: getJSON(path.join(CWD, 'data', 'projects')),
-        socialMedia: getJSON(path.join(CWD, 'data', 'socialMedia.json'))
+    return {
+        props: {
+            featured: getJSON(path.join(CWD, 'data', 'featured')),
+            projects: getJSON(path.join(CWD, 'data', 'projects')),
+            socialMedia: getJSON(path.join(CWD, 'data', 'socialMedia.json'))
+        }
     };
-
-    return { props: { data } };
 }
 
 export default Home;
