@@ -26,6 +26,7 @@ import SortIcon from '@mui/icons-material/Sort';
 import ReactIcons from '@/components/common/ReactIcons';
 import Section from '@/components/common/Section';
 import Post from '@/components/blogs/Post';
+import Comments from '@/components/blogs/Comments';
 
 //Sort in-place by date
 function sortByDate(data, order) {
@@ -133,86 +134,87 @@ function Blogs({ blogs }) {
 
     return (
         <Section id='blogs' sx={{ mt: 4 }}>
-            <Box>
-                {/* Filters */}
-                <Grid container spacing={3}>
-                    <Grid item xs={12}>
-                        <LabeledIcon icon={DragIndicatorIcon}>Tags</LabeledIcon>
-                        <Box sx={{
-                            display: 'flex',
-                            gap: 2,
-                            flexWrap: 'wrap',
-                        }}>
-                            {Object.entries(tags.current).concat([['All']]).map(tag => {
-                                const curr = tag[0];
-
-                                return (
-                                    <Button
-                                        key={curr}
-                                        variant='contained'
-                                        startIcon={<ReactIcons icon={curr} />}
-                                        disabled={curr === category}
-                                        onClick={(event) => dispatch({
-                                            type: 'button',
-                                            field: 'category',
-                                            payload: curr
-                                        })}>
-                                        {curr}
-                                    </Button>
-                                );
-                            })}
-                        </Box>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <LabeledIcon icon={SortIcon}>Sort</LabeledIcon>
-                        <FormControl>
-                            <InputLabel>Order By</InputLabel>
-                            <Select
-                                label='Order By'
-                                onChange={event => dispatch({
-                                    type: 'select',
-                                    field: 'order',
-                                    payload: event.target.value
-                                })}
-                                value={upperFirst(order)}
-                            >
-                                <MenuItem value='Newest'>Newest</MenuItem>
-                                <MenuItem value='Oldest'>Oldest</MenuItem>
-                            </Select>
-                        </FormControl>
-                    </Grid>
-                </Grid>
-                {/* All Posts */}
-                <Grid container spacing={3} sx={{ mt: 1, position: 'relative' }}>
-                    {/* <FlipMove typeName={null}> */}
-                    {currPage.length ? currPage : (
-                        <Grid item xs={12}>
-                            <Typography gutterBottom variant='h4'>No articles with the tag &quot;{category}&quot; found</Typography>
-                        </Grid>
-                    )}
-                    {/* </FlipMove> */}
-                    <Grid item xs={12} sx={{
+            {/* Filters */}
+            <Grid container spacing={3}>
+                <Grid item xs={12}>
+                    <LabeledIcon icon={DragIndicatorIcon}>Tags</LabeledIcon>
+                    <Box sx={{
                         display: 'flex',
-                        justifyContent: 'center'
+                        gap: 2,
+                        flexWrap: 'wrap',
                     }}>
-                        <Stack spacing={2}>
-                            <Pagination
-                                count={Math.ceil(blogs ? blogs.length / 10 : 0)}
-                                color='secondary'
-                                size='large'
-                                showFirstButton
-                                showLastButton
-                                onChange={(event, value) => dispatch({
-                                    type: 'pagination',
-                                    field: 'page',
-                                    payload: value
-                                })}
-                                page={page}
-                            />
-                        </Stack>
-                    </Grid>
+                        {Object.entries(tags.current).concat([['All']]).map(tag => {
+                            const curr = tag[0];
+
+                            return (
+                                <Button
+                                    key={curr}
+                                    variant='contained'
+                                    startIcon={<ReactIcons icon={curr} />}
+                                    disabled={curr === category}
+                                    onClick={(event) => dispatch({
+                                        type: 'button',
+                                        field: 'category',
+                                        payload: curr
+                                    })}>
+                                    {curr}
+                                </Button>
+                            );
+                        })}
+                    </Box>
                 </Grid>
-            </Box>
+                <Grid item xs={12}>
+                    <LabeledIcon icon={SortIcon}>Sort</LabeledIcon>
+                    <FormControl>
+                        <InputLabel>Order By</InputLabel>
+                        <Select
+                            label='Order By'
+                            onChange={event => dispatch({
+                                type: 'select',
+                                field: 'order',
+                                payload: event.target.value
+                            })}
+                            value={upperFirst(order)}
+                        >
+                            <MenuItem value='Newest'>Newest</MenuItem>
+                            <MenuItem value='Oldest'>Oldest</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Grid>
+            </Grid>
+            {/* All Posts */}
+            <Grid container spacing={3} sx={{ mt: 1, position: 'relative' }}>
+                {/* <FlipMove typeName={null}> */}
+                {currPage.length ? currPage : (
+                    <Grid item xs={12}>
+                        <Typography gutterBottom variant='h4'>No articles with the tag &quot;{category}&quot; found</Typography>
+                    </Grid>
+                )}
+                {/* </FlipMove> */}
+                <Grid item xs={12} sx={{
+                    display: 'flex',
+                    justifyContent: 'center'
+                }}>
+                    <Stack spacing={2}>
+                        <Pagination
+                            count={Math.ceil(blogs ? blogs.length / 10 : 0)}
+                            color='secondary'
+                            size='large'
+                            showFirstButton
+                            showLastButton
+                            onChange={(event, value) => dispatch({
+                                type: 'pagination',
+                                field: 'page',
+                                payload: value
+                            })}
+                            page={page}
+                        />
+                    </Stack>
+                </Grid>
+            </Grid>
+            <Grid item xs={12}>
+                <Comments />
+            </Grid>
         </Section>
     );
 }

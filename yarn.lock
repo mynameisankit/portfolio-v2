@@ -438,6 +438,13 @@
   resolved "https://registry.yarnpkg.com/@fal-works/esbuild-plugin-global-externals/-/esbuild-plugin-global-externals-2.1.2.tgz#c05ed35ad82df8e6ac616c68b92c2282bd083ba4"
   integrity sha512-cEee/Z+I12mZcFJshKcCqC8tuX5hG3s+d+9nZ3LabqKF1vKdF41B92pJVCBggjAGORAeOzyyDDKrZwIkLffeOQ==
 
+"@giscus/react@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@giscus/react/-/react-1.0.1.tgz#3fae2b5e00912a76cb136679f6229d3d6ea28898"
+  integrity sha512-vViRGjfmDy9xvRIx+6+hocL3iAipbKx4gxtSpQBzOksDwnZS0QbB+r19bYQ08vw8CfHRwE6ws8AOO9yEUrzUyQ==
+  dependencies:
+    iframe-resizer-react "^1.1.0"
+
 "@hapi/accept@5.0.2":
   version "5.0.2"
   resolved "https://registry.yarnpkg.com/@hapi/accept/-/accept-5.0.2.tgz#ab7043b037e68b722f93f376afb05e85c0699523"
@@ -3111,7 +3118,7 @@ get-window@^1.1.1:
   dependencies:
     get-document "1"
 
-github-slugger@^1.1.1:
+github-slugger@^1.1.1, github-slugger@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/github-slugger/-/github-slugger-1.4.0.tgz#206eb96cdb22ee56fdc53a28d5a302338463444e"
   integrity sha512-w0dzqw/nt51xMVmlaV1+JRzN+oCa1KfcgGEWhxUG16wbdA+Xnt/yoFO8Z8x/V82ZcZ0wy6ln9QDup5avbhiDhQ==
@@ -3582,6 +3589,19 @@ ieee754@^1.1.13, ieee754@^1.1.4, ieee754@^1.1.6:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.2.1.tgz#8eb7a10a63fff25d15a57b001586d177d1b0d352"
   integrity sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==
+
+iframe-resizer-react@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/iframe-resizer-react/-/iframe-resizer-react-1.1.0.tgz#5009e019b7a5c7f1c009bff5bcdf0dbf33557465"
+  integrity sha512-FrytSq91AIJaDgE+6uK/Vdd6IR8CrwLoZ6eGmL2qQMPTzF0xlSV2jaSzRRUh5V2fttD7vzl21jvBl97bV40eBw==
+  dependencies:
+    iframe-resizer "^4.3.0"
+    warning "^4.0.3"
+
+iframe-resizer@^4.3.0:
+  version "4.3.2"
+  resolved "https://registry.yarnpkg.com/iframe-resizer/-/iframe-resizer-4.3.2.tgz#42dd88345d18b9e377b6044dddb98c664ab0ce6b"
+  integrity sha512-gOWo2hmdPjMQsQ+zTKbses08mDfDEMh4NneGQNP4qwePYujY1lguqP6gnbeJkf154gojWlBhIltlgnMfYjGHWA==
 
 ignore@^4.0.6:
   version "4.0.6"
@@ -4345,14 +4365,6 @@ md5.js@^1.3.4:
     inherits "^2.0.1"
     safe-buffer "^5.1.2"
 
-mdast-normalize-headings@^3.0.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/mdast-normalize-headings/-/mdast-normalize-headings-3.1.0.tgz#45747f0b76ef9d7f5f741de652a951266f49aab5"
-  integrity sha512-QL9XJ610dApHcsScRTbWiFtn7QO4wcE2fu6Jpyt4vja3qW28tpwDe0SBpM1lCYYtZi+2XNEb04Wlue8RYG6GqA==
-  dependencies:
-    "@types/mdast" "^3.0.0"
-    unist-util-visit "^4.0.0"
-
 mdast-util-compact@^1.0.0:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/mdast-util-compact/-/mdast-util-compact-1.0.4.tgz#d531bb7667b5123abf20859be086c4d06c894593"
@@ -4490,9 +4502,9 @@ mdast-util-gfm-table@^0.1.0:
     mdast-util-to-markdown "~0.6.0"
 
 mdast-util-gfm-table@^1.0.0:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/mdast-util-gfm-table/-/mdast-util-gfm-table-1.0.1.tgz#07c269a219d66ec2deb6de38aed0ba1d1f9442df"
-  integrity sha512-NByKuaSg5+M6r9DZBPXFUmhMHGFf9u+WE76EeStN01ghi8hpnydiWBXr+qj0XCRWI7SAMNtEjGvip6zci9axQA==
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/mdast-util-gfm-table/-/mdast-util-gfm-table-1.0.2.tgz#c727c20d5ac0d7d4b238d50b48e2924f0b77cc76"
+  integrity sha512-pPekvCTChFBF8uCq8bVyQwar8NBU/TaXIy44jj/UzmjMgPBHIa1B1ge8a0JVgzhqgXQAMvGT+PgiKlicdLGfDQ==
   dependencies:
     markdown-table "^3.0.0"
     mdast-util-to-markdown "^1.0.0"
@@ -4878,9 +4890,9 @@ micromark-extension-gfm@^0.3.0:
     micromark-extension-gfm-task-list-item "~0.3.0"
 
 micromark-extension-gfm@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/micromark-extension-gfm/-/micromark-extension-gfm-2.0.0.tgz#d9d1b82967f43c346a335864060c16b735e3861f"
-  integrity sha512-yYPlZ48Ss8fRFSmlQP/QXt3/M6tEvawEVFO+jDPnFA3mGeVgzIyaeHgrIV/9AMFAjQhctKA47Bk8xBhcuaL74Q==
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/micromark-extension-gfm/-/micromark-extension-gfm-2.0.1.tgz#40f3209216127a96297c54c67f5edc7ef2d1a2a2"
+  integrity sha512-p2sGjajLa0iYiGQdT0oelahRYtMWvLjy8J9LOCxzIQsllMCGLbsLW+Nc+N4vi02jcRJvedVJ68cjelKIO6bpDA==
   dependencies:
     micromark-extension-gfm-autolink-literal "^1.0.0"
     micromark-extension-gfm-footnote "^1.0.0"
@@ -6922,6 +6934,15 @@ rehype-stringify@^7.0.0:
     hast-util-to-html "^7.0.0"
     xtend "^4.0.0"
 
+remark-breaks@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/remark-breaks/-/remark-breaks-3.0.2.tgz#f466b9d3474d7323146c0149fc1496dabadd908e"
+  integrity sha512-x96YDJ9X+Ry0/JNZFKfr1hpcAKvGYWfUTszxY9RbxKEqq6uzPPoLCuHdZsLPZZUdAv3nCROyc7FPrQLWr2rxyw==
+  dependencies:
+    "@types/mdast" "^3.0.0"
+    unified "^10.0.0"
+    unist-util-visit "^4.0.0"
+
 remark-frontmatter@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/remark-frontmatter/-/remark-frontmatter-4.0.1.tgz#84560f7ccef114ef076d3d3735be6d69f8922309"
@@ -6976,15 +6997,6 @@ remark-mdx-images@^1.0.3:
   integrity sha512-+0/EV3SvO9PUaUGlPphM3n5cMsnQE57n2tMwZMiT6YlTKjVr/FuhOynt6WQGEes7enpL3WpbJuycfWGLrH6S5w==
   dependencies:
     unist-util-visit "^2.0.0"
-
-remark-normalize-headings@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/remark-normalize-headings/-/remark-normalize-headings-3.0.1.tgz#de9030a72ebdb657cd2e22c14e5f1e9c472d692e"
-  integrity sha512-ovwKHQUQ8vLMnHPbFzW2sMfHqTKgqwseA3G4EEV+U2aRUyzH8dydqRo128FoJ3a1qYhADt2DyxNXv9iyEmvGFg==
-  dependencies:
-    "@types/mdast" "^3.0.0"
-    mdast-normalize-headings "^3.0.0"
-    unified "^10.0.0"
 
 remark-parse@^10.0.0:
   version "10.0.1"
@@ -7450,6 +7462,11 @@ slice-ansi@^5.0.0:
   dependencies:
     ansi-styles "^6.0.0"
     is-fullwidth-code-point "^4.0.0"
+
+smoothscroll-polyfill@^0.4.4:
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/smoothscroll-polyfill/-/smoothscroll-polyfill-0.4.4.tgz#3a259131dc6930e6ca80003e1cb03b603b69abf8"
+  integrity sha512-TK5ZA9U5RqCwMpfoMq/l1mrH0JAR7y7KRvOBx0n2869aLxch+gT9GhN3yUfjiw+d/DiF1mKo14+hd62JyMmoBg==
 
 source-map@0.7.3, source-map@^0.7.0, source-map@^0.7.3:
   version "0.7.3"

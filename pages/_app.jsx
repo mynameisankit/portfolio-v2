@@ -1,5 +1,5 @@
 //Client-side imports
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { DefaultSeo } from 'next-seo';
 import GlobalStyles from '@mui/material/GlobalStyles';
@@ -9,6 +9,7 @@ import { CacheProvider } from '@emotion/react';
 import createEmotionCache from '../styles/createEmotionCache';
 import axios from 'axios';
 import { SWRConfig } from 'swr';
+import smoothscroll from 'smoothscroll-polyfill';
 //Theme
 import theme from '../styles/theme';
 //Custom Components
@@ -33,6 +34,10 @@ function MyApp(props) {
     //Get the top-most route
     currentRoute = URLMatcher.exec(currentRoute)[1].toLowerCase();
 
+    useEffect(() => {
+        smoothscroll.polyfill();
+    }, []);
+
     return (
         <SWRConfig
             value={{
@@ -53,9 +58,7 @@ function MyApp(props) {
                     )}
                     <DefaultSeo {...SEO} />
                     <Component {...pageProps} />
-                    {currentRoute !== 'admin' && (
-                        <Footer />
-                    )}
+                    {/* {currentRoute !== 'admin' && <Footer />} */}
                 </ThemeProvider>
             </CacheProvider>
         </SWRConfig>

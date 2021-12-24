@@ -8,14 +8,23 @@ import getFrontMatter from '@/lib/util/getFrontMatter';
 import serialize from '@/lib/serialize';
 //Client Side Imports
 import React, { useState, useEffect } from 'react';
-import Container from '@mui/material/Container';
+import Link from 'next/link';
+import { NextSeo } from 'next-seo';
+import Chip from '@mui/material/Chip';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
 //Custom Components
-import ReactIcons from '@/components/common/ReactIcons';
-import Footer from '@/components/blogs/Footer';
+import Section from '@/components/common/Section';
 import MDXLayoutRenderer from '@/components/MDXComponents/MDXLayoutRenderer';
+import Comments from '@/components/blogs/Comments';
+//Icons
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+
+//TODO: Implement different wrapper components
+//TODO: Implement different layout components
 
 function Blog({ mdxSource, frontMatter, toc }) {
     const [loaded, setLoaded] = useState(false);
@@ -34,44 +43,79 @@ function Blog({ mdxSource, frontMatter, toc }) {
 
     return (
         <React.Fragment>
+            <NextSeo
+                title={`${title} | Blogs | Portfolio v2`}
+                description={abstract}
+            />
             {/* Meta-Data */}
-            <Box sx={{
-                backgroundColor: 'secondary.main',
-                width: 1, py: 2,
-                mb: {
-                    xs: 3,
-                    md: 8
-                }
-            }}>
-                <Container id='meta' maxWidth='lg'>
-                    <Typography variant='h1'>{title}</Typography>
-                    {abstract && (
-                        <Typography variant='subtitle1'>
-                            {abstract}
-                        </Typography>
-                    )}
-                    <Typography variant='subtitle1'>
-                        {readingTime}
+            <Section id='meta' maxWidth='lg'>
+                <Box sx={{
+                    py: 2, px: 5,
+                    textAlign: 'center'
+                }}>
+                    <Typography gutterBottom variant='subtitle1' component='h6'>
+                        Published {loaded && `${diff[0]} ${diff[1]}`} ago on {date.format('DD MMMM YYYY')}
                     </Typography>
+                    <Typography gutterBottom variant='h2' component='h1'>{title}</Typography>
+                    <Box sx={{ px: { xs: 0, md: 10 } }}>
+                        {abstract && (
+                            <Typography paragraph variant='subtitle1' gutterBottom>
+                                {abstract}
+                            </Typography>
+                        )}
+                    </Box>
+                </Box>
+                <Box sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    mb: 2,
+                }}>
                     <Box sx={{
                         display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'center'
+                        gap: 1
                     }}>
-                        <Typography variant='h6'>
-                            Published {loaded && `${diff[0]} ${diff[1]}`} ago on {date.format('DD MMMM YYYY')}
-                        </Typography>
+                        {tags?.map(tag => (
+                            <Chip key={tag} label={tag} />
+                        ))}
                     </Box>
-                </Container>
-            </Box>
+                    <Typography variant='h6' component='h6'>
+                        {readingTime}
+                    </Typography>
+                </Box>
+            </Section>
+
             {/* Blog */}
-            <Container id='body' maxWidth='lg' sx={{ mb: 4 }}>
+            <Section id='body' maxWidth='lg'>
+                <Divider sx={{ mb: 4 }} />
                 <MDXLayoutRenderer
                     mdxSource={mdxSource}
+                    frontMatter={frontMatter}
                     toc={toc}
                 />
-            </Container>
-            <Footer />
+            </Section>
+
+            {/* Footer */}
+            <Section id='footer' maxWidth='lg'>
+                <Divider sx={{ my: 2 }} />
+                <Box sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center'
+                }}>
+                    <Link passHref href='/blogs'>
+                        <Button variant='text' startIcon={<ArrowBackIcon />}>
+                            Go back to blogs
+                        </Button>
+                    </Link>
+                    <Button
+                        variant='text'
+                        startIcon={<ArrowUpwardIcon />}
+                        onClick={() => window.scroll({ top: 0, left: 0, behavior: 'smooth' })}
+                    >Go back to top</Button>
+                </Box>
+                <Comments />
+            </Section>
         </React.Fragment>
     );
 }

@@ -1,4 +1,5 @@
 const SEO = {
+    title: 'Ankit Kumar | Portfolio v2',
     openGraph: {
         type: 'website',
         locale: 'en_IE',

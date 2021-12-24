@@ -15,8 +15,7 @@ import dayjs from 'dayjs';
 //Custom Components
 import ReactIcons from '@/components/common/ReactIcons';
 
-function Post(props) {
-    const { children: data } = props;
+function Post({ children: { title, subTitle, date, abstract, url, tags } }) {
     const isSmall = useMediaQuery((theme) => theme.breakpoints.down('md'));
     const ActionArea = isSmall ? React.Fragment : CardActionArea;
 
@@ -32,13 +31,17 @@ function Post(props) {
         >
             <ActionArea>
                 <CardContent>
-                    <Typography variant='h4'>{data.title}</Typography>
+                    <Typography variant='h4'>{title}</Typography>
                     <Divider light />
-                    <Typography variant='subtitle1'>{data.subTitle}</Typography>
-                    <Typography variant='subtitle1' gutterBottom>Published on {dayjs(data.date).format('D MMMM YYYY')}</Typography>
-                    <Typography variant='body1' sx={{ mt: 2 }} paragraph>{data.abstract}</Typography>
+                    <Typography variant='subtitle1'>{subTitle}</Typography>
+                    <Typography variant='subtitle1' gutterBottom>Published on {dayjs(date).format('D MMMM YYYY')}</Typography>
+                    {abstract && (
+                        <Typography variant='body1' sx={{ mt: 2 }} paragraph>
+                            {`${abstract.substr(0, 200)} ${abstract.length > 200 && '...'}`}
+                        </Typography>
+                    )}
                     {isSmall && (
-                        <Link href={data.url} passHref>
+                        <Link href={url} passHref>
                             <MuiLink variant='button' color='inherit'>Read More</MuiLink>
                         </Link>
                     )}
@@ -48,7 +51,7 @@ function Post(props) {
                         gap: 2,
                         mt: 3
                     }}>
-                        {data.tags.map(tag => (
+                        {tags.map(tag => (
                             <Chip
                                 key={tag}
                                 variant='outlined'
@@ -70,7 +73,7 @@ function Post(props) {
 
     return (
         isSmall ? content : (
-            <Link href={data.url}>
+            <Link href={url}>
                 {content}
             </Link>
         )

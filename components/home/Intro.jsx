@@ -1,8 +1,6 @@
 import React from 'react';
-import Link from 'next/link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import MuiLink from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -11,6 +9,7 @@ import { useTheme } from '@mui/material/styles';
 import Section from '@/components/common/Section';
 import Terminal from '@/components/common/Terminal';
 import ReactIcons from '@/components/common/ReactIcons';
+import Link from '@/components/common/Link';
 import RaisedButton from '@/components/common/Buttons/RaisedButton';
 
 function Intro(props) {
@@ -32,10 +31,8 @@ function Intro(props) {
                     <Typography variant='h1'>Ankit Kumar</Typography>
                     <Typography variant='subtitle1'>
                         I am an undergraduate at the{' '}
-                        <Link href='http://iiitg.ac.in/' passHref>
-                            <MuiLink target='_blank' rel='noopener noreferrer'>
-                                Indian Institute of Information Technology Guwahati
-                            </MuiLink>
+                        <Link href='http://iiitg.ac.in/' link nextLinkProps={{ passHref: true }}>
+                            Indian Institute of Information Technology Guwahati
                         </Link>
                         {' '}majoring in Computer Science and Engineering. You may learn more about me by scrolling below.
                     </Typography>
@@ -44,19 +41,16 @@ function Intro(props) {
                         justifyContent: 'center',
                         gap: 2
                     }}>
-                        {
-                            Object.entries(socialMedia).map(platform => (
-                                <Link passHref href={platform[1]} key={platform[0]}>
-                                    <IconButton
-                                        sx={{ fontSize: 40, color: 'primary.contrastText' }}
-                                        target='_blank'
-                                        rel='noopener noreferrer'
-                                    >
-                                        <ReactIcons icon={platform[0]} />
-                                    </IconButton>
-                                </Link>
-                            ))
-                        }
+                        {Object.entries(socialMedia).map(platform => (
+                            <Link
+                                key={platform[0]}
+                                href={platform[1]}
+                                icon
+                                nextLinkProps={{ passHref: true }}
+                                buttonProps={{ sx: { fontSize: 40, color: 'primary.contrastText' } }}>
+                                <ReactIcons icon={platform[0]} />
+                            </Link>
+                        ))}
                     </Box>
                     <RaisedButton
                         size='large'
@@ -82,7 +76,7 @@ function Intro(props) {
                     </Grid>
                 )}
             </Grid>
-        </Section>
+        </Section >
     );
 }
 

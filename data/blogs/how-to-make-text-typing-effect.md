@@ -1,6 +1,6 @@
 ---
 title: How To Make Text Typing Effect?
-abstract: Lorem Ipsum
+abstract: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis quam nisl, sollicitudin vitae libero non, faucibus vulputate sem. Donec placerat est a dapibus vehicula. Quisque viverra sagittis scelerisque. Aenean lectus purus, sagittis sed dolor in, pharetra maximus magna. Aliquam nec leo non tortor scelerisque tincidunt. Quisque volutpat metus arcu, quis lacinia tortor suscipit euismod. Sed fermentum non risus at aliquet. Interdum et malesuada fames ac ante ipsum primis in faucibus. Integer placerat pellentesque malesuada.
 tags:
   - HTML
   - CSS
