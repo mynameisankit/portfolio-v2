@@ -7,7 +7,8 @@ const socialMedia = {
         { label: 'LinkedIn', name: 'linkedin' },
         { label: 'Twitter', name: 'twitter' },
         { label: 'Instagram', name: 'instagram' },
-        { label: 'Facebook', name: 'facebook' }
+        { label: 'Facebook', name: 'facebook' },
+        { label: 'E-Mail', name: 'email' }
     ]
 };
 

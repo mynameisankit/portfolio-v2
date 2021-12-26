@@ -95,7 +95,7 @@ function Contact(props) {
     };
 
     return (
-        <Section id='contact' maxWidth='md'>
+        <Section id='contact' maxWidth='md' minHeight>
             <Paper sx={{
                 display: 'flex',
                 backgroundColor: 'primary.main',

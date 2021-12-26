@@ -1,13 +1,13 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Giscus } from '@giscus/react';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 //Configuration Data
 import config from '/giscus.config.js';
 
 function Comments() {
-    const [enableComments, setEnableComments] = useState(false);
+    const [loaded, setLoaded] = useState(false);
+    useEffect(() => setLoaded(true), []);
 
     return (
         <Box id='comments' sx={{
@@ -19,7 +19,7 @@ function Comments() {
             maxWidth: 'lg',
             mx: 'auto'
         }}>
-            {!enableComments ? <Button variant='text' onClick={() => setEnableComments(true)}> Load Comments</Button> : (
+            {loaded && (
                 <React.Fragment>
                     <Typography variant='h4' component='h4'>Comments</Typography>
                     <Giscus

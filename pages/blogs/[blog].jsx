@@ -13,6 +13,7 @@ import { NextSeo } from 'next-seo';
 import Chip from '@mui/material/Chip';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
 //Custom Components
@@ -57,37 +58,40 @@ function Blog({ mdxSource, frontMatter, toc }) {
                         Published {loaded && `${diff[0]} ${diff[1]}`} ago on {date.format('DD MMMM YYYY')}
                     </Typography>
                     <Typography gutterBottom variant='h2' component='h1'>{title}</Typography>
-                    <Box sx={{ px: { xs: 0, md: 10 } }}>
-                        {abstract && (
-                            <Typography paragraph variant='subtitle1' gutterBottom>
+                    {abstract && (
+                        <Box sx={{ px: { xs: 0, md: 10 } }}>
+                            <Typography paragraph variant='subtitle1' gutterBottom align='justify'>
                                 {abstract}
                             </Typography>
-                        )}
-                    </Box>
+                        </Box>
+                    )}
                 </Box>
-                <Box sx={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    mb: 2,
-                }}>
-                    <Box sx={{
+                <Grid container spacing={2}>
+                    <Grid item xs={6} sx={{
                         display: 'flex',
+                        justifyContent: 'flex-start',
+                        flexWrap: 'wrap',
                         gap: 1
                     }}>
                         {tags?.map(tag => (
                             <Chip key={tag} label={tag} />
                         ))}
-                    </Box>
-                    <Typography variant='h6' component='h6'>
-                        {readingTime}
-                    </Typography>
-                </Box>
+                    </Grid>
+                    <Grid item xs={6} sx={{
+                        display: 'flex',
+                        justifyContent: 'flex-end',
+                        flexWrap: 'wrap'
+                    }}>
+                        <Typography variant='h6' component='h6'>
+                            {readingTime}
+                        </Typography>
+                    </Grid>
+                </Grid>
             </Section>
 
             {/* Blog */}
             <Section id='body' maxWidth='lg'>
-                <Divider sx={{ mb: 4 }} />
+                <Divider sx={{ mt: 2, mb: 4 }} />
                 <MDXLayoutRenderer
                     mdxSource={mdxSource}
                     frontMatter={frontMatter}
@@ -96,7 +100,7 @@ function Blog({ mdxSource, frontMatter, toc }) {
             </Section>
 
             {/* Footer */}
-            <Section id='footer' maxWidth='lg'>
+            <Section maxWidth='lg'>
                 <Divider sx={{ my: 2 }} />
                 <Box sx={{
                     display: 'flex',

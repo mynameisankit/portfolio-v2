@@ -12,7 +12,7 @@ import Contact from '@/components/home/Contact';
 function Home({ featured, projects, socialMedia }) {
     return (
         <React.Fragment>
-            <Intro socialMedia={socialMedia} />
+            <Intro />
             <Featured>
                 {featured}
             </Featured>
@@ -29,8 +29,7 @@ export async function getStaticProps() {
     return {
         props: {
             featured: getJSON(path.join(CWD, 'data', 'featured')),
-            projects: getJSON(path.join(CWD, 'data', 'projects')),
-            socialMedia: getJSON(path.join(CWD, 'data', 'socialMedia.json'))
+            projects: getJSON(path.join(CWD, 'data', 'projects'))
         }
     };
 }

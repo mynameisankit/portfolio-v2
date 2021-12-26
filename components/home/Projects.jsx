@@ -129,7 +129,7 @@ function Projects(props) {
     const { children: data } = props;
 
     return (
-        <Section id='projects' gutterBottom>
+        <Section id='projects' maxWidth={false} minHeight>
             <Grid container spacing={{ xs: 2, sm: 4 }}>
                 <React.Fragment>
                     {data.map(project => (

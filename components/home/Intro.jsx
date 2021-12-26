@@ -8,17 +8,23 @@ import { useTheme } from '@mui/material/styles';
 //Custom Components
 import Section from '@/components/common/Section';
 import Terminal from '@/components/common/Terminal';
-import ReactIcons from '@/components/common/ReactIcons';
 import Link from '@/components/common/Link';
 import RaisedButton from '@/components/common/Buttons/RaisedButton';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import EmailIcon from '@mui/icons-material/Email';
+//Social Media Data
+import SocialMediaData from '@/data/socialMedia';
 
-function Intro(props) {
-    const { socialMedia } = props;
+function Intro() {
     const theme = useTheme();
     const isSmall = useMediaQuery(theme.breakpoints.down('md'));
 
     return (
-        <Section id='intro'>
+        <Section id='intro' maxWidth={false} minHeight>
             <Grid container spacing={0}>
                 <Grid item xs={12} md={6} sx={{
                     display: 'flex',
@@ -41,7 +47,7 @@ function Intro(props) {
                         justifyContent: 'center',
                         gap: 2
                     }}>
-                        {Object.entries(socialMedia).map(platform => (
+                        {/* {Object.entries(socialMedia).map(platform => (
                             <Link
                                 key={platform[0]}
                                 href={platform[1]}
@@ -50,7 +56,7 @@ function Intro(props) {
                                 buttonProps={{ sx: { fontSize: 40, color: 'primary.contrastText' } }}>
                                 <ReactIcons icon={platform[0]} />
                             </Link>
-                        ))}
+                        ))} */}
                     </Box>
                     <RaisedButton
                         size='large'
@@ -76,7 +82,7 @@ function Intro(props) {
                     </Grid>
                 )}
             </Grid>
-        </Section >
+        </Section>
     );
 }
 

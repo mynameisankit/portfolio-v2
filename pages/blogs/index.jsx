@@ -133,7 +133,7 @@ function Blogs({ blogs }) {
     }
 
     return (
-        <Section id='blogs' sx={{ mt: 4 }}>
+        <Section id='blogs' minHeight maxWidth={false}>
             {/* Filters */}
             <Grid container spacing={3}>
                 <Grid item xs={12}>
@@ -211,9 +211,6 @@ function Blogs({ blogs }) {
                         />
                     </Stack>
                 </Grid>
-            </Grid>
-            <Grid item xs={12}>
-                <Comments />
             </Grid>
         </Section>
     );

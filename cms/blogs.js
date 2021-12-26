@@ -8,6 +8,12 @@ const blogs = {
     preview_path: 'http://localhost:3000/blogs/{{fields.title}}',
     fields: [
         { 
+            label: 'Thumbnail', 
+            name: 'thumbail', 
+            widget: 'image',
+            required: false
+        },
+        { 
             label: 'Title', 
             name: 'title', 
             widget: 'string'

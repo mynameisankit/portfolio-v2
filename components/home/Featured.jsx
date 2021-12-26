@@ -194,8 +194,8 @@ function Featured(props) {
     const { children: data } = props;
 
     return (
-        <Section id='featured' gutterBottom>
-            <Grid container spacing={{ sm: 9, xs: 4 }}>
+        <Section id='featured' maxWidth={false}>
+            <Grid container spacing={5}>
                 {data?.map((project, idx) => (
                     <Grid item key={project.title} xs={12}>
                         <Project direction={(idx % 2) ? 'left' : 'right'}>

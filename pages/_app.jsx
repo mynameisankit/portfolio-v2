@@ -58,7 +58,7 @@ function MyApp(props) {
                     )}
                     <DefaultSeo {...SEO} />
                     <Component {...pageProps} />
-                    {/* {currentRoute !== 'admin' && <Footer />} */}
+                    {currentRoute !== 'admin' && <Footer />}
                 </ThemeProvider>
             </CacheProvider>
         </SWRConfig>
