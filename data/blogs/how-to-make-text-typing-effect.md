@@ -1,10 +1,18 @@
 ---
 title: How To Make Text Typing Effect?
-abstract: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis quam nisl, sollicitudin vitae libero non, faucibus vulputate sem. Donec placerat est a dapibus vehicula. Quisque viverra sagittis scelerisque. Aenean lectus purus, sagittis sed dolor in, pharetra maximus magna. Aliquam nec leo non tortor scelerisque tincidunt. Quisque volutpat metus arcu, quis lacinia tortor suscipit euismod. Sed fermentum non risus at aliquet. Interdum et malesuada fames ac ante ipsum primis in faucibus. Integer placerat pellentesque malesuada.
+abstract: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis quam
+  nisl, sollicitudin vitae libero non, faucibus vulputate sem. Donec placerat
+  est a dapibus vehicula. Quisque viverra sagittis scelerisque. Aenean lectus
+  purus, sagittis sed dolor in, pharetra maximus magna. Aliquam nec leo non
+  tortor scelerisque tincidunt. Quisque volutpat metus arcu, quis lacinia tortor
+  suscipit euismod. Sed fermentum non risus at aliquet. Interdum et malesuada
+  fames ac ante ipsum primis in faucibus. Integer placerat pellentesque
+  malesuada.
+thumbail: images/typing-effect.gif
 tags:
-    - HTML
-    - CSS
-    - JavaScript
+  - HTML
+  - CSS
+  - JavaScript
 date: 2021-11-27T08:34:59.562Z
 ---
 
