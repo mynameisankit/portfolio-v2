@@ -1,7 +1,7 @@
 const socialMedia = {
     label: 'Social Media',
     name: 'social',
-    file: 'content/socialMedia.json',
+    file: 'data/socialMedia.json',
     fields: [
         { label: 'GitHub', name: 'github' },
         { label: 'LinkedIn', name: 'linkedin' },

@@ -1,7 +1,7 @@
 const projects = {
     name: 'projects',
     label: 'Projects',
-    folder: 'content/projects',
+    folder: 'data/projects',
     create: true,
     extension: 'json',
     slug: '{{fields.title}}-{{year}}-{{month}}-{{day}}',

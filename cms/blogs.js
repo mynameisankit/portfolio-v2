@@ -1,18 +1,12 @@
 const blogs = {
     name: 'blogs',
     label: 'Blog',
-    folder: 'content/blogs',
+    folder: 'data/blogs',
     create: true,
     extension: 'md',
     slug: '{{fields.title}}',
     preview_path: 'http://localhost:3000/blogs/{{fields.title}}',
     fields: [
-        { 
-            label: 'Thumbnail', 
-            name: 'thumbail', 
-            widget: 'image',
-            required: false
-        },
         { 
             label: 'Title', 
             name: 'title', 
@@ -28,6 +22,12 @@ const blogs = {
             label: 'Abstract', 
             name: 'abstract', 
             widget: 'text',
+            required: false
+        },
+        { 
+            label: 'Thumbnail', 
+            name: 'thumbail', 
+            widget: 'image',
             required: false
         },
         {

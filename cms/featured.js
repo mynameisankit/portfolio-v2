@@ -1,7 +1,7 @@
 const featured = {
     name: 'featured',
     label: 'Featured Projects',
-    folder: 'content/featured',
+    folder: 'data/featured',
     create: true,
     extension: 'json',
     slug: '{{fields.title}}_{{year}}-{{month}}-{{day}}',
