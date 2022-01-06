@@ -11,7 +11,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Fade from '@mui/material/Fade';
 import { styled, useTheme } from '@mui/material/styles';
 import { useForm, Controller } from 'react-hook-form';
-import emailjs from 'emailjs-com';
+import emailjs from '@emailjs/browser';
 import camelCase from 'lodash/fp/camelCase';
 //Custom Components
 import Section from '@/components/common/Section';
