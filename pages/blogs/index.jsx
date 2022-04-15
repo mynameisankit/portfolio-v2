@@ -18,7 +18,6 @@ import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
-//import FlipMove from 'react-flip-move';
 //Material-UI Icon
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 import SortIcon from '@mui/icons-material/Sort';
@@ -26,7 +25,6 @@ import SortIcon from '@mui/icons-material/Sort';
 import ReactIcons from '@/components/common/ReactIcons';
 import Section from '@/components/common/Section';
 import Post from '@/components/blogs/Post';
-import Comments from '@/components/blogs/Comments';
 
 //Sort in-place by date
 function sortByDate(data, order) {
@@ -127,13 +125,14 @@ function Blogs({ blogs }) {
 
         currPage.push(
             <Grid item xs={12} lg={4} md={6} key={blog.title}>
-                <Post>{blog}</Post>
+                <Post {...blog} />
             </Grid>
         );
     }
 
     return (
-        <Section id='blogs' minHeight maxWidth={false}>
+        <Section id='blogs' minHeight maxWidth={false} sx={{ display: 'block' }}>
+            
             {/* Filters */}
             <Grid container spacing={3}>
                 <Grid item xs={12}>
@@ -152,7 +151,7 @@ function Blogs({ blogs }) {
                                     variant='contained'
                                     startIcon={<ReactIcons icon={curr} />}
                                     disabled={curr === category}
-                                    onClick={(event) => dispatch({
+                                    onClick={() => dispatch({
                                         type: 'button',
                                         field: 'category',
                                         payload: curr
@@ -182,15 +181,14 @@ function Blogs({ blogs }) {
                     </FormControl>
                 </Grid>
             </Grid>
+
             {/* All Posts */}
             <Grid container spacing={3} sx={{ mt: 1, position: 'relative' }}>
-                {/* <FlipMove typeName={null}> */}
                 {currPage.length ? currPage : (
                     <Grid item xs={12}>
                         <Typography gutterBottom variant='h4'>No articles with the tag &quot;{category}&quot; found</Typography>
                     </Grid>
                 )}
-                {/* </FlipMove> */}
                 <Grid item xs={12} sx={{
                     display: 'flex',
                     justifyContent: 'center'
@@ -212,6 +210,7 @@ function Blogs({ blogs }) {
                     </Stack>
                 </Grid>
             </Grid>
+
         </Section>
     );
 }

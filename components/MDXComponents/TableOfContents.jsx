@@ -1,80 +1,72 @@
 import React, { useState } from 'react';
-import Paper from '@mui/material/Paper';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import MuiListItemText from '@mui/material/ListItemText';
-import MuiListItemIcon from '@mui/material/ListItemIcon';
+import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
 import Divider from '@mui/material/Divider';
-import { styled } from '@mui/material/styles';
+import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import { useTheme } from '@mui/material/styles';
 //Icons
-import FastForwardSharpIcon from '@mui/icons-material/FastForwardSharp';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 //Custom Components
 import Link from '@/components/common/Link';
 
-const ListItemText = styled(MuiListItemText)((({ theme }) => ({
-    fontSize: theme.typography.pxToRem(20),
-    userSelect: 'none'
-})));
+//Recursively render the items
+function TableOfContentsItems({ toc }) {
+    const theme = useTheme();
 
-const ListItemIcon = styled(MuiListItemIcon)((({ theme }) => ({
-    minWidth: 40
-})));
+    if (!toc?.length)
+        return null;
+
+    return (
+        <React.Fragment>
+            {toc.map(({ value, depth, url, children }) => (
+                <Box key={value + depth} sx={{ pl: theme.spacing(depth && 4) }}>
+                    <Link
+                        href={url}
+                        nextLinkProps={{
+                            replace: true,
+                            shallow: true,
+                            scroll: false
+                        }}
+                        muiLinkProps={{ underline: 'none' }}
+                    >
+                        <Box sx={{ display: 'flex', alignItems: 'center', mb: theme.spacing(1) }}>
+                            <ArrowRightIcon />
+                            <Typography variant='h6' component='h6' sx={{ fontSize: 'inherit' }}>
+                                {value}
+                            </Typography>
+                        </Box>
+                    </Link>
+                    <TableOfContentsItems toc={children} />
+                </Box>
+            ))}
+        </React.Fragment>
+    );
+}
 
 function TableOfContents({ toc }) {
     const [open, setOpen] = useState(true);
+    const theme = useTheme();
 
     if (!toc.length)
         return null;
 
     return (
-        <Paper>
-            <List dense>
-                <ListItem onClick={() => setOpen(!open)}>
-                    <ListItemIcon>
-                        {open ? <ExpandLess /> : <ExpandMore />}
-                    </ListItemIcon>
-                    <ListItemText
-                        primaryTypographyProps={{
-                            sx: {
-                                fontSize: 'inherit',
-                                fontWeight: 'fontWeightBold'
-                            }
-                        }}
-                        primary='Table Of Contents'
-                    />
-                </ListItem>
-                {open && <Divider />}
-                <Collapse in={open} timeout='auto' unmountOnExit>
-                    {toc.map(({ value, depth, url }) => (
-                        <ListItem key={value + depth} sx={{ ml: depth * 2 }}>
-                            <ListItemIcon>
-                                <FastForwardSharpIcon />
-                            </ListItemIcon>
-                            <Link
-                                nextLinkProps={{
-                                    replace: true,
-                                    passHref: true,
-                                    href: url,
-                                    shallow: true,
-                                    scroll: false
-                                }}
-                                muiLinkProps={{
-                                    underline: 'none',
-                                    onClick: (() => document.querySelector(url).scrollIntoView({ behavior: 'smooth' }))
-                                }}>
-                                <ListItemText
-                                    primaryTypographyProps={{ sx: { fontSize: 'inherit' } }}
-                                    primary={value}
-                                />
-                            </Link>
-                        </ListItem>
-                    ))}
-                </Collapse>
-            </List>
-        </Paper >
+        <Box sx={{ float: 'right', ml: theme.spacing(2), mb: theme.spacing(2) }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                <Typography variant='h5' component='h5'>Table Of Contents</Typography>
+                <IconButton onClick={() => setOpen(!open)}>
+                    {open ? <ExpandLess /> : <ExpandMore />}
+                </IconButton>
+            </Box>
+            {open && <Divider />}
+            <Collapse in={open} timeout='auto' unmountOnExit>
+                <TableOfContentsItems toc={toc} />
+            </Collapse>
+        </Box>
     );
 }
 

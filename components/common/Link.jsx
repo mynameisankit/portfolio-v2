@@ -4,50 +4,61 @@ import MuiLink from '@mui/material/Link';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 
-function Link({ href, children, nextLinkProps, muiLinkProps, button, icon, link, buttonProps }) {
-    const IS_ANCHOR = href && href.startsWith('#');
-    const IS_INTERNAL_LINK = href && href.startsWith('/');
+function scrollIntoView(event, href) {
+    event.preventDefault();
 
-    const MUI_LINK = (
-        <MuiLink
-            {...muiLinkProps}
-            {...(!IS_INTERNAL_LINK && { rel: 'noopener noreferrer', target: '_blank' })}>
+    document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
+
+    return;
+}
+
+//TODO: Refactor
+function Link({ children, href, type, buttonProps, muiLinkProps, nextLinkProps }) {
+    if (!href)
+        href = nextLinkProps?.href ? nextLinkProps.href : '#';
+
+    const isAnchor = href.startsWith('#');
+    const isInternalLink = href.startsWith('/');
+
+    let BaseComponent, componentProps;
+    if (type === 'button' || type === 'icon') {
+        BaseComponent = type === 'button' ? Button : IconButton;
+        componentProps = buttonProps;
+    }
+    else {
+        BaseComponent = MuiLink;
+        componentProps = muiLinkProps;
+    }
+
+    if (!isInternalLink) {
+        componentProps = {
+            ...componentProps,
+            ...(!isAnchor && { rel: 'noopener noreferrer', target: '_blank' }),
+            ...(isAnchor && { href, onClick: (event) => scrollIntoView(event, href) })
+        };
+    }
+
+    if (!isAnchor)
+        nextLinkProps = {
+            ...nextLinkProps,
+            passHref: true,
+            href
+        };
+
+    const component = (
+        <BaseComponent {...componentProps}>
             {children}
-        </MuiLink>
+        </BaseComponent>
     );
 
-    const MUI_BUTTON = (
-        <Button
-            {...buttonProps}
-            {...(!IS_INTERNAL_LINK && { rel: 'noopener noreferrer', target: '_blank' })}>
-            {children}
-        </Button>
-    );
-
-    const MUI_ICON_BUTTON = (
-        <IconButton
-            {...buttonProps}
-            {...(!IS_INTERNAL_LINK && { rel: 'noopener noreferrer', target: '_blank' })}>
-            {children}
-        </IconButton>
-    );
-
-    let component = null;
-    if (button)
-        component = MUI_BUTTON;
-    else if (icon)
-        component = MUI_ICON_BUTTON;
-    else
-        component = MUI_LINK;
-
-    if (IS_ANCHOR)
+    if (isAnchor)
         return component;
-
-    return (
-        <NxtLink href={href} {...nextLinkProps}>
-            {component}
-        </NxtLink>
-    );
+    else
+        return (
+            <NxtLink {...nextLinkProps}>
+                {component}
+            </NxtLink>
+        );
 }
 
 export default Link;

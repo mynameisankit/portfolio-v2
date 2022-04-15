@@ -1,6 +1,4 @@
 import React from 'react';
-import Link from 'next/link';
-import MuiLink from '@mui/material/Link';
 import SvgIcon from '@mui/material/SvgIcon';
 import Card from '@mui/material/Card';
 import CardActionArea from '@mui/material/CardActionArea';
@@ -14,8 +12,9 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import dayjs from 'dayjs';
 //Custom Components
 import ReactIcons from '@/components/common/ReactIcons';
+import Link from '@/components/common/Link';
 
-function Post({ children: { title, subTitle, date, abstract, url, tags } }) {
+function Post({ title, subTitle, date, abstract, url, tags }) {
     const isSmall = useMediaQuery((theme) => theme.breakpoints.down('md'));
     const ActionArea = isSmall ? React.Fragment : CardActionArea;
 
@@ -27,8 +26,7 @@ function Post({ children: { title, subTitle, date, abstract, url, tags } }) {
                 border: 1,
                 borderColor: 'primary.main',
             }}
-            elevation={5}
-        >
+            elevation={5}>
             <ActionArea>
                 <CardContent>
                     <Typography variant='h4'>{title}</Typography>
@@ -41,7 +39,7 @@ function Post({ children: { title, subTitle, date, abstract, url, tags } }) {
                         </Typography>
                     )}
                     {isSmall && (
-                        <Link href={url} passHref>
+                        <Link href={url} muiLinkProps={{ underline: 'none' }}>
                             <MuiLink variant='button' color='inherit'>Read More</MuiLink>
                         </Link>
                     )}
@@ -73,7 +71,7 @@ function Post({ children: { title, subTitle, date, abstract, url, tags } }) {
 
     return (
         isSmall ? content : (
-            <Link href={url}>
+            <Link href={url} muiLinkProps={{ underline: 'none' }}>
                 {content}
             </Link>
         )

@@ -14,7 +14,6 @@ import smoothscroll from 'smoothscroll-polyfill';
 import theme from '../styles/theme';
 //Custom Components
 import AppBar from '@/components/common/AppBar';
-import Footer from '@/components/common/Footer';
 //Styles
 import globalStyles from '@/styles/global';
 import highlightJsStyles from 'highlight.js/styles/rainbow.css';
@@ -58,7 +57,6 @@ function MyApp(props) {
                     )}
                     <DefaultSeo {...SEO} />
                     <Component {...pageProps} />
-                    {currentRoute !== 'admin' && <Footer />}
                 </ThemeProvider>
             </CacheProvider>
         </SWRConfig>
