@@ -5,7 +5,6 @@ import FileCopyIcon from '@mui/icons-material/FileCopy';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { green } from '@mui/material/colors';
 
-
 function Pre({ children, ...rest }) {
     const CodeBlock = useRef(null);
     const timerID = useRef(null);
