@@ -5,23 +5,25 @@ import FileCopyIcon from '@mui/icons-material/FileCopy';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { green } from '@mui/material/colors';
 
+
 function Pre({ children, ...rest }) {
     const CodeBlock = useRef(null);
+    const timerID = useRef(null);
     const [copied, setCopied] = useState(false);
     const [hovered, setHovered] = useState(false);
 
-    let timerID = null;
     return (
         <Box
             ref={CodeBlock}
             sx={{ position: 'relative' }}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => {
-                setHovered(false)
+                setHovered(false);
                 setCopied(false);
-                if (timerID) {
-                    clearTimeout(timerID);
-                    timerID = null;
+
+                if (timerID.current) {
+                    clearTimeout(timerID.current);
+                    timerID.current = null;
                 }
             }}
         >
@@ -31,14 +33,14 @@ function Pre({ children, ...rest }) {
                         setCopied(true);
                         navigator.clipboard.writeText(CodeBlock.current.textContent);
 
-                        if (timerID) {
-                            clearTimeout(timerID);
-                            timerID = null;
+                        if (timerID.current) {
+                            clearTimeout(timerID.current);
+                            timerID.current = null;
                         }
 
-                        timerID = setTimeout(() => {
+                        timerID.current = setTimeout(() => {
                             setCopied(false);
-                            timerID = null;
+                            timerID.current = null;
                         }, 2000);
                     }}
                     sx={{

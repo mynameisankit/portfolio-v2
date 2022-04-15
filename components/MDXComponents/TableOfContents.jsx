@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import Button from '@mui/material/Button';
+import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/material/styles';
 //Icons
@@ -55,18 +55,18 @@ function TableOfContents({ toc }) {
         return null;
 
     return (
-        <Box sx={{ float: 'right', ml: theme.spacing(2), mb: theme.spacing(2) }}>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Paper sx={{ float: 'right', p: theme.spacing(2) }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', pb: theme.spacing(1) }}>
                 <Typography variant='h5' component='h5'>Table Of Contents</Typography>
                 <IconButton onClick={() => setOpen(!open)}>
                     {open ? <ExpandLess /> : <ExpandMore />}
                 </IconButton>
+                {open && <Divider />}
             </Box>
-            {open && <Divider />}
             <Collapse in={open} timeout='auto' unmountOnExit>
                 <TableOfContentsItems toc={toc} />
             </Collapse>
-        </Box>
+        </Paper>
     );
 }
 
