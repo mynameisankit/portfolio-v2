@@ -48,7 +48,7 @@ function Blog({ mdxSource, frontMatter, toc }) {
                 title={`${title} | Blogs | Portfolio v2`}
                 description={abstract}
             />
-            
+
             {/* Meta-Data */}
             <Section id='meta' maxWidth='lg'>
                 <Box sx={{
@@ -108,7 +108,7 @@ function Blog({ mdxSource, frontMatter, toc }) {
                     justifyContent: 'space-between',
                     alignItems: 'center'
                 }}>
-                    <Link href='/blogs'>
+                    <Link href='/blogs' muiLinkProps={{ underline: 'none' }}>
                         <Button variant='text' startIcon={<ArrowBackIcon />}>
                             Go back to blogs
                         </Button>
@@ -149,8 +149,7 @@ export async function getStaticPaths() {
     const files = getFrontMatter(getFiles(ROOT));
     return {
         paths: files.map(file => ({ params: { blog: file.url } })),
-        //TODO: Add a not found page for blogs
-        fallback: false,
+        fallback: false
     };
 }
 

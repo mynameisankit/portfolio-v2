@@ -1,7 +1,7 @@
 //Utility Imports
 import dayjs from 'dayjs';
 import cloneDeep from 'lodash/fp/cloneDeep';
-import upperFirst from 'lodash/fp/upperFirst';
+import Fuse from 'fuse.js'
 //Server Side Imports
 import path from 'path';
 import getFiles from '@/lib/getFiles';
@@ -14,17 +14,19 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-import Select from '@mui/material/Select';
-import FormControl from '@mui/material/FormControl';
-import MenuItem from '@mui/material/MenuItem';
-import InputLabel from '@mui/material/InputLabel';
+import Switch from '@mui/material/Switch';
+import Divider from '@mui/material/Divider';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 //Material-UI Icon
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
+
 import SortIcon from '@mui/icons-material/Sort';
 //Custom Components
 import ReactIcons from '@/components/common/ReactIcons';
 import Section from '@/components/common/Section';
 import Post from '@/components/blogs/Post';
+import SearchBox from '@/components/blogs/SearchBox';
 
 //Sort in-place by date
 function sortByDate(data, order) {
@@ -35,12 +37,9 @@ function sortByDate(data, order) {
         date1 = dayjs(date1);
         date2 = dayjs(date2);
 
-        const diff = date1.diff(date2, 'day');
+        const diff = date1.diff(date2, 'day', true);
 
-        if (diff)
-            return (order === 'newest') ? -diff : diff;
-        else
-            return 0;
+        return diff ? (order === 'newest') ? -diff : diff : 0;
     });
 }
 
@@ -68,26 +67,35 @@ function LabeledIcon(props) {
 function reducer(state, action) {
     const { type, field, payload } = action;
 
-    switch (type) {
-        case 'button': case 'select':
-            return { ...state, [field]: payload };
-        case 'pagination': return { ...state, page: payload };
-        default: return state;
-    }
+    if (type === 'button' || type === 'select')
+        return { ...state, [field]: payload };
+    else if (type === 'pagination')
+        return { ...state, page: payload };
+    else if (type === 'switch')
+        return { ...state, order: payload ? 'newest' : 'oldest' };
+    else
+        return state;
 }
 
-function Blogs({ blogs }) {
+//TODO: Implement Fuzzy Search
+function Blogs({ blogs, paginationSettings, fuzzySearchProps }) {
+    const theme = useTheme();
+
     const [currBlogs, setCurrBlogs] = useState(blogs);
     const [settings, dispatch] = useReducer(reducer, {
         page: 1,
         category: 'All',
         order: 'newest',
-        rows: 10
+        rows: paginationSettings.maxRows
     });
 
-    //Create a hash map to quickly find the corresponding articles
-    //Using useRef to create instance variable
-    const tags = useRef((() => {
+    //Hash-Map of Blogs
+    const tags = useRef({});
+    //Fuzzy Search
+    const fuzzySearch = useRef(null);
+
+    useEffect(() => {
+        //Create a hash map to quickly find the corresponding articles
         const taggedArticles = {};
 
         //Find the articles to each corresponding tag
@@ -105,112 +113,163 @@ function Blogs({ blogs }) {
             }
         }
 
-        return taggedArticles;
-    })());
+        tags.current = taggedArticles;
 
-    const { page, rows, category, order } = settings;
+        //Fuzzy Search Init
+        const { index, options } = fuzzySearchProps;
+        fuzzySearch.current = new Fuse(blogs, options, Fuse.parseIndex(JSON.parse(index)));
+    }, []);
 
-    //Side-effect when tag is changed
+    const { page, rows, category, order, search } = settings;
+
+    //Side-effects
     useEffect(() => {
         const newBlogs = cloneDeep((category === 'All') ? blogs : tags.current[category]);
         sortByDate(newBlogs, order);
         setCurrBlogs(newBlogs);
-
     }, [category, order, blogs]);
 
     // Current Blogs
     const currPage = [];
     for (let i = ((page - 1) * rows); i < Math.min(currBlogs.length, page * rows); i++) {
         const blog = currBlogs[i];
-
-        currPage.push(
-            <Grid item xs={12} lg={4} md={6} key={blog.title}>
-                <Post {...blog} />
-            </Grid>
-        );
+        currPage.push(...[
+            <Post key={blog.title} {...blog} />,
+            <Divider component='div' key={i} sx={{
+                color: theme.palette.text.primary
+            }} />
+        ]);
     }
+    currPage.pop();
+
+    const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
 
     return (
-        <Section id='blogs' minHeight maxWidth={false} sx={{ display: 'block' }}>
-            
-            {/* Filters */}
-            <Grid container spacing={3}>
-                <Grid item xs={12}>
-                    <LabeledIcon icon={DragIndicatorIcon}>Tags</LabeledIcon>
-                    <Box sx={{
-                        display: 'flex',
-                        gap: 2,
-                        flexWrap: 'wrap',
-                    }}>
-                        {Object.entries(tags.current).concat([['All']]).map(tag => {
-                            const curr = tag[0];
+        <Section id='blogs' minHeight maxWidth={false} sx={{ display: 'block', py: theme.spacing(3) }}>
 
-                            return (
-                                <Button
-                                    key={curr}
-                                    variant='contained'
-                                    startIcon={<ReactIcons icon={curr} />}
-                                    disabled={curr === category}
-                                    onClick={() => dispatch({
-                                        type: 'button',
-                                        field: 'category',
-                                        payload: curr
-                                    })}>
-                                    {curr}
-                                </Button>
-                            );
-                        })}
-                    </Box>
-                </Grid>
-                <Grid item xs={12}>
-                    <LabeledIcon icon={SortIcon}>Sort</LabeledIcon>
-                    <FormControl>
-                        <InputLabel>Order By</InputLabel>
-                        <Select
-                            label='Order By'
-                            onChange={event => dispatch({
-                                type: 'select',
-                                field: 'order',
-                                payload: event.target.value
-                            })}
-                            value={upperFirst(order)}
-                        >
-                            <MenuItem value='Newest'>Newest</MenuItem>
-                            <MenuItem value='Oldest'>Oldest</MenuItem>
-                        </Select>
-                    </FormControl>
-                </Grid>
-            </Grid>
+            {/* Header */}
+            <Box sx={{
+                minHeight: {
+                    xs: 300,
+                    md: 500
+                },
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                background: `linear-gradient(90deg, ${theme.palette.background.default} 14px, transparent 1%) 50%, linear-gradient(${theme.palette.background.default} 14px, transparent 1%) 50%, ${theme.palette.secondary.main}`,
+                backgroundSize: '16px 16px',
+                mb: theme.spacing(4),
+            }}>
+                <Typography>Blogs</Typography>
+            </Box>
 
-            {/* All Posts */}
-            <Grid container spacing={3} sx={{ mt: 1, position: 'relative' }}>
-                {currPage.length ? currPage : (
-                    <Grid item xs={12}>
-                        <Typography gutterBottom variant='h4'>No articles with the tag &quot;{category}&quot; found</Typography>
-                    </Grid>
-                )}
-                <Grid item xs={12} sx={{
+            <Grid container spacing={4} direction={isSmall ? 'column-reverse' : 'row'}>
+
+                {/* All Posts */}
+                <Grid item xs={12} md={8} sx={{
                     display: 'flex',
-                    justifyContent: 'center'
+                    flexDirection: 'column'
                 }}>
-                    <Stack spacing={2}>
-                        <Pagination
-                            count={Math.ceil(blogs ? blogs.length / 10 : 0)}
-                            color='secondary'
-                            size='large'
-                            showFirstButton
-                            showLastButton
-                            onChange={(event, value) => dispatch({
-                                type: 'pagination',
-                                field: 'page',
-                                payload: value
+                    {currPage.length ?
+                        currPage : (
+                            <Box>
+                                <Typography gutterBottom variant='h4'>No articles with the tag &quot;{category}&quot; found</Typography>
+                            </Box>
+                        )}
+                </Grid>
+
+                {/* Filters */}
+                <Grid item xs={12} md={4} sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: theme.spacing(4),
+                    px: theme.spacing(2)
+                }}>
+
+                    <SearchBox fuzzySearch={fuzzySearch.current} />
+
+                    {/* Tags */}
+                    <Box>
+                        <LabeledIcon icon={DragIndicatorIcon}>Tags</LabeledIcon>
+                        <Box sx={{
+                            display: 'flex',
+                            gap: 2,
+                            flexWrap: 'wrap',
+                        }}>
+                            {Object.entries(tags.current).concat([['All']]).map(tag => {
+                                const curr = tag[0];
+
+                                return (
+                                    <Button
+                                        key={curr}
+                                        variant='contained'
+                                        startIcon={<ReactIcons icon={curr} />}
+                                        disabled={curr === category}
+                                        onClick={() => dispatch({
+                                            type: 'button',
+                                            field: 'category',
+                                            payload: curr
+                                        })}
+                                    >
+                                        {curr}
+                                    </Button>
+                                );
                             })}
-                            page={page}
-                        />
-                    </Stack>
+                        </Box>
+                    </Box>
+
+                    {/* Order Switch */}
+                    <Box>
+                        <LabeledIcon icon={SortIcon}>Sort</LabeledIcon>
+                        <Stack direction='row' spacing={1} alignItems='center'>
+                            <Typography>Newest</Typography>
+                            <Switch
+                                sx={{
+                                    '.MuiSwitch-thumb': {
+                                        backgroundColor: order === 'newest' ?
+                                            theme.palette.primary.main :
+                                            theme.palette.secondary.main
+                                    },
+                                    '.MuiSwitch-track': {
+                                        backgroundColor: order === 'newest' ?
+                                            theme.palette.primary.main :
+                                            theme.palette.secondary.main
+                                    }
+                                }}
+                                checked={order === 'newest'}
+                                onChange={event => dispatch({
+                                    type: 'switch',
+                                    field: 'sort',
+                                    payload: event.target.checked
+                                })}
+                            />
+                            <Typography>Oldest</Typography>
+                        </Stack>
+                    </Box>
+
                 </Grid>
             </Grid>
 
+            {/* Pagination */}
+            <Box sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                pt: 3
+            }}>
+                <Pagination
+                    count={Math.ceil(blogs ? blogs.length / paginationSettings.maxRows : 0)}
+                    color='secondary'
+                    size='large'
+                    showFirstButton
+                    showLastButton
+                    onChange={(event, value) => dispatch({
+                        type: 'pagination',
+                        field: 'page',
+                        payload: value
+                    })}
+                    page={page}
+                />
+            </Box>
         </Section>
     );
 }
@@ -219,7 +278,30 @@ export async function getStaticProps() {
     const ROOT = path.join(process.cwd(), 'data', 'blogs');
     const files = getFrontMatter(getFiles(ROOT));
     files.forEach(file => file.url = `/blogs/${file.url}`);
-    return { props: { blogs: files } };
+
+    //Page Settings
+    const paginationSettings = {
+        maxRows: 10
+    };
+
+    //Fuzzy Search
+    const options = {
+        keys: ['title', 'tags']
+    };
+
+    // Create the Fuse index
+    const fuzzySearchIndex = Fuse.createIndex(options.keys, files).toJSON();
+
+    return {
+        props: {
+            blogs: files,
+            fuzzySearchProps: {
+                index: JSON.stringify(fuzzySearchIndex),
+                options
+            },
+            paginationSettings
+        }
+    };
 }
 
 export default Blogs;

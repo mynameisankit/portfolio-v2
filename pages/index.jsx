@@ -9,7 +9,7 @@ import Featured from '@/components/home/Featured';
 import Projects from '@/components/home/Projects';
 import Contact from '@/components/home/Contact';
 
-function Home({ featured, projects, socialMedia }) {
+function Home({ featured, projects }) {
     return (
         <React.Fragment>
             <Intro />

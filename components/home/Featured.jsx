@@ -16,23 +16,30 @@ import LinkIcon from '@mui/icons-material/Link';
 import Section from '@/components/common/Section';
 import ReactIcons from '@/components/common/ReactIcons';
 import Tooltip from '@/components/common/Tooltip';
+import AugmentedBox from '@/components/common/AugmentedBox';
 
-function Project(props) {
-    const { children: data, direction } = props;
+function Project({ children: data, direction }) {
     const theme = useTheme();
     const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
 
-    //With respect to Content
-    //True -> Content on left
-    //False -> Content on Right
+    /**
+     * Direction Prop
+     * --------------
+     * With respect to Content
+     * True -> Content on left
+     * False -> Content on Right
+     * */
+
+    const isLeft = direction === 'left';
+
     const configuration = {
         image: {
-            gridArea: isSmall ? '1/1/2/13' : (direction === 'left') ? '1/1/2/7' : '1/7/2/13',
+            gridArea: isSmall ? '1/1/2/13' : isLeft ? '1/1/2/7' : '1/7/2/13',
         },
         content: {
-            gridArea: isSmall ? '1/1/2/13' : (direction === 'left') ? '1/6/2/13' : '1/1/2/8',
-            align: isSmall ? 'center' : (direction === 'left') ? 'right' : 'left',
-            justifyContent: isSmall ? 'center' : (direction === 'left') ? 'flex-end' : 'flex-start',
+            gridArea: isSmall ? '1/1/2/13' : isLeft ? '1/6/2/13' : '1/1/2/8',
+            align: isSmall ? 'center' : isLeft ? 'right' : 'left',
+            justifyContent: isSmall ? 'center' : isLeft ? 'flex-end' : 'flex-start',
         },
     };
 
@@ -52,35 +59,35 @@ function Project(props) {
                         target='_blank'
                         rel='noopener'
                     >
-                        <Box sx={{
-                            position: 'relative',
-                            height: isSmall ? 470 : 380,
-                            zIndex: 0,
-                            overflow: 'hidden',
-                            borderRadius: 1.5,
-                            '&::before': {
-                                content: "''",
-                                position: 'absolute',
-                                height: '100%',
-                                width: 1,
-                                zIndex: 1,
-                                backgroundColor: alpha(theme.palette.primary.main, isSmall ? 0.7 : 0.5),
-                                transitionDuration: `300ms`,
-                                transitionProperty: `background-color`,
-                                transitionTimingFunction: 'transitions.easing.easeOut',
-                            },
-                            '&:hover::before': {
-                                backgroundColor: alpha(theme.palette.primary.main, 0),
-                            },
-                            boxShadow: 24,
-                        }}>
-                            <Image
-                                src={`/${data.thumbnail}`}
-                                layout='fill'
-                                objectFit='cover'
-                                alt={`${data.name} Project Image`}
-                            />
-                        </Box>
+                        <AugmentedBox top left={!isLeft} right={isLeft}>
+                            <Box sx={{
+                                position: 'relative',
+                                height: isSmall ? 470 : 380,
+                                zIndex: 0,
+                                overflow: 'hidden',
+                                '&::before': {
+                                    content: "''",
+                                    position: 'absolute',
+                                    height: '100%',
+                                    width: 1,
+                                    zIndex: 1,
+                                    backgroundColor: alpha(theme.palette.primary.main, isSmall ? 0.7 : 0.5),
+                                    transitionDuration: `${theme.transitions.duration.standard}ms`,
+                                    transitionProperty: `background-color`,
+                                    transitionTimingFunction: 'transitions.easing.easeOut'
+                                },
+                                '&:hover::before': {
+                                    backgroundColor: alpha(theme.palette.primary.main, 0),
+                                }
+                            }}>
+                                <Image
+                                    src={`/${data.thumbnail}`}
+                                    layout='fill'
+                                    objectFit='cover'
+                                    alt={`${data.name} Project Image`}
+                                />
+                            </Box>
+                        </AugmentedBox>
                     </MuiLink>
                 </Link>
             </Box>
@@ -94,6 +101,8 @@ function Project(props) {
                 position: 'relative',
                 zIndex: 1,
             }}>
+
+                {/* Meta */}
                 <Typography
                     variant='h6'
                     sx={{
@@ -116,8 +125,9 @@ function Project(props) {
                 >
                     {data.title}
                 </Typography>
+
+                {/* Description */}
                 <Box sx={{
-                    borderRadius: 2,
                     px: 3, pt: 3, pb: 2,
                     ...(!isSmall && {
                         backgroundColor: 'primary.main',
@@ -162,6 +172,8 @@ function Project(props) {
                         )}
                     </Box>
                 </Box>
+
+                {/* Tech Stack */}
                 <Box sx={{
                     display: 'flex',
                     alignItems: 'center',
@@ -186,6 +198,7 @@ function Project(props) {
                     ))}
                 </Box>
             </Box>
+
         </Box>
     );
 }

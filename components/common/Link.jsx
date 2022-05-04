@@ -6,14 +6,12 @@ import IconButton from '@mui/material/IconButton';
 
 function scrollIntoView(event, href) {
     event.preventDefault();
-
     document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
-
     return;
 }
 
 //TODO: Refactor
-function Link({ children, href, type, buttonProps, muiLinkProps, nextLinkProps }) {
+function Link({ children, sx, href, type, buttonProps, muiLinkProps, nextLinkProps }) {
     if (!href)
         href = nextLinkProps?.href ? nextLinkProps.href : '#';
 
@@ -37,6 +35,8 @@ function Link({ children, href, type, buttonProps, muiLinkProps, nextLinkProps }
             ...(isAnchor && { href, onClick: (event) => scrollIntoView(event, href) })
         };
     }
+
+    componentProps = { ...componentProps, sx };
 
     if (!isAnchor)
         nextLinkProps = {

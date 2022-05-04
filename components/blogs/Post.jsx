@@ -5,7 +5,6 @@ import CardActionArea from '@mui/material/CardActionArea';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
 import Chip from '@mui/material/Chip';
 import useMediaQuery from '@mui/material/useMediaQuery';
 //Utility Imports
@@ -18,36 +17,50 @@ function Post({ title, subTitle, date, abstract, url, tags }) {
     const isSmall = useMediaQuery((theme) => theme.breakpoints.down('md'));
     const ActionArea = isSmall ? React.Fragment : CardActionArea;
 
+    const META_THRESHOLD = 350;
+
     const content = (
         <Card
             sx={{
                 backgroundColor: 'transparent',
                 color: 'primary.contrastText',
-                border: 1,
-                borderColor: 'primary.main',
+                border: 'none',
+                boxShadow: 0,
+                borderRadius: 0
             }}
             elevation={5}>
-            <ActionArea>
-                <CardContent>
-                    <Typography variant='h4'>{title}</Typography>
-                    <Divider light />
-                    <Typography variant='subtitle1'>{subTitle}</Typography>
-                    <Typography variant='subtitle1' gutterBottom>Published on {dayjs(date).format('D MMMM YYYY')}</Typography>
-                    {abstract && (
-                        <Typography variant='body1' sx={{ mt: 2 }} paragraph>
-                            {`${abstract.substr(0, 200)} ${abstract.length > 200 && '...'}`}
-                        </Typography>
-                    )}
-                    {isSmall && (
-                        <Link href={url} muiLinkProps={{ underline: 'none' }}>
-                            <MuiLink variant='button' color='inherit'>Read More</MuiLink>
-                        </Link>
-                    )}
+            <ActionArea {...(!isSmall && { sx: { height: 1 } })}>
+                <CardContent
+                    sx={{
+                        height: 1,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-between'
+                    }}
+                >
+
+                    {/* Meta Data */}
+                    <Box>
+                        <Typography variant='h4'>{title}</Typography>
+                        <Typography variant='subtitle1'>{subTitle}</Typography>
+                        <Typography variant='subtitle1' gutterBottom>Published on {dayjs(date).format('D MMMM YYYY')}</Typography>
+                        {abstract && (
+                            <Typography variant='body1' sx={{ mt: 2 }} paragraph>
+                                {`${abstract.substr(0, META_THRESHOLD)} ${abstract.length >= META_THRESHOLD && '...'}`}
+                            </Typography>
+                        )}
+                        {isSmall && (
+                            <Link href={url} muiLinkProps={{ variant: 'text', color: 'inherit', underline: 'none' }}>
+                                Read More ...
+                            </Link>
+                        )}
+                    </Box>
+
+                    {/* Topics */}
                     <Box sx={{
                         display: 'flex',
                         flexWrap: 'wrap',
-                        gap: 2,
-                        mt: 3
+                        gap: 1, mt: 3
                     }}>
                         {tags.map(tag => (
                             <Chip
@@ -59,11 +72,12 @@ function Post({ title, subTitle, date, abstract, url, tags }) {
                                     </SvgIcon>
                                 )}
                                 label={tag}
-                                sx={{ py: 2, px: 1 }}
+                                sx={{ p: 1 }}
                                 color='primary'
                             />
                         ))}
                     </Box>
+
                 </CardContent>
             </ActionArea>
         </Card>

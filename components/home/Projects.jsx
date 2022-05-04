@@ -16,6 +16,7 @@ import LinkIcon from '@mui/icons-material/Link';
 import { blue } from '@mui/material/colors';
 //Custom Components
 import Section from '@/components/common/Section';
+import AugmentedBox from '@/components/common/AugmentedBox';
 
 const LinkButton = styled(IconButton)`
     padding: 0px,
@@ -27,101 +28,106 @@ function ProjectCard(props) {
     const theme = useTheme();
 
     return (
-        <Paper
+        <AugmentedBox top left
             sx={{
-                py: 3, px: 4,
-                backgroundColor: 'primary.main',
-                color: 'primary.contrastText',
-                display: 'flex',
-                flexDirection: 'column',
-                minHeight: 330,
-                transitionDuration: `300ms`,
-                transitionProperty: `transform, box-shadow`,
-                transitionTimingFunction: 'transitions.easing.easeOut',
                 '&:hover': {
-                    transform: `scale(1.05)`,
-                    boxShadow: 24,
-                },
-            }}
-            elevation={10}>
-            <Box sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-            }}>
-                <Box sx={{
-                    fontSize: 40,
-                    display: 'flex',
-                    alignItems: 'center',
-                    color: blue[300],
-                }}>
-                    <FolderIcon fontSize='inherit' />
-                </Box>
-                <Box
-                    sx={{
-                        display: 'flex',
-                        flexGrow: 2,
-                        justifyContent: 'flex-end',
-                        alignItems: 'center',
-                    }}
-                >
-                    <React.Fragment>
-                        {data.github && (
-                            <Link href={data.github} passHref>
-                                <LinkButton
-                                    target='_blank'
-                                    rel='noopener noreferrer'
-                                >
-                                    <GitHubIcon fontSize='large' />
-                                </LinkButton>
-                            </Link>
-                        )}
-                    </React.Fragment>
-                    <React.Fragment>
-                        {data.extLink && (
-                            <Link href={data.extLink} passHref>
-                                <LinkButton
-                                    target='_blank'
-                                    rel='noopener noreferrer'
-                                >
-                                    <LinkIcon fontSize='large' />
-                                </LinkButton>
-                            </Link>
-                        )}
-                    </React.Fragment>
-                </Box>
-            </Box>
-            <Box sx={{
-                pt: 2,
-                '&:last-child': {
-                    paddingBottom: 0,
-                },
-                flexGrow: 2,
-                display: 'flex',
-                flexDirection: 'column',
-                height: '100%'
-            }}>
-                <Typography gutterBottom variant='h4'>{data.title}</Typography>
-                <Typography align='justify' variant='body1' gutterBottom>{data.abstract}</Typography>
-            </Box>
-            <Box sx={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                gap: `0px ${theme.spacing(2)}`,
-                flexDirection: 'row',
-                marginTop: 'auto',
-                mt: { xs: 4, sm: 0 },
-                justifySelf: 'flex-end'
-            }}>
-                {
-                    data.techStack.map(tech => (
-                        <Typography variant='subtitle1' key={tech}>
-                            {tech}
-                        </Typography>
-                    ))
+                    top: 10,
+                    left: 10
                 }
-            </Box>
-        </Paper>
+            }}>
+            <Paper
+                sx={{
+                    py: 3, px: 4,
+                    backgroundColor: 'primary.main',
+                    color: 'primary.contrastText',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    minHeight: 330,
+                    transitionDuration: `300ms`,
+                    transitionProperty: `transform, box-shadow`,
+                    transitionTimingFunction: 'transitions.easing.easeOut',
+                    borderRadius: 0
+                }}
+                elevation={10}>
+                <Box sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                }}>
+                    <Box sx={{
+                        fontSize: 40,
+                        display: 'flex',
+                        alignItems: 'center',
+                        color: blue[300]
+                    }}>
+                        <FolderIcon fontSize='inherit' />
+                    </Box>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            flexGrow: 2,
+                            justifyContent: 'flex-end',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <React.Fragment>
+                            {data.github && (
+                                <Link href={data.github} passHref>
+                                    <LinkButton
+                                        target='_blank'
+                                        rel='noopener noreferrer'
+                                    >
+                                        <GitHubIcon fontSize='large' />
+                                    </LinkButton>
+                                </Link>
+                            )}
+                        </React.Fragment>
+                        <React.Fragment>
+                            {data.extLink && (
+                                <Link href={data.extLink} passHref>
+                                    <LinkButton
+                                        target='_blank'
+                                        rel='noopener noreferrer'
+                                    >
+                                        <LinkIcon fontSize='large' />
+                                    </LinkButton>
+                                </Link>
+                            )}
+                        </React.Fragment>
+                    </Box>
+                </Box>
+                <Box sx={{
+                    pt: 2,
+                    '&:last-child': {
+                        paddingBottom: 0,
+                    },
+                    flexGrow: 2,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: '100%'
+                }}>
+                    <Typography gutterBottom variant='h4'>{data.title}</Typography>
+                    <Typography align='justify' variant='body1' gutterBottom>{data.abstract}</Typography>
+                </Box>
+                <Box sx={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    gap: `0px ${theme.spacing(2)}`,
+                    flexDirection: 'row',
+                    marginTop: 'auto',
+                    mt: { xs: 4, sm: 0 },
+                    justifySelf: 'flex-end'
+                }}>
+                    {
+                        data.techStack.map(tech => (
+                            <Typography variant='subtitle1' key={tech}>
+                                {tech}
+                            </Typography>
+                        ))
+                    }
+                </Box>
+            </Paper>
+        </AugmentedBox>
     );
 }
 
