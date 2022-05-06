@@ -16,7 +16,6 @@ import LinkIcon from '@mui/icons-material/Link';
 import Section from '@/components/common/Section';
 import ReactIcons from '@/components/common/ReactIcons';
 import Tooltip from '@/components/common/Tooltip';
-import AugmentedBox from '@/components/common/AugmentedBox';
 
 function Project({ children: data, direction }) {
     const theme = useTheme();
@@ -59,35 +58,33 @@ function Project({ children: data, direction }) {
                         target='_blank'
                         rel='noopener'
                     >
-                        <AugmentedBox top left={!isLeft} right={isLeft}>
-                            <Box sx={{
-                                position: 'relative',
-                                height: isSmall ? 470 : 380,
-                                zIndex: 0,
-                                overflow: 'hidden',
-                                '&::before': {
-                                    content: "''",
-                                    position: 'absolute',
-                                    height: '100%',
-                                    width: 1,
-                                    zIndex: 1,
-                                    backgroundColor: alpha(theme.palette.primary.main, isSmall ? 0.7 : 0.5),
-                                    transitionDuration: `${theme.transitions.duration.standard}ms`,
-                                    transitionProperty: `background-color`,
-                                    transitionTimingFunction: 'transitions.easing.easeOut'
-                                },
-                                '&:hover::before': {
-                                    backgroundColor: alpha(theme.palette.primary.main, 0),
-                                }
-                            }}>
-                                <Image
-                                    src={`/${data.thumbnail}`}
-                                    layout='fill'
-                                    objectFit='cover'
-                                    alt={`${data.name} Project Image`}
-                                />
-                            </Box>
-                        </AugmentedBox>
+                        <Box sx={{
+                            position: 'relative',
+                            height: isSmall ? 500 : 380,
+                            zIndex: 0,
+                            overflow: 'hidden',
+                            '&::before': {
+                                content: "''",
+                                position: 'absolute',
+                                height: '100%',
+                                width: 1,
+                                zIndex: 1,
+                                backgroundColor: alpha(theme.palette.primary.main, isSmall ? 0.85 : 0.5),
+                                transitionDuration: `${theme.transitions.duration.standard}ms`,
+                                transitionProperty: `background-color`,
+                                transitionTimingFunction: 'transitions.easing.easeOut'
+                            },
+                            '&:hover::before': {
+                                backgroundColor: alpha(theme.palette.primary.main, 0),
+                            }
+                        }}>
+                            <Image
+                                src={`/${data.thumbnail}`}
+                                layout='fill'
+                                objectFit='cover'
+                                alt={`${data.name} Project Image`}
+                            />
+                        </Box>
                     </MuiLink>
                 </Link>
             </Box>
@@ -207,7 +204,7 @@ function Featured(props) {
     const { children: data } = props;
 
     return (
-        <Section id='featured' maxWidth={false}>
+        <Section id='featured' maxWidth='lg'>
             <Grid container spacing={5}>
                 {data?.map((project, idx) => (
                     <Grid item key={project.title} xs={12}>

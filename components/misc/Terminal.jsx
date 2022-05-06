@@ -56,8 +56,7 @@ function InvalidCommand(props) {
     );
 };
 
-function Terminal(props) {
-    const { initialMessage, commands } = props;
+function Terminal({ initialMessage, commands }) {
     const [output, setOutput] = useState([]);
     const [ready, setReady] = useState(false);
 
@@ -100,7 +99,7 @@ function Terminal(props) {
 
         //Return a function so that the timer will be stopped
         return (() => clearInterval(timerID));
-    }, [initialMessage, commands]);
+    }, []);
 
     //Construct the Prompt
     const prompt = useRef(null);

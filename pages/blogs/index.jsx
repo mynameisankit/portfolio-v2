@@ -20,13 +20,13 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 //Material-UI Icon
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
-
 import SortIcon from '@mui/icons-material/Sort';
 //Custom Components
 import ReactIcons from '@/components/common/ReactIcons';
 import Section from '@/components/common/Section';
 import Post from '@/components/blogs/Post';
 import SearchBox from '@/components/blogs/SearchBox';
+import Header from '@/components/common/Header';
 
 //Sort in-place by date
 function sortByDate(data, order) {
@@ -147,21 +147,7 @@ function Blogs({ blogs, paginationSettings, fuzzySearchProps }) {
     return (
         <Section id='blogs' minHeight maxWidth={false} sx={{ display: 'block', py: theme.spacing(3) }}>
 
-            {/* Header */}
-            <Box sx={{
-                minHeight: {
-                    xs: 300,
-                    md: 500
-                },
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                background: `linear-gradient(90deg, ${theme.palette.background.default} 14px, transparent 1%) 50%, linear-gradient(${theme.palette.background.default} 14px, transparent 1%) 50%, ${theme.palette.secondary.main}`,
-                backgroundSize: '16px 16px',
-                mb: theme.spacing(4),
-            }}>
-                <Typography>Blogs</Typography>
-            </Box>
+            <Header>Blogs</Header>
 
             <Grid container spacing={4} direction={isSmall ? 'column-reverse' : 'row'}>
 

@@ -7,17 +7,8 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 //Custom Components
 import Section from '@/components/common/Section';
-import Terminal from '@/components/common/Terminal';
+import Terminal from '@/components/misc/Terminal';
 import Link from '@/components/common/Link';
-import RaisedButton from '@/components/common/Buttons/RaisedButton';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import EmailIcon from '@mui/icons-material/Email';
-//Social Media Data
-import SocialMediaData from '@/data/socialMedia';
 
 function Intro() {
     const theme = useTheme();
@@ -58,14 +49,6 @@ function Intro() {
                             </Link>
                         ))} */}
                     </Box>
-                    <RaisedButton
-                        size='large'
-                        href='https://drive.google.com/file/d/1itl3WReKXMKl7W-6-MvaTSOu-9MXFyEC/view?usp=sharing'
-                        target='_blank'
-                        rel='noopener noreferrer'
-                    >
-                        Download CV
-                    </RaisedButton>
                 </Grid>
                 {!isSmall && (
                     <Grid item xs={12} md={6}>

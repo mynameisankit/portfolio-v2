@@ -52,7 +52,7 @@ function MyApp(props) {
                     </React.Fragment>
                     {currentRoute !== 'admin' && (
                         <AppBar>
-                            {['projects', 'blogs']}
+                            {['blogs', 'projects']}
                         </AppBar>
                     )}
                     <DefaultSeo {...SEO} />
