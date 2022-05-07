@@ -3,8 +3,10 @@ import { useRouter } from 'next/router';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
+import Toolbar from '@mui/material/Toolbar';
+import MuiAppBar from '@mui/material/AppBar';
 import { useTheme } from '@mui/material/styles';
-//Utilitu
+//Utility
 import startCase from 'lodash/fp/startCase';
 //Custom Components
 import Link from '@/components/common/Link';
@@ -15,6 +17,7 @@ import CloseIcon from '@mui/icons-material/Close';
 
 function AppBar({ children: routes }) {
     const theme = useTheme();
+
     const router = useRouter();
     const [open, setOpen] = useState(false);
 
@@ -34,23 +37,29 @@ function AppBar({ children: routes }) {
         };
     }, []);
 
-    const spacing = theme.spacing(2);
-
     return (
         <React.Fragment>
-            <Box sx={{
-                position: 'fixed',
-                top: spacing,
-                left: spacing,
-                zIndex: theme.zIndex.drawer
+            <MuiAppBar color='transparent' sx={{
+                boxShadow: 0,
+                pt: theme.spacing(1)
             }}>
-                <BgIconButton
-                    aria-label='Menu'
-                    onClick={() => setOpen(true)}
-                >
-                    <MenuIcon fontSize='large' />
-                </BgIconButton>
-            </Box>
+                <Toolbar sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center'
+                }}>
+                    <BgIconButton
+                        aria-label='Menu'
+                        onClick={() => setOpen(true)}
+                    >
+                        <MenuIcon fontSize='large' />
+                    </BgIconButton>
+                    <Link>
+                        Ankit Kumar
+                    </Link>
+                </Toolbar>
+            </MuiAppBar>
+            <Toolbar sx={{ mt: 1 }} />
             <SwipeableDrawer
                 anchor='left'
                 open={open}
@@ -70,8 +79,8 @@ function AppBar({ children: routes }) {
                 }}>
                     <Box sx={{
                         position: 'absolute',
-                        right: spacing,
-                        top: spacing
+                        right: theme.spacing(2),
+                        top: theme.spacing(2)
                     }}>
                         <BgIconButton
                             aria-label='Close Menu'

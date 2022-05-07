@@ -4,6 +4,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
 import { useTheme, alpha } from '@mui/material/styles';
 //Custom Components
 import Link from '@/components/common/Link';
@@ -51,29 +52,33 @@ function SearchBox({ fuzzySearch }) {
             />
             <Box sx={{
                 display: 'flex',
-                flexDirection: 'column'
+                flexDirection: 'column',
+                overflowY: 'scroll',
+                maxHeight: 500
             }}>
-                {results.map(({ item: { title, abstract, url }, refIndex }, idx) => (
-                    <Link
-                        href={url}
-                        key={refIndex}
-                        muiLinkProps={{
-                            underline: 'none'
-                        }}
-                        sx={{
-                            backgroundColor: !idx && alpha(theme.palette.secondary.main, 0.3),
-                            p: 2,
-                            transitionDuration: `${theme.transitions.duration.complex}ms`,
-                            transitionProperty: 'background-color',
-                            transitionTimingFunction: 'transitions.easing.easeOut',
-                            '&:hover': {
-                                backgroundColor: alpha(theme.palette.secondary.main, 0.5),
-                            }
-                        }}
-                    >
-                        <Typography variant='body1'>{title}</Typography>
-                        <Typography variant='body2'>{abstract?.slice(0, 50)}...</Typography>
-                    </Link>
+                {results.map(({ item: { title, abstract, url }, refIndex }, idx, arr) => (
+                    <React.Fragment key={refIndex}>
+                        <Link
+                            href={url}
+                            muiLinkProps={{
+                                underline: 'none'
+                            }}
+                            sx={{
+                                backgroundColor: !idx && alpha(theme.palette.secondary.main, 0.3),
+                                p: 2,
+                                transitionDuration: `${theme.transitions.duration.complex}ms`,
+                                transitionProperty: 'background-color',
+                                transitionTimingFunction: 'transitions.easing.easeOut',
+                                '&:hover': {
+                                    backgroundColor: alpha(theme.palette.secondary.main, 0.5),
+                                }
+                            }}
+                        >
+                            <Typography variant='body1'>{title}</Typography>
+                            <Typography variant='body2'>{abstract?.slice(0, 50)}...</Typography>
+                        </Link>
+                        {(idx + 1 !== arr.length) && <Divider />}
+                    </React.Fragment>
                 ))}
             </Box>
         </Paper>

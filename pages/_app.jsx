@@ -1,5 +1,5 @@
 //Client-side imports
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { DefaultSeo } from 'next-seo';
 import GlobalStyles from '@mui/material/GlobalStyles';
@@ -27,15 +27,29 @@ function MyApp(props) {
     const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
     const router = useRouter();
+    const route = useRef(null);
 
-    let { pathname: currentRoute } = router;
     const URLMatcher = /^\/([-\w]*).*$/;
-    //Get the top-most route
-    currentRoute = URLMatcher.exec(currentRoute)[1].toLowerCase();
+
+    const handlePathChange = () => {
+        let { pathname } = router;
+        //Get the top-most route
+        pathname = URLMatcher.exec(pathname)[1].toLowerCase();
+
+        route.current = pathname;
+    };
 
     useEffect(() => {
         smoothscroll.polyfill();
+
+        router.events.on('routeChangeComplete', handlePathChange);
+
+        return () => {
+            router.events.off('routeChangeComplete', handlePathChange);
+        };
     }, []);
+
+    const currentRoute = route.current;
 
     return (
         <SWRConfig

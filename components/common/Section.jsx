@@ -31,7 +31,7 @@ function Section({ id, children, maxWidth, minHeight, gutterBottom, sx, ...rest 
             }}
             {...rest}
         >
-            <Box sx={{ width: 1 }}>
+            <Box sx={{ width: 1, height: 1 }}>
                 {children}
             </Box>
         </Container>

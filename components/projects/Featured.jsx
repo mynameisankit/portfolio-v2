@@ -83,6 +83,7 @@ function Project({ children: data, direction }) {
                                 layout='fill'
                                 objectFit='cover'
                                 alt={`${data.name} Project Image`}
+                                priority
                             />
                         </Box>
                     </MuiLink>

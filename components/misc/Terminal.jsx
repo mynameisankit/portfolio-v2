@@ -35,9 +35,7 @@ function getBrowserName() {
         return browser_name = 'matrix';
 }
 
-function InlineText(props) {
-    const { color, text, children } = props;
-
+function InlineText({ color, text, children }) {
     return (
         <Typography
             variant='body1'
@@ -48,25 +46,30 @@ function InlineText(props) {
     );
 }
 
-function InvalidCommand(props) {
+function InvalidCommand({ command, children }) {
     return (
         <React.Fragment>
-            command not found : <InlineText color='red' text={props.command || props.children} />
+            command not found : <InlineText color='red' text={command || children} />
         </React.Fragment>
     );
 };
 
-function Terminal({ initialMessage, commands }) {
+function Terminal({ height, width, initialMessage, commandsList }) {
     const [output, setOutput] = useState([]);
     const [ready, setReady] = useState(false);
 
+    const prompt = useRef(null);
+    const commands = useRef(commandsList ? commandsList : {});
+
+    const availaleCommandsPrompt = (
+        <React.Fragment>
+            Type <InlineText text='"help"' /> to see available commands
+        </React.Fragment>
+    );
+
     //Initial Messages
     useEffect(() => {
-        const text = initialMessage.concat(
-            <React.Fragment>
-                Type <InlineText text='"help"' /> to see available commands
-            </React.Fragment>
-        );
+        const text = initialMessage ? initialMessage.concat(availaleCommandsPrompt) : [availaleCommandsPrompt];
 
         let count = 0;
         const timerID = setInterval(() => {
@@ -80,16 +83,15 @@ function Terminal({ initialMessage, commands }) {
             }
         }, 1000);
 
-        commands['clear'] = () => {
+        commands.current['clear'] = () => {
             setOutput([]);
             return null;
         };
 
         //Add some commands by default
-        commands['help'] = null;
-        commands['help'] = () => (
+        commands.current['help'] = () => (
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                {Object.keys(commands).map(command => (
+                {Object.keys(commands.current).map(command => (
                     <React.Fragment key={command}>
                         <InlineText>{command}</InlineText>
                     </React.Fragment>
@@ -97,21 +99,11 @@ function Terminal({ initialMessage, commands }) {
             </Box>
         );
 
+        //Construct the Prompt
+        prompt.current = `user@${getBrowserName()}`;
+
         //Return a function so that the timer will be stopped
         return (() => clearInterval(timerID));
-    }, []);
-
-    //Construct the Prompt
-    const prompt = useRef(null);
-    useEffect(() => {
-        let text = 'user@';
-
-        if (typeof window !== 'undefined')
-            text += getBrowserName();
-        else
-            text += 'machine';
-
-        prompt.current = text;
     }, []);
 
     const handleInput = (e) => {
@@ -124,7 +116,7 @@ function Terminal({ initialMessage, commands }) {
             let output = <InvalidCommand command={input} />;
 
             //Check if it is a command
-            const command = commands[lowerCase(input)];
+            const command = commands.current[lowerCase(input)];
             if (command) {
                 if (typeof command === 'string')
                     output = command;
@@ -169,12 +161,13 @@ function Terminal({ initialMessage, commands }) {
         <ThemeProvider theme={theme}>
             <Box
                 sx={{
-                    height: 400, width: 1,
+                    height, width,
                     position: 'relative',
                     display: 'flex',
                     flexDirection: 'column',
                     userSelect: 'none',
                     overflowY: 'scroll',
+                    borderRadius: theme.shape.borderRadius
                 }}
                 onClick={handleFocus}
             >
@@ -190,13 +183,14 @@ function Terminal({ initialMessage, commands }) {
                     <Box sx={{
                         position: 'absolute',
                         display: 'flex',
-                        gap: 1, px: 1,
+                        gap: 1, px: 2,
                         justifySelf: 'flex-start'
                     }}>
                         {['maximize', 'minimize', 'close'].map(variant => (
                             <RibbonButton
                                 key={variant}
                                 variant={variant}
+                                sx={{ border: 1 }}
                             />
                         ))}
                     </Box>
