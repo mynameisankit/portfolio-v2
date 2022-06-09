@@ -140,10 +140,14 @@ function Terminal({ height, width, initialMessage, commandsList }) {
         }
     };
 
-    //Scroll to the bottom of the terminal
     const outputBox = useRef(null);
+    const inputField = useRef(null);
+
+    const isActive = (document.activeElement === inputField.current);
+
+    //Scroll to the bottom of the terminal
     useEffect(() => {
-        if (outputBox.current) {
+        if (outputBox.current && isActive) {
             outputBox.current.scroll({
                 top: outputBox.current.scrollHeight,
                 behavior: 'smooth'
@@ -151,9 +155,8 @@ function Terminal({ height, width, initialMessage, commandsList }) {
         }
     }, [output]);
 
-    const inputField = useRef(null);
     const handleFocus = () => {
-        if (inputField.current)
+        if (inputField.current && isActive)
             inputField.current.focus();
     };
 
@@ -230,7 +233,6 @@ function Terminal({ height, width, initialMessage, commandsList }) {
                                 fullWidth
                                 sx={{ color: 'primary.main' }}
                                 inputProps={{ style: { padding: 0 } }}
-                                autoFocus
                             />
                         </Box>
                     )}

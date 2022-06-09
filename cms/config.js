@@ -1,10 +1,10 @@
 //Schemas
 //Folder Based Schemas
-import featured from './featured';
-import projects from './projects';
-import blogs from './blogs';
+import Featured from './featured';
+import Projects from './projects';
+import Blogs from './blogs';
 //File Based Schemas
-import social from './social';
+import Links from './Links';
 
 const config = {
     cms_manual_init: true,
@@ -16,14 +16,14 @@ const config = {
     media_folder: 'public/images',
     public_folder: 'images',
     collections: [
-        featured,
-        projects,
-        blogs,
+        Featured,
+        Projects,
+        Blogs,
         {
             label: 'Common Data',
             name: 'common',
             files: [
-                social
+                Links
             ],
         }
     ],

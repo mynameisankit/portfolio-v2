@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 import { getMDXComponent } from 'mdx-bundler/client';
 import DefaultComponents from '@/components/MDXComponents/default';
-import Box from '@mui/material/Box';
 //Custom Components
 import TableOfContents from '@/components/MDXComponents/TableOfContents';
 

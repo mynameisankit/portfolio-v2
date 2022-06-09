@@ -3,7 +3,7 @@ import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/material/styles';
 
-function Section({ id, children, maxWidth, minHeight, gutterBottom, sx, ...rest }) {
+function Section({ children, maxWidth, minHeight, gutterBottom, sx, ...rest }) {
     const theme = useTheme();
 
     if (minHeight !== undefined) {
@@ -19,7 +19,6 @@ function Section({ id, children, maxWidth, minHeight, gutterBottom, sx, ...rest 
 
     return (
         <Container
-            id={id}
             maxWidth={maxWidth === undefined ? 'lg' : maxWidth}
             sx={{
                 display: 'flex',

@@ -54,7 +54,7 @@ function AppBar({ children: routes }) {
                     >
                         <MenuIcon fontSize='large' />
                     </BgIconButton>
-                    <Link>
+                    <Link href='/'>
                         Ankit Kumar
                     </Link>
                 </Toolbar>

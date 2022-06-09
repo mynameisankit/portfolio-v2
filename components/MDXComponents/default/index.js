@@ -9,14 +9,14 @@ const MDXComponents = {
     ...(
         ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].reduce((acc, curr) => (
             acc[curr] = ({ variant, children, ...rest }) => (
-                <Typography variant={curr} {...rest}>
+                <Typography component={curr} variant={curr} {...rest}>
                     {children}
                 </Typography>
             ), acc
         ), {})
     ),
     p: ({ children, ...rest }) => (
-        <Typography variant='body1' {...rest}>
+        <Typography component='p' variant='body1' {...rest}>
             {children}
         </Typography>
     ),

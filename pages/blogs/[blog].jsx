@@ -52,7 +52,7 @@ function Blog({ mdxSource, frontMatter, toc }) {
             {/* Meta-Data */}
             <Section id='meta' maxWidth='lg'>
                 <Box sx={{
-                    py: 2, px: 5,
+                    py: 2,
                     textAlign: 'center'
                 }}>
                     <Typography gutterBottom variant='subtitle1' component='h6'>
@@ -60,11 +60,9 @@ function Blog({ mdxSource, frontMatter, toc }) {
                     </Typography>
                     <Typography gutterBottom variant='h2' component='h1'>{title}</Typography>
                     {abstract && (
-                        <Box sx={{ px: { xs: 0, md: 10 } }}>
-                            <Typography paragraph variant='subtitle1' gutterBottom align='justify'>
-                                {abstract}
-                            </Typography>
-                        </Box>
+                        <Typography paragraph variant='subtitle1' gutterBottom align='justify'>
+                            {abstract}
+                        </Typography>
                     )}
                 </Box>
                 <Grid container spacing={2}>
@@ -88,16 +86,18 @@ function Blog({ mdxSource, frontMatter, toc }) {
                         </Typography>
                     </Grid>
                 </Grid>
+                <Divider sx={{ mt: 2, mb: 4 }} />
             </Section>
 
             {/* Blog */}
             <Section id='body' maxWidth='lg'>
-                <Divider sx={{ mt: 2, mb: 4 }} />
-                <MDXLayoutRenderer
-                    mdxSource={mdxSource}
-                    frontMatter={frontMatter}
-                    toc={toc}
-                />
+                <Box sx={{ px: 4 }}>
+                    <MDXLayoutRenderer
+                        mdxSource={mdxSource}
+                        frontMatter={frontMatter}
+                        toc={toc}
+                    />
+                </Box>
             </Section>
 
             {/* Footer */}

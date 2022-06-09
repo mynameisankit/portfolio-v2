@@ -1,7 +1,7 @@
-const socialMedia = {
-    label: 'Social Media',
-    name: 'social',
-    file: 'data/socialMedia.json',
+const Links = {
+    label: 'Links',
+    name: 'links',
+    file: 'data/links.json',
     fields: [
         { label: 'GitHub', name: 'github' },
         { label: 'LinkedIn', name: 'linkedin' },
@@ -12,4 +12,4 @@ const socialMedia = {
     ]
 };
 
-export default socialMedia;
+export default Links;

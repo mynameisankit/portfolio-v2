@@ -14,9 +14,9 @@ import smoothscroll from 'smoothscroll-polyfill';
 import theme from '../styles/theme';
 //Custom Components
 import AppBar from '@/components/common/AppBar';
+import Footer from '@/components/common/Footer';
 //Styles
 import globalStyles from '@/styles/global';
-import highlightJsStyles from 'highlight.js/styles/rainbow.css';
 //SEO 
 import SEO from 'next-seo.config';
 
@@ -62,7 +62,7 @@ function MyApp(props) {
                     {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
                     <CssBaseline />
                     <React.Fragment>
-                        {[globalStyles, highlightJsStyles].map((styles, idx) => <GlobalStyles key={idx} styles={styles} />)}
+                        {[globalStyles].map((styles, idx) => <GlobalStyles key={idx} styles={styles} />)}
                     </React.Fragment>
                     {currentRoute !== 'admin' && (
                         <AppBar>
@@ -71,6 +71,7 @@ function MyApp(props) {
                     )}
                     <DefaultSeo {...SEO} />
                     <Component {...pageProps} />
+                    {/* {currentRoute !== 'admin' && <Footer />} */}
                 </ThemeProvider>
             </CacheProvider>
         </SWRConfig>

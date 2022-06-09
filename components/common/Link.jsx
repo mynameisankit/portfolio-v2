@@ -13,7 +13,7 @@ function scrollIntoView(event, href) {
 //TODO: Refactor
 function Link({ children, sx, href, type, buttonProps, muiLinkProps, nextLinkProps }) {
     if (!href)
-        href = nextLinkProps?.href ? nextLinkProps.href : '#';
+        href = nextLinkProps?.href ? nextLinkProps.href : '/';
 
     const isAnchor = href.startsWith('#');
     const isInternalLink = href.startsWith('/');
