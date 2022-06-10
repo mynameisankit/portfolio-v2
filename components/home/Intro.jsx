@@ -45,7 +45,7 @@ function Intro() {
                     }}
                     align='center'>
                     <Typography variant='h2' gutterBottom>Hi, I'm Ankit Kumar</Typography>
-                    <Typography variant='subtitle1' sx={{
+                    <Typography variant='body1' sx={{
                         px: { xs: theme.spacing(2), md: 0 }
                     }}>
                         I am an undergraduate at the{' '}

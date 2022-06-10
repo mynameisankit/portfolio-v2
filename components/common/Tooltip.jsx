@@ -3,9 +3,12 @@ import MuiTooltip from '@mui/material/Tooltip';
 import Box from '@mui/material/Box';
 import Zoom from '@mui/material/Zoom';
 
-function Tooltip(props) {
-    const { title, sx, children, componentProps } = props;
-
+function Tooltip({ title, sx, children,
+    componentProps: {
+        arrow: { arrowSx, ...arrowRest },
+        tooltip: { tooltipSx, ...tooltipRest }
+    }
+}) {
     return (
         <MuiTooltip
             TransitionComponent={Zoom}
@@ -15,8 +18,22 @@ function Tooltip(props) {
             placement='top'
             arrow
             componentsProps={{
-                arrow: componentProps.arrow,
-                tooltip: componentProps.tooltip,
+                arrow: {
+                    sx: {
+                        color: 'secondary.main',
+                        ...arrowSx
+                    },
+                    ...arrowRest
+                },
+                tooltip: {
+                    sx: {
+                        backgroundColor: 'secondary.main',
+                        userSelect: 'none',
+                        border: 1,
+                        ...tooltipSx
+                    },
+                    ...tooltipRest
+                },
             }}
         >
             <Box sx={sx}>

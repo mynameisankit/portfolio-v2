@@ -1,4 +1,6 @@
-module.exports = {
+const { withPlaiceholder } = require('@plaiceholder/next');
+
+module.exports = withPlaiceholder({
     reactStrictMode: true,
     generateBuildId: async () => 'build',
     webpack: (config, { isServer, dev }) => {
@@ -15,4 +17,4 @@ module.exports = {
 
         return config;
     }
-}
+});

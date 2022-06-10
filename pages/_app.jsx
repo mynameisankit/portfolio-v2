@@ -7,8 +7,6 @@ import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider } from '@emotion/react';
 import createEmotionCache from '../styles/createEmotionCache';
-import axios from 'axios';
-import { SWRConfig } from 'swr';
 import smoothscroll from 'smoothscroll-polyfill';
 //Theme
 import theme from '../styles/theme';
@@ -17,6 +15,7 @@ import AppBar from '@/components/common/AppBar';
 import Footer from '@/components/common/Footer';
 //Styles
 import globalStyles from '@/styles/global';
+import 'cal-sans';
 //SEO 
 import SEO from 'next-seo.config';
 
@@ -52,29 +51,23 @@ function MyApp(props) {
     const currentRoute = route.current;
 
     return (
-        <SWRConfig
-            value={{
-                refreshInterval: 60 * 60 * 1000,
-                fetcher: (endpoint, params) => axios.get(endpoint, { params }).then(res => res.data)
-            }}>
-            <CacheProvider value={emotionCache}>
-                <ThemeProvider theme={theme}>
-                    {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-                    <CssBaseline />
-                    <React.Fragment>
-                        {[globalStyles].map((styles, idx) => <GlobalStyles key={idx} styles={styles} />)}
-                    </React.Fragment>
-                    {currentRoute !== 'admin' && (
-                        <AppBar>
-                            {['blogs', 'projects']}
-                        </AppBar>
-                    )}
-                    <DefaultSeo {...SEO} />
-                    <Component {...pageProps} />
-                    {/* {currentRoute !== 'admin' && <Footer />} */}
-                </ThemeProvider>
-            </CacheProvider>
-        </SWRConfig>
+        <CacheProvider value={emotionCache}>
+            <ThemeProvider theme={theme}>
+                {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+                <CssBaseline />
+                <React.Fragment>
+                    {[globalStyles].map((styles, idx) => <GlobalStyles key={idx} styles={styles} />)}
+                </React.Fragment>
+                {currentRoute !== 'admin' && (
+                    <AppBar>
+                        {['blogs', 'projects']}
+                    </AppBar>
+                )}
+                <DefaultSeo {...SEO} />
+                <Component {...pageProps} />
+                {/* {currentRoute !== 'admin' && <Footer />} */}
+            </ThemeProvider>
+        </CacheProvider>
     );
 }
 

@@ -34,7 +34,7 @@ function SearchBox({ fuzzySearch }) {
             transitionTimingFunction: 'transitions.easing.easeOut',
             '&:hover': {
                 borderColor: theme.palette.primary.main
-            },
+            }
         }}>
             <TextField
                 label='Search'
@@ -44,11 +44,15 @@ function SearchBox({ fuzzySearch }) {
                         <InputAdornment position="start">
                             <SearchIcon />
                         </InputAdornment>
-                    )
+                    ),
+                    sx: {
+                        color: 'primary.contrastText'
+                    }
                 }}
                 value={query}
                 onChange={event => setQuery(event.target.value)}
                 variant='filled'
+                color='secondary'
             />
             <Box sx={{
                 display: 'flex',
@@ -60,17 +64,16 @@ function SearchBox({ fuzzySearch }) {
                     <React.Fragment key={refIndex}>
                         <Link
                             href={url}
-                            muiLinkProps={{
-                                underline: 'none'
-                            }}
+                            muiLinkProps={{ underline: 'none' }}
                             sx={{
-                                backgroundColor: !idx && alpha(theme.palette.secondary.main, 0.3),
                                 p: 2,
+                                color: 'secondary.dark',
+                                backgroundColor: !idx && alpha(theme.palette.primary.dark, 0.5),
                                 transitionDuration: `${theme.transitions.duration.complex}ms`,
                                 transitionProperty: 'background-color',
                                 transitionTimingFunction: 'transitions.easing.easeOut',
                                 '&:hover': {
-                                    backgroundColor: alpha(theme.palette.secondary.main, 0.5),
+                                    backgroundColor: alpha(theme.palette.primary.main, 0.5),
                                 }
                             }}
                         >

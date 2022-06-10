@@ -20,12 +20,13 @@
     "@mui/lab": "^5.0.0-alpha.58",
     "@mui/material": "^5.2.2",
     "@mui/system": "^5.2.2",
-    "add": "^2.0.6",
-    "axios": "^0.24.0",
+    "@plaiceholder/next": "^2.3.0",
+    "cal-sans": "^1.0.1",
     "dayjs": "^1.10.7",
     "fuse.js": "^6.6.0",
     "github-slugger": "^1.4.0",
     "gray-matter": "^4.0.3",
+    "hastscript": "^7.0.2",
     "lodash": "^4.17.21",
     "mdast-util-to-string": "^3.1.0",
     "mdx-bundler": "^8.0.1",
@@ -47,10 +48,9 @@
     "remark-gfm": "^3.0.1",
     "remark-math": "^5.1.1",
     "remark-unwrap-images": "^3.0.1",
+    "sharp": "^0.30.6",
     "smoothscroll-polyfill": "^0.4.4",
-    "swr": "^1.1.1",
-    "unist-util-visit": "^4.1.0",
-    "yarn": "^1.22.19"
+    "unist-util-visit": "^4.1.0"
   },
   "devDependencies": {
     "esbuild": "^0.14.5",

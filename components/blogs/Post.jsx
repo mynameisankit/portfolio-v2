@@ -23,10 +23,18 @@ function Post({ title, subTitle, date, abstract, url, tags }) {
         <Card
             sx={{
                 backgroundColor: 'transparent',
-                color: 'primary.contrastText',
                 border: 'none',
                 boxShadow: 0,
-                borderRadius: 0
+                borderRadius: 0,
+                '&:hover': {
+                    md: {
+                        transform: `scale(1.02)`
+                    }
+                },
+                transitionProperty: 'transform',
+                transitionDuration: 'transitions.duration.standard',
+                transitionTimingFunction: 'transitions.easing.easeOut',
+                userSelect: 'none'
             }}
             elevation={5}>
             <ActionArea {...(!isSmall && { sx: { height: 1 } })}>
@@ -72,12 +80,17 @@ function Post({ title, subTitle, date, abstract, url, tags }) {
                                     </SvgIcon>
                                 )}
                                 label={tag}
-                                sx={{ p: 1 }}
+                                sx={{
+                                    p: 1,
+                                    cursor: {
+                                        xs: 'auto',
+                                        md: 'pointer'
+                                    }
+                                }}
                                 color='primary'
                             />
                         ))}
                     </Box>
-
                 </CardContent>
             </ActionArea>
         </Card>

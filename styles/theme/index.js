@@ -1,20 +1,32 @@
 import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
 
+const baseFonts = [
+    '-apple-system',
+    'BlinkMacSystemFont',
+    '"Segoe UI"',
+    'Helvetica',
+    'Arial',
+    'sans-serif',
+    '"Apple Color Emoji"',
+    '"Segoe UI Emoji"',
+    '"Segoe UI Symbol"'
+];
+
 // Create a theme instance.
 const theme = createTheme({
     palette: {
         primary: {
-            main: '#556cd6',
+            main: '#B794F4',
         },
         secondary: {
-            main: '#19857b',
+            main: '#2D3748',
         },
         error: {
-            main: red.A400,
+            main: red[500],
         },
         background: {
-            default: '#253237',
+            default: '#1A202C',
         },
         text: {
             primary: '#FFFFFF'
@@ -22,10 +34,20 @@ const theme = createTheme({
     },
     typography: {
         fontFamily: [
-            'Montserrat',
-            'sans-serif'
+            'Inter',
+            ...baseFonts
         ].join(','),
-    },
+        ...(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'subtitle1', 'subtitle2'].reduce((acc, curr) => {
+            acc[curr] = {
+                fontFamily: [
+                    'Cal Sans',
+                    ...baseFonts
+                ].join(',')
+            };
+
+            return acc;
+        }, {}))
+    }
 });
 
 export default responsiveFontSizes(theme);

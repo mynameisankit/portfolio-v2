@@ -1,8 +1,8 @@
 import React from 'react';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import createEmotionServer from '@emotion/server/create-instance';
-import theme from '@/styles/theme';
 import createEmotionCache from '@/styles/createEmotionCache';
+import theme from '@/styles/theme';
 
 export default class MyDocument extends Document {
     render() {
@@ -13,14 +13,7 @@ export default class MyDocument extends Document {
                     <meta name="theme-color" content={theme.palette.primary.main} />
                     <link rel="preconnect" href="https://fonts.googleapis.com" />
                     <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-                    <link
-                        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap"
-                        rel="stylesheet"
-                    />
-                    <link
-                        rel="stylesheet"
-                        href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap"
-                    />
+                    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
                     <link
                         rel="stylesheet"
                         href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css"

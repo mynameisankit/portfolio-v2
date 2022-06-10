@@ -16,7 +16,7 @@ const MDXComponents = {
         ), {})
     ),
     p: ({ children, ...rest }) => (
-        <Typography component='p' variant='body1' {...rest}>
+        <Typography component='p' variant='body1' sx={{ mb: 3 }} {...rest}>
             {children}
         </Typography>
     ),

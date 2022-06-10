@@ -3,8 +3,6 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import styled from '@mui/system/styled';
 import { useTheme } from '@mui/material/styles';
 //Material-UI Icons
 import FolderOpenOutlinedIcon from '@mui/icons-material/FolderOpenOutlined';
@@ -13,11 +11,6 @@ import LinkIcon from '@mui/icons-material/Link';
 //Custom Components
 import Section from '@/components/common/Section';
 import Link from '@/components/common/Link';
-
-const LinkButton = styled(IconButton)`
-    padding: 0px,
-    color: inherit
-`;
 
 function ProjectCard({ children: data }) {
     const theme = useTheme();
@@ -34,15 +27,12 @@ function ProjectCard({ children: data }) {
                     sm: 300,
                     md: 330
                 },
-                transitionDuration: `300ms`,
-                transitionProperty: `transform, box-shadow`,
+                transitionDuration: 'transitions.duration.standard',
+                transitionProperty: 'transform, box-shadow',
                 transitionTimingFunction: 'transitions.easing.easeOut',
                 borderRadius: 0,
                 minHeight: 350,
-                '&:hover': {
-                    transform: 'scale(1.03)',
-                    userSelect: 'none'
-                }
+                '&:hover': { transform: 'scale(1.03)' }
             }}
             elevation={10}>
             <Box sx={{
@@ -57,32 +47,17 @@ function ProjectCard({ children: data }) {
                         flexGrow: 2,
                         justifyContent: 'flex-end',
                         alignItems: 'center',
-                    }}
-                >
-                    <React.Fragment>
-                        {data.github_repo && (
-                            <Link href={`https://github.com/mynameisankit/${data.github_repo}`}>
-                                <LinkButton
-                                    target='_blank'
-                                    rel='noopener noreferrer'
-                                >
-                                    <GitHubIcon fontSize='large' />
-                                </LinkButton>
-                            </Link>
-                        )}
-                    </React.Fragment>
-                    <React.Fragment>
-                        {data.extLink && (
-                            <Link href={data.extLink}>
-                                <LinkButton
-                                    target='_blank'
-                                    rel='noopener noreferrer'
-                                >
-                                    <LinkIcon fontSize='large' />
-                                </LinkButton>
-                            </Link>
-                        )}
-                    </React.Fragment>
+                    }}>
+                    {data.github_repo && (
+                        <Link type='icon' href={`https://github.com/mynameisankit/${data.github_repo}`}>
+                            <GitHubIcon fontSize='large' />
+                        </Link>
+                    )}
+                    {data.extLink && (
+                        <Link type='icon' href={data.extLink}>
+                            <LinkIcon fontSize='large' />
+                        </Link>
+                    )}
                 </Box>
             </Box>
             <Box sx={{

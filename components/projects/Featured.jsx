@@ -1,13 +1,10 @@
 import React from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import Box from '@mui/material/Box';
 import SvgIcon from '@mui/material/SvgIcon';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-import MuiLink from '@mui/material/Link';
-import { useTheme, alpha } from '@mui/material/styles';
+import { useTheme, alpha, styled } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 //Material-UI Icons
 import GitHubIcon from '@mui/icons-material/GitHub';
@@ -16,6 +13,14 @@ import LinkIcon from '@mui/icons-material/Link';
 import Section from '@/components/common/Section';
 import ReactIcons from '@/components/common/ReactIcons';
 import Tooltip from '@/components/common/Tooltip';
+import Link from '@/components/common/Link';
+
+const LinkButton = styled(Link)(({ theme }) => ({
+    fontSize: 40,
+    [theme.breakpoints.down('sm')]: {
+        fontSize: 35
+    }
+}));
 
 function Project({ children: data, direction }) {
     const theme = useTheme();
@@ -52,41 +57,35 @@ function Project({ children: data, direction }) {
         }}>
             {/* Image Wrapper */}
             <Box sx={{ gridArea: configuration.image.gridArea }}>
-                <Link href={data.github || data.extLink} passHref>
-                    <MuiLink
-                        underline='none'
-                        target='_blank'
-                        rel='noopener'
-                    >
-                        <Box sx={{
-                            position: 'relative',
-                            height: isSmall ? 500 : 380,
-                            zIndex: 0,
-                            overflow: 'hidden',
-                            '&::before': {
-                                content: "''",
-                                position: 'absolute',
-                                height: '100%',
-                                width: 1,
-                                zIndex: 1,
-                                backgroundColor: alpha(theme.palette.primary.main, isSmall ? 0.85 : 0.5),
-                                transitionDuration: `${theme.transitions.duration.standard}ms`,
-                                transitionProperty: `background-color`,
-                                transitionTimingFunction: 'transitions.easing.easeOut'
-                            },
-                            '&:hover::before': {
-                                backgroundColor: alpha(theme.palette.primary.main, 0),
-                            }
-                        }}>
-                            <Image
-                                src={`/${data.thumbnail}`}
-                                layout='fill'
-                                objectFit='cover'
-                                alt={`${data.name} Project Image`}
-                                priority
-                            />
-                        </Box>
-                    </MuiLink>
+                <Link muiLinkProps={{ underline: 'none' }} href={data.github || data.extLink}>
+                    <Box sx={{
+                        position: 'relative',
+                        height: isSmall ? 500 : 380,
+                        zIndex: 0,
+                        overflow: 'hidden',
+                        '&::before': {
+                            content: "''",
+                            position: 'absolute',
+                            height: '100%',
+                            width: 1,
+                            zIndex: 1,
+                            backgroundColor: alpha(theme.palette.primary.main, isSmall ? 0.85 : 0.5),
+                            transitionDuration: `${theme.transitions.duration.standard}ms`,
+                            transitionProperty: `background-color`,
+                            transitionTimingFunction: 'transitions.easing.easeOut'
+                        },
+                        '&:hover::before': {
+                            backgroundColor: alpha(theme.palette.primary.main, 0),
+                        }
+                    }}>
+                        <Image
+                            src={`/${data.thumbnail}`}
+                            layout='fill'
+                            objectFit='cover'
+                            alt={`${data.name} Project Image`}
+                            priority
+                        />
+                    </Box>
                 </Link>
             </Box>
 
@@ -103,10 +102,7 @@ function Project({ children: data, direction }) {
                 {/* Meta */}
                 <Typography
                     variant='h6'
-                    sx={{
-                        color: 'primary.contrastText',
-                        mt: isSmall && 1,
-                    }}
+                    sx={{ mt: isSmall && 1 }}
                     gutterBottom
                     align={configuration.content.align}
                 >
@@ -114,10 +110,7 @@ function Project({ children: data, direction }) {
                 </Typography>
                 <Typography
                     variant='h4'
-                    sx={{
-                        color: 'primary.contrastText',
-                        fontSize: isSmall && 23,
-                    }}
+                    sx={{ fontSize: isSmall && 23 }}
                     align={configuration.content.align}
                     gutterBottom
                 >
@@ -131,7 +124,7 @@ function Project({ children: data, direction }) {
                         backgroundColor: 'primary.main',
                         boxShadow: 24
                     }),
-                    color: 'primary.contrastText',
+                    color: 'primary.contrastText'
                 }}>
                     <Typography variant='body1' align={configuration.content.align}>
                         {data.abstract}
@@ -143,30 +136,18 @@ function Project({ children: data, direction }) {
                         mt: 1
                     }}>
                         {data.github && (
-                            <Link href={data.github} passHref>
-                                <IconButton
-                                    sx={{ fontSize: isSmall ? 35 : 40 }}
-                                    target='_blank'
-                                    rel='noopener noreferrer'
-                                >
-                                    <SvgIcon fontSize='inherit'>
-                                        <GitHubIcon />
-                                    </SvgIcon>
-                                </IconButton>
-                            </Link>
+                            <LinkButton type='icon' href={data.github}>
+                                <SvgIcon fontSize='inherit'>
+                                    <GitHubIcon />
+                                </SvgIcon>
+                            </LinkButton>
                         )}
                         {data.extLink && (
-                            <Link href={data.extLink} passHref>
-                                <IconButton
-                                    sx={{ fontSize: isSmall ? 35 : 40 }}
-                                    target='_blank'
-                                    rel='noopener noreferrer'
-                                >
-                                    <SvgIcon fontSize='inherit'>
-                                        <LinkIcon />
-                                    </SvgIcon>
-                                </IconButton>
-                            </Link>
+                            <LinkButton type='icon' href={data.extLink}>
+                                <SvgIcon fontSize='inherit'>
+                                    <LinkIcon />
+                                </SvgIcon>
+                            </LinkButton>
                         )}
                     </Box>
                 </Box>
@@ -183,7 +164,6 @@ function Project({ children: data, direction }) {
                             key={tech}
                             title={tech}
                             sx={{
-                                color: 'primary.contrastText',
                                 mx: 1,
                                 fontSize: isSmall ? 35 : 42,
                             }}

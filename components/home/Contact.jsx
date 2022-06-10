@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Image from 'next/image';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
@@ -9,7 +9,7 @@ import MuiTextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
 import Fade from '@mui/material/Fade';
-import { styled, useTheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import { useForm, Controller } from 'react-hook-form';
 import emailjs from '@emailjs/browser';
 import camelCase from 'lodash/fp/camelCase';
@@ -19,71 +19,101 @@ import Section from '@/components/common/Section';
 import Decoration from '@/images/contact.png';
 
 const TextField = styled(MuiTextField)(({ theme }) => ({
+    '& label': {
+        color: theme.palette.text.primary
+    },
+    '& label.Mui-focused': {
+        color: theme.palette.primary.light
+    },
+    '& .MuiInputBase-root': {
+        borderRadius: '4px 4px 0 0',
+        backgroundColor: theme.palette.secondary.light,
+        transition: theme.transitions.create(['background-color']),
+        '&:focus': {
+            backgroundColor: theme.palette.secondary.dark
+        }
+    }
 }));
 
-function Contact(props) {
+function Contact() {
+    const ALERT_TIMEOUT = 7000;
+
     const params = ['Message', 'First Name', 'Last Name', 'Subject', 'E-Mail'];
     const {
         control,
         handleSubmit,
-        formState: { errors, isSubmitting, submitCount },
+        formState: { errors, isSubmitting },
         reset
     } = useForm({ defaultValues: params.reduce((acc, curr) => (acc[curr] = '', acc), {}) });
 
-    const timeout = 7000;
     const [alert, setAlert] = useState({
         open: false,
         error: false,
-        message: '',
+        message: ''
     });
 
-    let alertTimeout;
+    const alertTimeout = useRef(null);
+
     const handleAlert = (error) => {
-        if (alertTimeout)
-            clearTimeout(alertTimeout);
+        if (alertTimeout.current)
+            clearTimeout(alertTimeout.current);
 
         if (!error) {
             setAlert({
                 open: true,
                 error: false,
-                message: 'E-Mail Sent Successfully',
+                message: 'E-Mail Sent Successfully'
             });
+
+            reset({ keepDefaultValues: true });
         }
         else {
+            let message = "";
+            if (!window.navigator.onLine)
+                message = "You are not connected to the internet";
+            else {
+                const { status } = error;
+                message = "The E-Mail could not be sent due to some error";
+
+                if (status === 402 || status === 412)
+                    message += " but don't worry, your E-Mail is saved in the Database";
+            }
+
             setAlert({
                 open: true,
                 error: true,
-                message: 'E-Mail Sent Successfully',
+                message
             });
         }
 
-        alertTimeout = setTimeout(() => {
-            reset({
-                keepSubmitCount: true,
-                keepDefaultValues: true,
-            });
+        alertTimeout.current = setTimeout(() => {
+            if (!error)
+                reset({ keepDefaultValues: true });
 
             setAlert({
                 open: false,
                 error: false,
                 message: '',
             });
-        }, timeout);
+        }, ALERT_TIMEOUT);
     }
 
     const onSubmit = async (data) => {
         const content = params.reduce((acc, curr) => (acc[camelCase(curr)] = data[curr], acc), {});
-        //if (submitCount > 3) {
+
         try {
-            await emailjs.send('service_y2ijfaj', 'template_h881z8n', content, 'user_s5RoD0Wuk9SX1CumwQ3lv');
+            await emailjs.send(
+                process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+                process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+                content,
+                process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+            );
+
             handleAlert();
         }
         catch (e) {
             handleAlert(e);
         }
-        //}
-        // else
-        //     handleAlert("Maximum Limit Reached");
     };
 
     const onCloseSnackbar = () => {
@@ -96,17 +126,18 @@ function Contact(props) {
 
     return (
         <Section id='contact' maxWidth='md' minHeight>
-            <Paper sx={{
-                display: 'flex',
-                backgroundColor: 'primary.main',
-                color: 'primary.contrastText',
-                boxShadow: 15,
-            }}>
+            <Paper
+                elevation={0}
+                sx={{
+                    display: 'flex',
+                    backgroundColor: 'secondary.main'
+                }}>
                 <Box sx={{
-                    py: 2, px: 4, width: {
+                    py: 2, px: 4,
+                    width: {
                         xs: 1,
                         md: 0.7
-                    },
+                    }
                 }}>
                     <Typography gutterBottom variant='h3'>Get In Touch</Typography>
                     <Typography variant='body1'>
@@ -121,7 +152,7 @@ function Contact(props) {
                         my: {
                             xs: 2,
                             md: 4
-                        },
+                        }
                     }}>
                         {['First Name', 'Last Name'].map(input => (
                             <Controller
@@ -130,7 +161,7 @@ function Contact(props) {
                                 rules={{ required: true, maxLength: 20 }}
                                 render={({ field: { onChange, value } }) => (
                                     <TextField
-                                        variant='outlined'
+                                        variant='filled'
                                         label={
                                             (errors[input]?.type == 'required' && `${input} is Required`) ||
                                             (errors[input]?.type == 'maxLength' && `${input} exceeds max length`) ||
@@ -157,7 +188,7 @@ function Contact(props) {
                             {
                                 label: 'Message',
                                 multiline: true,
-                                rows: 5
+                                rows: 2
                             }
                         ].map(input => (
                             <Controller
@@ -170,7 +201,7 @@ function Contact(props) {
                                 control={control}
                                 render={({ field: { onChange, value } }) => (
                                     <TextField
-                                        variant='outlined'
+                                        variant='filled'
                                         sx={{
                                             mb: {
                                                 xs: 2,
@@ -209,21 +240,20 @@ function Contact(props) {
                     </React.Fragment>
                     <Box sx={{
                         display: 'flex',
-                        justifyContent: {
-                            xs: 'center',
-                            md: 'space-between'
-                        },
+                        width: 1,
+                        justifyContent: isSubmitting ? 'space-between' : 'center'
                     }}>
                         <Button
                             size='large'
                             variant='contained'
-                            color='secondary'
+                            color='primary'
                             onClick={handleSubmit(onSubmit)}
                             disabled={isSubmitting}
+                            disableElevation
                         >
                             Submit
                         </Button>
-                        {isSubmitting && <CircularProgress color='warning' />}
+                        {isSubmitting && <CircularProgress color='primary' />}
                     </Box>
                 </Box>
                 <Box sx={{
@@ -251,18 +281,20 @@ function Contact(props) {
                     />
                 </Box>
             </Paper>
+
+            {/* Alerts */}
             <Snackbar
                 open={alert.open}
-                autoHideDuration={timeout}
+                autoHideDuration={ALERT_TIMEOUT}
                 onClose={onCloseSnackbar}
                 anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-                TransitionComponent={Fade}
-            >
+                TransitionComponent={Fade}>
                 <Alert onClose={onCloseSnackbar} severity={alert.error ? 'error' : 'success'} variant='filled'>
                     {alert.message}
                 </Alert>
             </Snackbar>
-        </Section >
+
+        </Section>
     );
 }
 

@@ -11,7 +11,7 @@ function scrollIntoView(event, href) {
 }
 
 //TODO: Refactor
-function Link({ children, sx, href, type, buttonProps, muiLinkProps, nextLinkProps }) {
+function Link({ children, sx, href, type, buttonProps, muiLinkProps, nextLinkProps, ...rest }) {
     if (!href)
         href = nextLinkProps?.href ? nextLinkProps.href : '/';
 
@@ -46,7 +46,7 @@ function Link({ children, sx, href, type, buttonProps, muiLinkProps, nextLinkPro
         };
 
     const component = (
-        <BaseComponent {...componentProps}>
+        <BaseComponent {...componentProps} {...rest}>
             {children}
         </BaseComponent>
     );

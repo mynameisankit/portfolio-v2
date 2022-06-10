@@ -9,7 +9,7 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 //Colors
 import { green } from '@mui/material/colors';
 //Highlighting Theme
-import theme from 'prism-react-renderer/themes/synthwave84';
+import theme from 'prism-react-renderer/themes/nightOwl';
 
 const Pre = styled('pre')(({ theme }) => ({
     textAlign: 'left',
@@ -71,7 +71,10 @@ function CodeBlock({ children: { props: code } }) {
     return (
         <Box
             ref={CodeBlock}
-            sx={{ position: 'relative' }}
+            sx={{
+                position: 'relative',
+                my: 3
+            }}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => {
                 setHovered(false);
@@ -105,7 +108,7 @@ function CodeBlock({ children: { props: code } }) {
                     sx={{
                         position: 'absolute',
                         right: 0, top: 0,
-                        mr: 1, mt: 1,
+                        mr: 1, mt: 1
                     }}>
                     <IconButton
                         size='large'

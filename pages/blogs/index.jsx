@@ -120,7 +120,7 @@ function Blogs({ blogs, paginationSettings, fuzzySearchProps }) {
         fuzzySearch.current = new Fuse(blogs, options, Fuse.parseIndex(JSON.parse(index)));
     }, []);
 
-    const { page, rows, category, order, search } = settings;
+    const { page, rows, category, order } = settings;
 
     //Side-effects
     useEffect(() => {
@@ -195,8 +195,7 @@ function Blogs({ blogs, paginationSettings, fuzzySearchProps }) {
                                                 type: 'button',
                                                 field: 'category',
                                                 payload: curr
-                                            })}
-                                        >
+                                            })}>
                                             {curr}
                                         </Button>
                                     );
@@ -244,7 +243,7 @@ function Blogs({ blogs, paginationSettings, fuzzySearchProps }) {
                 }}>
                     <Pagination
                         count={Math.ceil(blogs ? blogs.length / paginationSettings.maxRows : 0)}
-                        color='secondary'
+                        color='primary'
                         size='large'
                         showFirstButton
                         showLastButton
