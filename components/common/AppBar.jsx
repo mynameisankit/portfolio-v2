@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import Toolbar from '@mui/material/Toolbar';
 import MuiAppBar from '@mui/material/AppBar';
-import { useTheme } from '@mui/material/styles';
+import { alpha } from '@mui/material/styles';
 //Utility
 import startCase from 'lodash/fp/startCase';
 //Custom Components
@@ -16,8 +16,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 
 function AppBar({ children: routes }) {
-    const theme = useTheme();
-
     const router = useRouter();
     const [open, setOpen] = useState(false);
 
@@ -41,7 +39,10 @@ function AppBar({ children: routes }) {
         <React.Fragment>
             <MuiAppBar color='transparent' sx={{
                 boxShadow: 0,
-                pt: theme.spacing(1)
+                pt: 1,
+                backgroundColor: (theme) => alpha(theme.palette.secondary.dark, 0.5),
+                backdropFilter: 'blur(20px)',
+                borderBottom: (theme) => `1px solid ${theme.palette.secondary.main}`
             }}>
                 <Toolbar sx={{
                     display: 'flex',
@@ -54,8 +55,10 @@ function AppBar({ children: routes }) {
                     >
                         <MenuIcon fontSize='large' />
                     </BgIconButton>
-                    <Link href='/'>
-                        Ankit Kumar
+                    <Link href='/' muiLinkProps={{ underline: 'none' }}>
+                        <Typography variant='h6' component='h6'>
+                            Ankit Kumar
+                        </Typography>
                     </Link>
                 </Toolbar>
             </MuiAppBar>
@@ -79,8 +82,8 @@ function AppBar({ children: routes }) {
                 }}>
                     <Box sx={{
                         position: 'absolute',
-                        right: theme.spacing(2),
-                        top: theme.spacing(2)
+                        right: (theme) => theme.spacing(2),
+                        top: (theme) => theme.spacing(2),
                     }}>
                         <BgIconButton
                             aria-label='Close Menu'
@@ -94,7 +97,7 @@ function AppBar({ children: routes }) {
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
-                        gap: theme.spacing(2)
+                        gap: 2
                     }}>
                         {['Home', ...routes].map(route => {
                             let url, name;

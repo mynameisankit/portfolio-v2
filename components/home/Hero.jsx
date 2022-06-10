@@ -3,17 +3,16 @@ import NxtImage from 'next/image';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import { useTheme } from '@mui/material/styles';
 //Custom Components
 import Section from '@/components/common/Section';
 import Link from '@/components/common/Link';
+import HeroPlay from '@/components/home/HeroPlay';
 
-function Intro() {
-    const theme = useTheme();
-
+function Hero() {
     return (
         <Section id='intro' maxWidth='lg' minHeight='75vh' gutterBottom={10}>
             <Grid container spacing={2}>
+                {/* Image */}
                 <Grid item xs={12} md={4} sx={{
                     display: 'flex',
                     justifyContent: 'center',
@@ -24,7 +23,7 @@ function Intro() {
                         overflow: 'hidden',
                         height: 300,
                         width: 300,
-                        borderRadius: theme.shape.borderRadius
+                        borderRadius: (theme) => theme.shape.borderRadius
                     }}>
                         <NxtImage
                             src='/images/myPic.jpg'
@@ -35,6 +34,8 @@ function Intro() {
                         />
                     </Box>
                 </Grid>
+
+                {/* Hero Description */}
                 <Typography
                     component={Grid}
                     item xs={12} md={8}
@@ -44,10 +45,20 @@ function Intro() {
                         justifyContent: 'center'
                     }}
                     align='center'>
-                    <Typography variant='h2' gutterBottom>Hi, I'm Ankit Kumar</Typography>
-                    <Typography variant='body1' sx={{
-                        px: { xs: theme.spacing(2), md: 0 }
+                    <Box sx={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        mb: 3
                     }}>
+                        <Typography variant='h2'>Hi, I'm Ankit Kumar.</Typography>
+                        <HeroPlay />
+                    </Box>
+                    <Typography
+                        variant='body1'
+                        align='justify'
+                        sx={{ px: [1, null, 0] }}
+                    >
                         I am an undergraduate at the{' '}
                         <Link href='http://iiitg.ac.in/' muiLinkProps={{ underline: 'none' }}>
                             Indian Institute of Information Technology Guwahati
@@ -55,9 +66,10 @@ function Intro() {
                         {' '}majoring in Computer Science and Engineering. You may learn more about me by scrolling below.
                     </Typography>
                 </Typography>
+
             </Grid>
-        </Section >
+        </Section>
     );
 }
 
-export default Intro;
+export default Hero;

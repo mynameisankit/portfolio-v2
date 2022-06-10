@@ -42,11 +42,24 @@ const theme = createTheme({
                 fontFamily: [
                     'Cal Sans',
                     ...baseFonts
-                ].join(',')
+                ].join(','),
+                lineHeight: 1.2
             };
 
             return acc;
         }, {}))
+    },
+    components: {
+        MuiDivider: {
+            styleOverrides: {
+                light: ({ theme }) => ({
+                    borderColor: theme.palette.text.primary
+                }),
+                root: ({ theme }) => ({
+                    borderColor: theme.palette.secondary.light
+                })
+            },
+        },
     }
 });
 

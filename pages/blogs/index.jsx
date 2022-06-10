@@ -191,6 +191,12 @@ function Blogs({ blogs, paginationSettings, fuzzySearchProps }) {
                                             variant='contained'
                                             startIcon={<ReactIcons icon={curr} />}
                                             disabled={curr === category}
+                                            sx={{
+                                                '&.Mui-disabled': {
+                                                    color: 'text.primary',
+                                                    backgroundColor: 'secondary.light'
+                                                }
+                                            }}
                                             onClick={() => dispatch({
                                                 type: 'button',
                                                 field: 'category',

@@ -9,6 +9,9 @@ const globalStyles = {
     },
     '::-webkit-scrollbar-thumb:hover': {
         background: '#555'
+    },
+    'body': {
+        userSelect: 'none'
     }
 };
 

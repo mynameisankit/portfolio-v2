@@ -27,9 +27,7 @@ function ProjectCard({ children: data }) {
                     sm: 300,
                     md: 330
                 },
-                transitionDuration: 'transitions.duration.standard',
-                transitionProperty: 'transform, box-shadow',
-                transitionTimingFunction: 'transitions.easing.easeOut',
+                transition: theme.transitions.create(['transform', 'box-shadow']),
                 borderRadius: 0,
                 minHeight: 350,
                 '&:hover': { transform: 'scale(1.03)' }

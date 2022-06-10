@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-import { useTheme } from '@mui/material/styles';
 //Icons
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
@@ -15,15 +14,13 @@ import Link from '@/components/common/Link';
 
 //Recursively render the items
 function TableOfContentsItems({ toc }) {
-    const theme = useTheme();
-
     if (!toc?.length)
         return null;
 
     return (
         <React.Fragment>
             {toc.map(({ value, depth, url, children }) => (
-                <Box key={value + depth} sx={{ pl: theme.spacing(depth && 4) }}>
+                <Box key={value + depth} sx={{ pl: depth && 3 }}>
                     <Link
                         href={url}
                         nextLinkProps={{
@@ -33,7 +30,7 @@ function TableOfContentsItems({ toc }) {
                         }}
                         muiLinkProps={{ underline: 'none' }}
                     >
-                        <Box sx={{ display: 'flex', alignItems: 'center', mb: theme.spacing(1) }}>
+                        <Box sx={{ display: 'flex', alignItems: 'center', mb: 1.2 }}>
                             <ArrowRightIcon />
                             <Typography variant='h6' component='h6' sx={{ fontSize: 'inherit' }}>
                                 {value}
@@ -49,20 +46,29 @@ function TableOfContentsItems({ toc }) {
 
 function TableOfContents({ toc }) {
     const [open, setOpen] = useState(true);
-    const theme = useTheme();
 
     if (!toc.length)
         return null;
 
     return (
-        <Paper sx={{ float: 'right', p: theme.spacing(2) }}>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', pb: theme.spacing(1) }}>
+        <Paper sx={{
+            backgroundColor: 'secondary.main',
+            float: { xs: 'none', md: 'right' },
+            p: 1,
+            mb: { xs: 4, md: 0 }
+        }}>
+            <Box sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                color: 'text.primary'
+            }}>
                 <Typography variant='h5' component='h5'>Table Of Contents</Typography>
-                <IconButton onClick={() => setOpen(!open)}>
+                <IconButton sx={{ color: 'inherit' }} onClick={() => setOpen(!open)}>
                     {open ? <ExpandLess /> : <ExpandMore />}
                 </IconButton>
-                {open && <Divider />}
             </Box>
+            <Divider light sx={{ mb: 2 }} />
             <Collapse in={open} timeout='auto' unmountOnExit>
                 <TableOfContentsItems toc={toc} />
             </Collapse>

@@ -60,7 +60,7 @@ function Project({ children: data, direction }) {
                 <Link muiLinkProps={{ underline: 'none' }} href={data.github || data.extLink}>
                     <Box sx={{
                         position: 'relative',
-                        height: isSmall ? 500 : 380,
+                        height: [500, 400],
                         zIndex: 0,
                         overflow: 'hidden',
                         '&::before': {
@@ -70,12 +70,10 @@ function Project({ children: data, direction }) {
                             width: 1,
                             zIndex: 1,
                             backgroundColor: alpha(theme.palette.primary.main, isSmall ? 0.85 : 0.5),
-                            transitionDuration: `${theme.transitions.duration.standard}ms`,
-                            transitionProperty: `background-color`,
-                            transitionTimingFunction: 'transitions.easing.easeOut'
+                            transition: theme.transitions.create(['background-color'])
                         },
                         '&:hover::before': {
-                            backgroundColor: alpha(theme.palette.primary.main, 0),
+                            backgroundColor: alpha(theme.palette.primary.main, 0)
                         }
                     }}>
                         <Image
@@ -97,6 +95,10 @@ function Project({ children: data, direction }) {
                 justifyContent: 'center',
                 position: 'relative',
                 zIndex: 1,
+                transition: theme.transitions.create(['transform']),
+                '&:hover': {
+                    transform: 'scale(1.03)'
+                }
             }}>
 
                 {/* Meta */}

@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 //Utility Imports
 import dayjs from 'dayjs';
 //Custom Components
@@ -14,6 +15,8 @@ import ReactIcons from '@/components/common/ReactIcons';
 import Link from '@/components/common/Link';
 
 function Post({ title, subTitle, date, abstract, url, tags }) {
+    const theme = useTheme();
+
     const isSmall = useMediaQuery((theme) => theme.breakpoints.down('md'));
     const ActionArea = isSmall ? React.Fragment : CardActionArea;
 
@@ -31,10 +34,7 @@ function Post({ title, subTitle, date, abstract, url, tags }) {
                         transform: `scale(1.02)`
                     }
                 },
-                transitionProperty: 'transform',
-                transitionDuration: 'transitions.duration.standard',
-                transitionTimingFunction: 'transitions.easing.easeOut',
-                userSelect: 'none'
+                transition: theme.transitions.create(['transform'])
             }}
             elevation={5}>
             <ActionArea {...(!isSmall && { sx: { height: 1 } })}>

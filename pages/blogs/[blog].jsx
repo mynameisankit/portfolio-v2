@@ -53,6 +53,7 @@ function Blog({ mdxSource, frontMatter, toc }) {
             <Section id='meta' maxWidth='lg'>
                 <Box sx={{
                     py: 2,
+                    px: { xs: 2, md: 0 },
                     textAlign: 'center'
                 }}>
                     <Typography gutterBottom variant='subtitle1' component='h6'>
@@ -60,7 +61,7 @@ function Blog({ mdxSource, frontMatter, toc }) {
                     </Typography>
                     <Typography gutterBottom variant='h2' component='h1'>{title}</Typography>
                     {abstract && (
-                        <Typography paragraph variant='subtitle1' gutterBottom align='justify'>
+                        <Typography paragraph variant='body1' gutterBottom align='justify'>
                             {abstract}
                         </Typography>
                     )}
@@ -73,7 +74,7 @@ function Blog({ mdxSource, frontMatter, toc }) {
                         gap: 1
                     }}>
                         {tags?.map(tag => (
-                            <Chip key={tag} label={tag} />
+                            <Chip key={tag} label={tag} color='primary' />
                         ))}
                     </Grid>
                     <Grid item xs={6} sx={{

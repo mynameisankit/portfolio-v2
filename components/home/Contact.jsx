@@ -16,7 +16,9 @@ import camelCase from 'lodash/fp/camelCase';
 //Custom Components
 import Section from '@/components/common/Section';
 //Image
-import Decoration from '@/images/contact.png';
+import Decoration from '@/images/contact.jpg';
+//Material-UI Icons
+import SendIcon from '@mui/icons-material/Send';
 
 const TextField = styled(MuiTextField)(({ theme }) => ({
     '& label': {
@@ -133,13 +135,13 @@ function Contact() {
                     backgroundColor: 'secondary.main'
                 }}>
                 <Box sx={{
-                    py: 2, px: 4,
+                    py: 3, px: 4,
                     width: {
                         xs: 1,
                         md: 0.7
                     }
                 }}>
-                    <Typography gutterBottom variant='h3'>Get In Touch</Typography>
+                    <Typography gutterBottom variant='h3'>Get In Touch ✉️</Typography>
                     <Typography variant='body1'>
                         Have an exciting project that could use my help? Want to start a project with me? Want to meet? Want to chit-chat? My inbox is always open. Whether you have a question or just want to say hi, I&apos;ll try my best to get back to you!
                     </Typography>
@@ -250,6 +252,7 @@ function Contact() {
                             onClick={handleSubmit(onSubmit)}
                             disabled={isSubmitting}
                             disableElevation
+                            endIcon={<SendIcon />}
                         >
                             Submit
                         </Button>

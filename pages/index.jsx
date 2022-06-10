@@ -4,7 +4,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 //Custom Components
 import Section from '@/components/common/Section';
-import Intro from '@/components/home/Intro';
+import Hero from '@/components/home/Hero';
 import Terminal from '@/components/misc/Terminal';
 import Contact from '@/components/home/Contact';
 
@@ -14,7 +14,7 @@ function Home() {
 
     return (
         <React.Fragment>
-            <Intro />
+            <Hero />
             {isBig && (
                 <Section minHeight='70vh' maxWidth='lg' gutterBottom={5}>
                     <Terminal
