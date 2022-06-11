@@ -24,15 +24,19 @@ const TextField = styled(MuiTextField)(({ theme }) => ({
     '& label': {
         color: theme.palette.text.primary
     },
-    '& label.Mui-focused': {
-        color: theme.palette.primary.light
-    },
-    '& .MuiInputBase-root': {
-        borderRadius: '4px 4px 0 0',
+    '& .MuiFilledInput-root': {
         backgroundColor: theme.palette.secondary.light,
-        transition: theme.transitions.create(['background-color']),
-        '&:focus': {
+        borderRadius: '4px 4px 0 0',
+        transition: theme.transitions.create([
+            'background-color',
+            'border-color'
+        ]),
+        '&:hover': {
             backgroundColor: theme.palette.secondary.dark
+        },
+        '&.Mui-focused': {
+            backgroundColor: theme.palette.secondary.dark,
+            borderColor: theme.palette.primary.main
         }
     }
 }));
@@ -136,10 +140,7 @@ function Contact() {
                 }}>
                 <Box sx={{
                     py: 3, px: 4,
-                    width: {
-                        xs: 1,
-                        md: 0.7
-                    }
+                    width: { xs: 1, md: 0.7 }
                 }}>
                     <Typography gutterBottom variant='h3'>Get In Touch ✉️</Typography>
                     <Typography variant='body1'>
@@ -204,12 +205,7 @@ function Contact() {
                                 render={({ field: { onChange, value } }) => (
                                     <TextField
                                         variant='filled'
-                                        sx={{
-                                            mb: {
-                                                xs: 2,
-                                                md: 4
-                                            },
-                                        }}
+                                        sx={{ mb: { xs: 2, md: 4 } }}
                                         fullWidth
                                         {...((input instanceof Object) ? {
                                             ...(input.multiline && {

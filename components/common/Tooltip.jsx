@@ -29,7 +29,7 @@ function Tooltip({ title, sx, children,
                     sx: {
                         backgroundColor: 'secondary.main',
                         userSelect: 'none',
-                        border: 1,
+                        boxShadow: 24,
                         ...tooltipSx
                     },
                     ...tooltipRest

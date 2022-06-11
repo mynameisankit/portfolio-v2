@@ -10,7 +10,6 @@ function scrollIntoView(event, href) {
     return;
 }
 
-//TODO: Refactor
 function Link({ children, sx, href, type, buttonProps, muiLinkProps, nextLinkProps, ...rest }) {
     if (!href)
         href = nextLinkProps?.href ? nextLinkProps.href : '/';
@@ -20,7 +19,7 @@ function Link({ children, sx, href, type, buttonProps, muiLinkProps, nextLinkPro
 
     let BaseComponent, componentProps;
     if (type === 'button' || type === 'icon') {
-        BaseComponent = type === 'button' ? Button : IconButton;
+        BaseComponent = (type === 'button') ? Button : IconButton;
         componentProps = buttonProps;
     }
     else {

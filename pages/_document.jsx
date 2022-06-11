@@ -20,6 +20,7 @@ export default class MyDocument extends Document {
                         integrity="sha384-Um5gpz1odJg5Z4HAmzPtgZKdTBHZdw8S29IecapCSB31ligYPhHQZMIlWLYQGVoc"
                         crossOrigin="anonymous"
                     />
+                    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
                 </Head>
                 <body>
                     <Main />

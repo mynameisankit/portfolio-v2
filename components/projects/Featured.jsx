@@ -60,7 +60,7 @@ function Project({ children: data, direction }) {
                 <Link muiLinkProps={{ underline: 'none' }} href={data.github || data.extLink}>
                     <Box sx={{
                         position: 'relative',
-                        height: [500, 400],
+                        height: [520, 400],
                         zIndex: 0,
                         overflow: 'hidden',
                         '&::before': {
@@ -70,10 +70,11 @@ function Project({ children: data, direction }) {
                             width: 1,
                             zIndex: 1,
                             backgroundColor: alpha(theme.palette.primary.main, isSmall ? 0.85 : 0.5),
-                            transition: theme.transitions.create(['background-color'])
+                            transition: (theme) => theme.transitions.create(['background-color']),
+                            backdropFilter: ['blur(2px)', null, 'none']
                         },
                         '&:hover::before': {
-                            backgroundColor: alpha(theme.palette.primary.main, 0)
+                            backgroundColor: (theme) => alpha(theme.palette.primary.main, 0)
                         }
                     }}>
                         <Image
@@ -97,7 +98,7 @@ function Project({ children: data, direction }) {
                 zIndex: 1,
                 transition: theme.transitions.create(['transform']),
                 '&:hover': {
-                    transform: 'scale(1.03)'
+                    transform: [null, null, 'scale(1.03)']
                 }
             }}>
 
@@ -139,16 +140,12 @@ function Project({ children: data, direction }) {
                     }}>
                         {data.github && (
                             <LinkButton type='icon' href={data.github}>
-                                <SvgIcon fontSize='inherit'>
-                                    <GitHubIcon />
-                                </SvgIcon>
+                                <GitHubIcon fontSize='large' />
                             </LinkButton>
                         )}
                         {data.extLink && (
                             <LinkButton type='icon' href={data.extLink}>
-                                <SvgIcon fontSize='inherit'>
-                                    <LinkIcon />
-                                </SvgIcon>
+                                <LinkIcon fontSize='large' />
                             </LinkButton>
                         )}
                     </Box>
@@ -165,15 +162,12 @@ function Project({ children: data, direction }) {
                         <Tooltip
                             key={tech}
                             title={tech}
-                            sx={{
-                                mx: 1,
-                                fontSize: isSmall ? 35 : 42,
-                            }}
+                            sx={{ mx: 1 }}
                             componentProps={{
                                 arrow: { style: { color: 'common.black' } },
                                 tooltip: { style: { color: 'common.black' } }
                             }}>
-                            <ReactIcons icon={tech} />
+                            <ReactIcons sx={{ fontSize: [32, null, 40] }} icon={tech} />
                         </Tooltip>
                     ))}
                 </Box>
@@ -187,7 +181,12 @@ function Featured(props) {
     const { children: data } = props;
 
     return (
-        <Section id='featured' maxWidth='lg'>
+        <Section
+            id='featured'
+            maxWidth='lg'
+            heading="Some Things I've Built"
+            gutterBottom={8}
+        >
             <Grid container spacing={5}>
                 {data?.map((project, idx) => (
                     <Grid item key={project.title} xs={12}>

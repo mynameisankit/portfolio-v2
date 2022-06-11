@@ -5,7 +5,6 @@ import Typography from '@mui/material/Typography';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import Toolbar from '@mui/material/Toolbar';
 import MuiAppBar from '@mui/material/AppBar';
-import { alpha } from '@mui/material/styles';
 //Utility
 import startCase from 'lodash/fp/startCase';
 //Custom Components
@@ -26,7 +25,7 @@ function AppBar({ children: routes }) {
     };
 
     useEffect(() => {
-        iOS.current = typeof navigator !== 'undefined' && /iPad|iPhone|iPod/.test(navigator.userAgent);
+        iOS.current = (typeof navigator !== 'undefined') && /iPad|iPhone|iPod/.test(navigator.userAgent);
 
         router.events.on('routeChangeStart', handleRouteChange);
 
@@ -37,13 +36,7 @@ function AppBar({ children: routes }) {
 
     return (
         <React.Fragment>
-            <MuiAppBar color='transparent' sx={{
-                boxShadow: 0,
-                pt: 1,
-                backgroundColor: (theme) => alpha(theme.palette.secondary.dark, 0.5),
-                backdropFilter: 'blur(20px)',
-                borderBottom: (theme) => `1px solid ${theme.palette.secondary.main}`
-            }}>
+            <MuiAppBar color='transparent' sx={{ boxShadow: 0, pt: [1, 0] }}>
                 <Toolbar sx={{
                     display: 'flex',
                     justifyContent: 'space-between',

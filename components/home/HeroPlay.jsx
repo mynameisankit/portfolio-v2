@@ -8,7 +8,7 @@ import StopCircleIcon from '@mui/icons-material/StopCircle';
 
 function HeroPlay() {
     const [audio, state, controls] = useAudio({
-        src: '/audio/intro.mp3',
+        src: '/audio/pronunciation.mp3',
         autoPlay: false
     });
 

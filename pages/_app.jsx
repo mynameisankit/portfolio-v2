@@ -8,6 +8,8 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider } from '@emotion/react';
 import createEmotionCache from '../styles/createEmotionCache';
 import smoothscroll from 'smoothscroll-polyfill';
+//Utility
+import getRoute from '@/lib/getRoute';
 //Theme
 import theme from '../styles/theme';
 //Custom Components
@@ -28,14 +30,8 @@ function MyApp(props) {
     const router = useRouter();
     const route = useRef(null);
 
-    const URLMatcher = /^\/([-\w]*).*$/;
-
     const handlePathChange = () => {
-        let { pathname } = router;
-        //Get the top-most route
-        pathname = URLMatcher.exec(pathname)[1].toLowerCase();
-
-        route.current = pathname;
+        route.current = getRoute(router.pathname);
     };
 
     useEffect(() => {
@@ -60,7 +56,7 @@ function MyApp(props) {
                 </React.Fragment>
                 {currentRoute !== 'admin' && (
                     <AppBar>
-                        {['blogs', 'projects']}
+                        {['blogs', 'projects', 'about']}
                     </AppBar>
                 )}
                 <DefaultSeo {...SEO} />

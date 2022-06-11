@@ -1,9 +1,10 @@
 import React from 'react';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/material/styles';
 
-function Section({ children, maxWidth, minHeight, gutterBottom, sx, ...rest }) {
+function Section({ heading, caption, subtitle, children, maxWidth, minHeight, gutterBottom, sx, ...rest }) {
     const theme = useTheme();
 
     if (minHeight !== undefined) {
@@ -31,6 +32,16 @@ function Section({ children, maxWidth, minHeight, gutterBottom, sx, ...rest }) {
             {...rest}
         >
             <Box sx={{ width: 1, height: 1 }}>
+                {heading && (
+                    <Typography gutterBottom={!caption} variant='h3' component='h1' align='center'>
+                        {heading}
+                    </Typography>
+                )}
+                {caption && (
+                    <Typography paragraph variant='body1' align='center' sx={{ mb: 5 }}>
+                        {caption}
+                    </Typography>
+                )}
                 {children}
             </Box>
         </Container>

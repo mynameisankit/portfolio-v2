@@ -94,7 +94,12 @@ function ProjectCard({ children: data }) {
 
 function Projects({ children: data, sx }) {
     return (
-        <Section id='projects' maxWidth='lg' sx={sx}>
+        <Section
+            id='projects'
+            maxWidth='lg'
+            sx={sx}
+            heading='Other Noteworthy Projects'
+        >
             <Grid container spacing={{ xs: 2 }}>
                 {data.map(project => (
                     <Grid item xs={12} md={6} lg={4} key={project.title}>

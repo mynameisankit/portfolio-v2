@@ -191,6 +191,7 @@ function Blogs({ blogs, paginationSettings, fuzzySearchProps }) {
                                             variant='contained'
                                             startIcon={<ReactIcons icon={curr} />}
                                             disabled={curr === category}
+                                            disableElevation
                                             sx={{
                                                 '&.Mui-disabled': {
                                                     color: 'text.primary',
