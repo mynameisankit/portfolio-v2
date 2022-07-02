@@ -1,6 +1,7 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/material/styles';
@@ -12,6 +13,10 @@ import LinkIcon from '@mui/icons-material/Link';
 import Section from '@/components/common/Section';
 import Link from '@/components/common/Link';
 
+const LinkButton = (props) => (
+    <Link buttonProps={{ color: 'secondary' }} {...props} />
+);
+
 function ProjectCard({ children: data }) {
     const theme = useTheme();
 
@@ -20,7 +25,7 @@ function ProjectCard({ children: data }) {
             sx={{
                 py: 3, px: 4,
                 backgroundColor: 'primary.main',
-                color: 'primary.contrastText',
+                color: 'text.secondary',
                 display: 'flex',
                 flexDirection: 'column',
                 minHeight: {
@@ -39,24 +44,24 @@ function ProjectCard({ children: data }) {
                 alignItems: 'center',
             }}>
                 <FolderOpenOutlinedIcon fontSize='large' />
-                <Box
-                    sx={{
-                        display: 'flex',
-                        flexGrow: 2,
-                        justifyContent: 'flex-end',
-                        alignItems: 'center',
-                    }}>
+                <Stack
+                    direction='row'
+                    justifyContent='flex-end'
+                    alignItems='center'
+                    sx={{ color: 'primary.contrastText' }}
+                    flexGrow={2}
+                >
                     {data.github_repo && (
-                        <Link type='icon' href={`https://github.com/mynameisankit/${data.github_repo}`}>
+                        <LinkButton type='icon' href={`https://github.com/mynameisankit/${data.github_repo}`}>
                             <GitHubIcon fontSize='large' />
-                        </Link>
+                        </LinkButton>
                     )}
                     {data.extLink && (
-                        <Link type='icon' href={data.extLink}>
+                        <LinkButton type='icon' href={data.extLink}>
                             <LinkIcon fontSize='large' />
-                        </Link>
+                        </LinkButton>
                     )}
-                </Box>
+                </Stack>
             </Box>
             <Box sx={{
                 pt: 2,

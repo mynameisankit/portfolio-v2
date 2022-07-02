@@ -14,7 +14,7 @@ import dayjs from 'dayjs';
 import ReactIcons from '@/components/common/ReactIcons';
 import Link from '@/components/common/Link';
 
-function Post({ title, subTitle, date, abstract, url, tags }) {
+function Post({ title, subTitle, date, abstract, url, tags, flippedProps }) {
     const theme = useTheme();
 
     const isSmall = useMediaQuery((theme) => theme.breakpoints.down('md'));
@@ -26,15 +26,15 @@ function Post({ title, subTitle, date, abstract, url, tags }) {
         <Card
             sx={{
                 backgroundColor: 'transparent',
+                backgroundImage: 'none',
                 border: 'none',
                 boxShadow: 0,
                 borderRadius: 0,
                 '&:hover': {
-                    md: {
-                        transform: `scale(1.02)`
-                    }
+                    backgroundColor: [null, null, theme.palette.mode === 'dark' ? 'secondary.dark' : 'secondary.light'],
+                    transform: [null, null, `scale(1.02)`]
                 },
-                transition: theme.transitions.create(['transform'])
+                transition: theme.transitions.create(['transform', 'background-color'])
             }}
             elevation={5}>
             <ActionArea {...(!isSmall && { sx: { height: 1 } })}>
@@ -49,7 +49,13 @@ function Post({ title, subTitle, date, abstract, url, tags }) {
 
                     {/* Meta Data */}
                     <Box>
-                        <Typography variant='h4'>{title}</Typography>
+                        {isSmall ? (
+                            <Link href={url} muiLinkProps={{ variant: 'text', color: 'inherit', underline: 'none' }}>
+                                <Typography variant='h4'>{title}</Typography>
+                            </Link>
+                        ) : (
+                            <Typography variant='h4'>{title}</Typography>
+                        )}
                         <Typography variant='subtitle1'>{subTitle}</Typography>
                         <Typography variant='subtitle1' gutterBottom>Published on {dayjs(date).format('D MMMM YYYY')}</Typography>
                         {abstract && (
@@ -58,8 +64,8 @@ function Post({ title, subTitle, date, abstract, url, tags }) {
                             </Typography>
                         )}
                         {isSmall && (
-                            <Link href={url} muiLinkProps={{ variant: 'text', color: 'inherit', underline: 'none' }}>
-                                Read More ...
+                            <Link href={url} muiLinkProps={{ variant: 'text', color: 'primary' }}>
+                                Read More
                             </Link>
                         )}
                     </Box>

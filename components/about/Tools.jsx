@@ -19,7 +19,7 @@ function Tools() {
             url: 'https://code.visualstudio.com/',
             use: 'Editor'
         }, {
-            title: 'Windows System For Linux',
+            title: 'WSL',
             description: 'A extension for windows which simulates linux terminal',
             url: 'https://ubuntu.com/wsl',
             use: 'Terminal'

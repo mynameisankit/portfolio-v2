@@ -9,14 +9,15 @@ import MuiTextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
 import Fade from '@mui/material/Fade';
-import { styled } from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
 import { useForm, Controller } from 'react-hook-form';
 import emailjs from '@emailjs/browser';
 import camelCase from 'lodash/fp/camelCase';
 //Custom Components
 import Section from '@/components/common/Section';
 //Image
-import Decoration from '@/images/contact.jpg';
+import DecorationDark from '@/images/contact-dark.jpg';
+import DecorationLight from '@/images/contact-light.jpg';
 //Material-UI Icons
 import SendIcon from '@mui/icons-material/Send';
 
@@ -24,25 +25,28 @@ const TextField = styled(MuiTextField)(({ theme }) => ({
     '& label': {
         color: theme.palette.text.primary
     },
-    '& .MuiFilledInput-root': {
-        backgroundColor: theme.palette.secondary.light,
-        borderRadius: '4px 4px 0 0',
-        transition: theme.transitions.create([
-            'background-color',
-            'border-color'
-        ]),
-        '&:hover': {
-            backgroundColor: theme.palette.secondary.dark
-        },
-        '&.Mui-focused': {
-            backgroundColor: theme.palette.secondary.dark,
-            borderColor: theme.palette.primary.main
+    ...(theme.palette.mode === 'dark' && {
+        '& .MuiFilledInput-root': {
+            backgroundColor: theme.palette.secondary.light,
+            borderRadius: '4px 4px 0 0',
+            transition: theme.transitions.create([
+                'background-color',
+                'border-color'
+            ], { duration: theme.transitions.duration.shorter }),
+            '&:hover': {
+                backgroundColor: theme.palette.secondary.dark
+            },
+            '&.Mui-focused': {
+                backgroundColor: theme.palette.secondary.dark,
+                borderColor: theme.palette.primary.main
+            }
         }
-    }
+    })
 }));
 
 function Contact() {
     const ALERT_TIMEOUT = 7000;
+    const theme = useTheme();
 
     const params = ['Message', 'First Name', 'Last Name', 'Subject', 'E-Mail'];
     const {
@@ -133,14 +137,17 @@ function Contact() {
     return (
         <Section id='contact' maxWidth='md' minHeight>
             <Paper
-                elevation={0}
+                elevation={theme.palette.mode === 'dark' ? 0 : 8}
                 sx={{
                     display: 'flex',
-                    backgroundColor: 'secondary.main'
+                    backgroundColor: theme.palette.mode === 'dark' ? 'secondary.main' : 'transparent',
+                    border: `1px solid ${theme.palette.mode === 'dark' ? 'none' : theme.palette.primary.main}`,
+                    borderRadius: 1,
+                    color: 'text.primary'
                 }}>
                 <Box sx={{
                     py: 3, px: 4,
-                    width: { xs: 1, md: 0.7 }
+                    width: { xs: 1, md: theme.palette.mode === 'dark' ? 0.7 : 1 }
                 }}>
                     <Typography gutterBottom variant='h3'>Get In Touch ✉️</Typography>
                     <Typography variant='body1'>
@@ -148,14 +155,8 @@ function Contact() {
                     </Typography>
                     <Box sx={{
                         display: 'flex',
-                        gap: {
-                            xs: 2,
-                            md: 4
-                        },
-                        my: {
-                            xs: 2,
-                            md: 4
-                        }
+                        gap: { xs: 2, md: 4 },
+                        my: { xs: 2, md: 4 }
                     }}>
                         {['First Name', 'Last Name'].map(input => (
                             <Controller
@@ -191,7 +192,7 @@ function Contact() {
                             {
                                 label: 'Message',
                                 multiline: true,
-                                rows: 2
+                                rows: 3
                             }
                         ].map(input => (
                             <Controller
@@ -211,6 +212,7 @@ function Contact() {
                                             ...(input.multiline && {
                                                 multiline: true,
                                                 maxRows: input.rows,
+                                                minRows: input.rows
                                             }),
                                             label: (
                                                 (errors[input.label]?.type == 'required' && `${input.label} is Required`) ||
@@ -255,30 +257,32 @@ function Contact() {
                         {isSubmitting && <CircularProgress color='primary' />}
                     </Box>
                 </Box>
-                <Box sx={{
-                    position: 'relative',
-                    width: {
-                        xs: 0,
-                        md: 0.3
-                    },
-                    '&::before': {
-                        content: '""',
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        zIndex: 1,
-                        height: 1,
-                        width: 1,
-                        backgroundColor: 'rgba(0, 0, 0, 0.6)',
-                    },
-                }}>
-                    <Image
-                        src={Decoration}
-                        layout='fill'
-                        objectFit='cover'
-                        alt=""
-                    />
-                </Box>
+                {theme.palette.mode === 'dark' && (
+                    <Box sx={{
+                        position: 'relative',
+                        width: { xs: 0, md: 0.3 },
+                        '&::before': {
+                            content: '""',
+                            position: 'absolute',
+                            top: 0, left: 0,
+                            zIndex: 1,
+                            height: 1, width: 1,
+                            backgroundColor: 'rgba(0, 0, 0, 0.6)'
+                        },
+                    }}>
+                        <Image
+                            priority
+                            src={
+                                theme.palette.mode === 'dark' ?
+                                    DecorationDark :
+                                    DecorationLight
+                            }
+                            layout='fill'
+                            objectFit='cover'
+                            alt=""
+                        />
+                    </Box>
+                )}
             </Paper>
 
             {/* Alerts */}

@@ -1,6 +1,6 @@
 {
   "title": "IIITG Technical Board",
-  "abstract": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vehicula vestibulum quam gravida fringilla. Sed lectus purus, hendrerit at massa et, ullamcorper lobortis lacus. Vivamus sit amet elementum elit. Aliquam fringilla tellus at nisl accumsan vehicula. Suspendisse potenti. Nullam dictum quam id mauris fringilla eleifend. Quisque purus sem, euismod a erat vitae, elementum faucibus est. Curabitur quam nisi, laoreet at malesuada sed, tincidunt sed libero. Morbi dictum velit arcu, eget eleifend odio faucibus eu. Sed eu libero eget nibh vulputate venenatis at id turpis.",
+  "abstract": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vehicula vestibulum quam gravida fringilla. Sed lectus purus, hendrerit at massa et, ullamcorper lobortis lacus. Vivamus sit amet elementum elit. Aliquam fringilla tellus at nisl accumsan vehicula. Suspendisse potenti.",
   "thumbnail": "images/admin-panel.png",
   "github": "https://github.com/IIITG-Open-Source/Technical-Board-Portal",
   "techStack": [

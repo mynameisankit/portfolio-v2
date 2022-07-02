@@ -25,34 +25,38 @@ function SearchBox({ fuzzySearch }) {
     }, [query]);
 
     return (
-        <Paper sx={{
-            border: 3,
-            borderColor: 'transparent',
-            borderRadius: 2,
-            transitionDuration: `${theme.transitions.duration.complex}ms`,
-            transitionProperty: 'border',
-            transitionTimingFunction: 'transitions.easing.easeOut',
-            '&:hover': {
-                borderColor: theme.palette.primary.main
-            }
-        }}>
+        <Paper
+            elevation={0}
+            sx={{
+                transition: theme.transitions.create(['border']),
+                '&:hover': {
+                    borderColor: theme.palette.primary.main
+                }
+            }}>
             <TextField
                 label='Search'
                 fullWidth
                 InputProps={{
                     endAdornment: (
-                        <InputAdornment position="start">
+                        <InputAdornment position='end'>
                             <SearchIcon />
                         </InputAdornment>
-                    ),
-                    sx: {
-                        color: 'primary.contrastText'
-                    }
+                    )
                 }}
                 value={query}
                 onChange={event => setQuery(event.target.value)}
                 variant='filled'
                 color='secondary'
+                sx={{
+                    '& label': {
+                        color: theme.palette.mode === 'dark' ?
+                            'text.secondary' : 'text.primary'
+                    },
+                    '& .MuiFilledInput-root': {
+                        color: theme.palette.mode === 'dark' ?
+                            'text.secondary' : 'text.primary'
+                    }
+                }}
             />
             <Box sx={{
                 display: 'flex',
@@ -67,13 +71,12 @@ function SearchBox({ fuzzySearch }) {
                             muiLinkProps={{ underline: 'none' }}
                             sx={{
                                 p: 2,
-                                color: 'secondary.dark',
-                                backgroundColor: !idx && alpha(theme.palette.primary.dark, 0.5),
-                                transitionDuration: `${theme.transitions.duration.complex}ms`,
-                                transitionProperty: 'background-color',
-                                transitionTimingFunction: 'transitions.easing.easeOut',
+                                color: theme.palette.mode === 'dark' ?
+                                    'text.secondary' : 'text.primary',
+                                backgroundColor: !idx && alpha(theme.palette.primary.light, 0.75),
+                                transition: theme.transitions.create(['background-color']),
                                 '&:hover': {
-                                    backgroundColor: alpha(theme.palette.primary.main, 0.5),
+                                    backgroundColor: alpha(theme.palette.primary.main, 0.9),
                                 }
                             }}
                         >

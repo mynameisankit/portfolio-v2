@@ -2,9 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import InputBase from '@mui/material/InputBase';
-import { styled, ThemeProvider } from '@mui/material/styles';
-//Custom Theme
-import theme from '@/styles/theme/code';
+import { styled } from '@mui/material/styles';
 //Utility Imports
 import lowerCase from 'lodash/fp/lowerCase';
 
@@ -161,84 +159,82 @@ function Terminal({ height, width, initialMessage, commandsList }) {
     };
 
     return (
-        <ThemeProvider theme={theme}>
+        <Box
+            sx={{
+                height, width,
+                position: 'relative',
+                display: 'flex',
+                flexDirection: 'column',
+                userSelect: 'none',
+                overflowY: 'scroll',
+                borderRadius: 4
+            }}
+            onClick={handleFocus}
+        >
+            {/* Title Bar */}
+            <Box sx={{
+                position: 'relative',
+                display: 'flex',
+                alignItems: 'center',
+                backgroundColor: 'primary.main',
+                color: 'background.default',
+                zIndex: 1
+            }}>
+                <Box sx={{
+                    position: 'absolute',
+                    display: 'flex',
+                    gap: 1, px: 2,
+                    justifySelf: 'flex-start'
+                }}>
+                    {['maximize', 'minimize', 'close'].map(variant => (
+                        <RibbonButton
+                            key={variant}
+                            variant={variant}
+                            sx={{ border: 1 }}
+                        />
+                    ))}
+                </Box>
+                <Typography variant='h6' align='center' sx={{ width: 1 }}>Terminal</Typography>
+            </Box>
+            {/* Std Out */}
             <Box
                 sx={{
-                    height, width,
-                    position: 'relative',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    userSelect: 'none',
+                    height: 1,
+                    px: 2, py: 1,
                     overflowY: 'scroll',
-                    borderRadius: theme.shape.borderRadius
-                }}
-                onClick={handleFocus}
-            >
-                {/* Title Bar */}
-                <Box sx={{
-                    position: 'relative',
-                    display: 'flex',
-                    alignItems: 'center',
-                    backgroundColor: 'primary.main',
-                    color: 'background.default',
+                    backgroundColor: 'background.default',
+                    color: 'primary.main',
                     zIndex: 1
-                }}>
+                }}
+                ref={outputBox}
+            >
+                <React.Fragment>
+                    {output.map((text, idx) => (
+                        <Typography key={idx} component='div'>
+                            {text}
+                        </Typography>
+                    ))}
+                </React.Fragment>
+                {ready && (
                     <Box sx={{
-                        position: 'absolute',
                         display: 'flex',
-                        gap: 1, px: 2,
-                        justifySelf: 'flex-start'
+                        alignItems: 'center',
+                        gap: 1
                     }}>
-                        {['maximize', 'minimize', 'close'].map(variant => (
-                            <RibbonButton
-                                key={variant}
-                                variant={variant}
-                                sx={{ border: 1 }}
-                            />
-                        ))}
+                        <Typography variant='body1' sx={{ color: 'info.main' }}>{prompt.current}:~$</Typography>
+                        {/* Note - Uncontrolled Component to avoid typing logic */}
+                        <InputBase
+                            inputRef={inputField}
+                            onKeyUp={handleInput}
+                            onChange={handleInput}
+                            fullWidth
+                            sx={{ color: 'primary.main' }}
+                            inputProps={{ style: { padding: 0 } }}
+                        />
                     </Box>
-                    <Typography variant='h6' align='center' sx={{ width: 1 }}>Terminal</Typography>
-                </Box>
-                {/* Std Out */}
-                <Box
-                    sx={{
-                        height: 1,
-                        px: 2, py: 1,
-                        overflowY: 'scroll',
-                        backgroundColor: 'background.default',
-                        color: 'primary.main',
-                        zIndex: 1
-                    }}
-                    ref={outputBox}
-                >
-                    <React.Fragment>
-                        {output.map((text, idx) => (
-                            <Typography key={idx} component='div'>
-                                {text}
-                            </Typography>
-                        ))}
-                    </React.Fragment>
-                    {ready && (
-                        <Box sx={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: 1
-                        }}>
-                            <Typography variant='body1' sx={{ color: 'info.main' }}>{prompt.current}:~$</Typography>
-                            {/* Note - Uncontrolled Component to avoid typing logic */}
-                            <InputBase
-                                inputRef={inputField}
-                                onKeyUp={handleInput}
-                                onChange={handleInput}
-                                fullWidth
-                                sx={{ color: 'primary.main' }}
-                                inputProps={{ style: { padding: 0 } }}
-                            />
-                        </Box>
-                    )}
-                </Box>
+                )}
             </Box>
-        </ThemeProvider>
+        </Box>
     );
 }
 

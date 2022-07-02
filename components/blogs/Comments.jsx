@@ -1,39 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Giscus } from '@giscus/react';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import { useTheme } from '@mui/material/styles';
 //Configuration Data
 import config from '/giscus.config.js';
 
 function Comments() {
-    const [loaded, setLoaded] = useState(false);
-    useEffect(() => setLoaded(true), []);
+    const theme = useTheme();
 
     return (
-        <Box id='comments' sx={{
-            mt: 4,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: 2,
-            maxWidth: 'lg',
-            mx: 'auto'
-        }}>
-            {loaded && (
-                <React.Fragment>
-                    <Typography variant='h4' component='h4'>Comments</Typography>
-                    <Giscus
-                        repo={config.repo}
-                        repoId={config.repoId}
-                        category={config.category}
-                        categoryId={config.categoryId}
-                        mapping={config.mapping}
-                        reactionsEnabled={config.reactionsEnabled}
-                        emitMetadata={config.emitMetadata}
-                        theme={config.theme}
-                    />
-                </React.Fragment>
-            )}
+        <Box id='comments' sx={{ mt: 8, maxWidth: 'lg' }}>
+            <Typography variant='h3' component='h3'>Comments</Typography>
+            <Giscus {...(config(theme))} />
         </Box>
     );
 }

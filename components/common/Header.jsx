@@ -19,7 +19,7 @@ function Header({ children: title }) {
             backgroundSize: '16px 16px',
             mb: theme.spacing(4),
         }}>
-            <Typography>{title}</Typography>
+            <Typography variant='h1' component='h1'>{title}</Typography>
         </Box>
     );
 }

@@ -1,17 +1,16 @@
 import React from 'react';
 import IconButton from '@mui/material/IconButton';
 
-function BgIconButton({ children, sx, ...rest }) {
+function MenuButton({ children, sx, ...rest }) {
     return (
         <IconButton
             sx={{
                 borderRadius: '100%',
                 backgroundColor: 'primary.main',
-                color: 'text.primary',
+                color: 'primary.contrastText',
                 '&:hover': {
                     backgroundColor: 'primary.main'
                 },
-                boxShadow: 24,
                 ...sx
             }}
             {...rest}
@@ -21,4 +20,4 @@ function BgIconButton({ children, sx, ...rest }) {
     );
 }
 
-export default BgIconButton;
+export default MenuButton;

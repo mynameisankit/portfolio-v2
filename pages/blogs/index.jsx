@@ -77,7 +77,6 @@ function reducer(state, action) {
         return state;
 }
 
-//TODO: Implement Fuzzy Search
 function Blogs({ blogs, paginationSettings, fuzzySearchProps }) {
     const theme = useTheme();
 

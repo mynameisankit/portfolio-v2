@@ -1,4 +1,4 @@
-const globalStyles = {
+const globalStyles = (theme) => ({
     '::-webkit-scrollbar': {
         backgroundColor: 'transparent',
         width: 7
@@ -10,9 +10,12 @@ const globalStyles = {
     '::-webkit-scrollbar-thumb:hover': {
         background: '#555'
     },
-    'body': {
-        userSelect: 'none'
+    '::selection': {
+        color: theme.palette.mode === 'dark' ?
+            theme.palette.primary.contrastText : theme.palette.secondary.contrastText,
+        backgroundColor: theme.palette.mode === 'dark' ?
+            theme.palette.primary.main : theme.palette.secondary.main
     }
-};
+});
 
 export default globalStyles;

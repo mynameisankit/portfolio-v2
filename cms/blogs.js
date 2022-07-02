@@ -24,12 +24,6 @@ const blogs = {
             widget: 'text',
             required: false
         },
-        { 
-            label: 'Thumbnail', 
-            name: 'thumbail', 
-            widget: 'image',
-            required: false
-        },
         {
             label: 'Tags',
             name: 'tags',

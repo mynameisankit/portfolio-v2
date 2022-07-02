@@ -1,9 +1,9 @@
 import React from 'react';
 import Image from 'next/image';
 import Box from '@mui/material/Box';
-import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
+import Stack from '@mui/material/Stack';
 import { useTheme, alpha, styled } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 //Material-UI Icons
@@ -16,6 +16,7 @@ import Tooltip from '@/components/common/Tooltip';
 import Link from '@/components/common/Link';
 
 const LinkButton = styled(Link)(({ theme }) => ({
+    color: theme.palette.text.secondary,
     fontSize: 40,
     [theme.breakpoints.down('sm')]: {
         fontSize: 35
@@ -70,11 +71,11 @@ function Project({ children: data, direction }) {
                             width: 1,
                             zIndex: 1,
                             backgroundColor: alpha(theme.palette.primary.main, isSmall ? 0.85 : 0.5),
-                            transition: (theme) => theme.transitions.create(['background-color']),
+                            transition: theme.transitions.create(['background-color']),
                             backdropFilter: ['blur(2px)', null, 'none']
                         },
                         '&:hover::before': {
-                            backgroundColor: (theme) => alpha(theme.palette.primary.main, 0)
+                            backgroundColor: alpha(theme.palette.primary.main, 0)
                         }
                     }}>
                         <Image
@@ -95,11 +96,7 @@ function Project({ children: data, direction }) {
                 flexDirection: 'column',
                 justifyContent: 'center',
                 position: 'relative',
-                zIndex: 1,
-                transition: theme.transitions.create(['transform']),
-                '&:hover': {
-                    transform: [null, null, 'scale(1.03)']
-                }
+                zIndex: 1
             }}>
 
                 {/* Meta */}
@@ -132,12 +129,7 @@ function Project({ children: data, direction }) {
                     <Typography variant='body1' align={configuration.content.align}>
                         {data.abstract}
                     </Typography>
-                    <Box sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        mt: 1
-                    }}>
+                    <Stack direction='row' justifyContent='center' sx={{ mt: 1 }}>
                         {data.github && (
                             <LinkButton type='icon' href={data.github}>
                                 <GitHubIcon fontSize='large' />
@@ -148,29 +140,21 @@ function Project({ children: data, direction }) {
                                 <LinkIcon fontSize='large' />
                             </LinkButton>
                         )}
-                    </Box>
+                    </Stack>
                 </Box>
 
                 {/* Tech Stack */}
-                <Box sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: configuration.content.justifyContent,
-                    mt: 2,
-                }}>
+                <Stack
+                    direction='row'
+                    justifyContent={configuration.content.justifyContent}
+                    sx={{ mt: 2 }}
+                >
                     {data.techStack?.map(tech => (
-                        <Tooltip
-                            key={tech}
-                            title={tech}
-                            sx={{ mx: 1 }}
-                            componentProps={{
-                                arrow: { style: { color: 'common.black' } },
-                                tooltip: { style: { color: 'common.black' } }
-                            }}>
+                        <Tooltip key={tech} title={tech} sx={{ mx: 1 }}>
                             <ReactIcons sx={{ fontSize: [32, null, 40] }} icon={tech} />
                         </Tooltip>
                     ))}
-                </Box>
+                </Stack>
             </Box>
 
         </Box>

@@ -35,7 +35,8 @@ function Link({ children, sx, href, type, buttonProps, muiLinkProps, nextLinkPro
         };
     }
 
-    componentProps = { ...componentProps, sx };
+    if (sx)
+        componentProps = { ...componentProps, sx };
 
     if (!isAnchor)
         nextLinkProps = {

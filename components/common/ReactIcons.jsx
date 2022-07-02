@@ -5,6 +5,7 @@ import * as Ai from 'react-icons/ai';
 import * as Bs from 'react-icons/bs';
 import * as Si from 'react-icons/si';
 import * as Di from 'react-icons/di';
+import * as Gi from 'react-icons/gi';
 import * as Vsc from 'react-icons/vsc';
 import * as Io from 'react-icons/io';
 import * as Gr from 'react-icons/gr';
@@ -63,20 +64,23 @@ const IconsMapping = {
     'notion': Si.SiNotion,
     'discord': Si.SiDiscord,
     'wsl': Si.SiWindowsterminal,
-    'windowssystemforlinux': Si.SiWindowsterminal,
+    'windowssubsystemforlinux': Si.SiWindowsterminal,
     'yarn': Si.SiYarn,
     'nodejs': Gr.GrNode,
     'expressjs': Si.SiExpress,
     'pandas': Si.SiPandas,
     'numpy': Si.SiNumpy,
     'cpp': Si.SiCplusplus,
-    'html': Si.SiHtml5
+    'html': Si.SiHtml5,
+    'laptop': Bs.BsLaptop,
+    'book': Bi.BiBook,
+    'menu': Gi.GiHamburgerMenu
 };
 
 function ReactIcons({ icon, ...rest }) {
     const Component = IconsMapping[lowerCase(icon).replaceAll(/[- _\.]/g, '')];
-    if (Component) {
 
+    if (Component) {
         return (
             <SvgIcon
                 {...rest}

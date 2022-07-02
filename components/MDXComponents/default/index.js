@@ -22,7 +22,8 @@ const MDXComponents = {
     ),
     a: Link,
     img: Image,
-    pre: Pre
+    pre: Pre,
+    code: Pre
 };
 
 export default MDXComponents;

@@ -7,10 +7,10 @@ const SEO = {
         site_name: 'Ankit Kumar | Portfolio v2',
     },
     twitter: {
-        handle: '@handle',
+        handle: '@bizzare_kumar',
         site: '@site',
         cardType: 'summary_large_image',
-    },
+    }
 };
 
 export default SEO;

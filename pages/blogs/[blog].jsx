@@ -15,23 +15,23 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 //Custom Components
 import Section from '@/components/common/Section';
 import MDXLayoutRenderer from '@/components/MDXComponents/MDXLayoutRenderer';
 import Comments from '@/components/blogs/Comments';
 import Link from '@/components/common/Link';
+import SocialShare from '@/components/common/SocialShare';
 //Icons
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-
-//TODO: Implement different wrapper components
-//TODO: Implement different layout components
 
 function Blog({ mdxSource, frontMatter, toc }) {
     const [loaded, setLoaded] = useState(false);
     useEffect(() => setLoaded(true), []);
 
     const { title, abstract, tags, readingTime: { text: readingTime } } = frontMatter;
+
     let { date: unformattedDate } = frontMatter;
     const date = dayjs(unformattedDate);
 
@@ -66,25 +66,30 @@ function Blog({ mdxSource, frontMatter, toc }) {
                         </Typography>
                     )}
                 </Box>
+
                 <Grid container spacing={2}>
-                    <Grid item xs={6} sx={{
-                        display: 'flex',
-                        justifyContent: 'flex-start',
-                        flexWrap: 'wrap',
-                        gap: 1
-                    }}>
+                    <Grid
+                        item
+                        xs={12}
+                        md={4}
+                        component={Stack}
+                        flexWrap='wrap'
+                        gap={1}
+                        sx={{ justifyContent: ['center', null, 'flex-start'] }}
+                    >
                         {tags?.map(tag => (
                             <Chip key={tag} label={tag} color='primary' />
                         ))}
                     </Grid>
-                    <Grid item xs={6} sx={{
-                        display: 'flex',
-                        justifyContent: 'flex-end',
-                        flexWrap: 'wrap'
-                    }}>
-                        <Typography variant='h6' component='h6'>
-                            {readingTime}
-                        </Typography>
+                    <Grid item xs={6} md={4}>
+                        <SocialShare title={title} />
+                    </Grid>
+                    <Grid item xs={6} md={4}>
+                        <Stack direction='row-reverse' alignItems='center'>
+                            <Typography variant='h6' component='h6'>
+                                {readingTime}
+                            </Typography>
+                        </Stack>
                     </Grid>
                 </Grid>
                 <Divider sx={{ mt: 2, mb: 4 }} />
@@ -104,11 +109,7 @@ function Blog({ mdxSource, frontMatter, toc }) {
             {/* Footer */}
             <Section maxWidth='lg'>
                 <Divider sx={{ my: 2 }} />
-                <Box sx={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center'
-                }}>
+                <Stack direction='row' justifyContent='space-between'>
                     <Link href='/blogs' muiLinkProps={{ underline: 'none' }}>
                         <Button variant='text' startIcon={<ArrowBackIcon />}>
                             Go back to blogs
@@ -121,7 +122,7 @@ function Blog({ mdxSource, frontMatter, toc }) {
                     >
                         Go back to top
                     </Button>
-                </Box>
+                </Stack>
                 <Comments />
             </Section>
         </React.Fragment>

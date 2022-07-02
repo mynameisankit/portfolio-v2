@@ -4,6 +4,7 @@ import Colophon from '@/components/about/Colophon';
 import Education from '@/components/about/Education';
 import Tools from '@/components/about/Tools';
 import Technologies from '@/components/about/Technologies';
+import Journey from '@/components/about/Journey';
 
 function About() {
     return (
@@ -12,6 +13,7 @@ function About() {
             <Education />
             <Tools />
             <Technologies />
+            <Journey />
         </React.Fragment>
     );
 }

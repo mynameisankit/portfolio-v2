@@ -2,14 +2,15 @@ import React, { useState, useRef } from 'react';
 import Highlight, { defaultProps } from 'prism-react-renderer';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
-import { styled } from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
 //Material-UI Icons
 import FileCopyIcon from '@mui/icons-material/FileCopy';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 //Colors
 import { green } from '@mui/material/colors';
 //Highlighting Theme
-import theme from 'prism-react-renderer/themes/nightOwl';
+import nightOwl from 'prism-react-renderer/themes/nightOwl';
+import dracula from 'prism-react-renderer/themes/dracula';
 
 const Pre = styled('pre')(({ theme }) => ({
     textAlign: 'left',
@@ -39,11 +40,13 @@ const LineContent = styled('span')({
 });
 
 function HighlightedCode({ children: { className: language, children: code } }) {
+    const theme = useTheme();
+
     language = language.split('-')[1];
     code = code.trim();
 
     return (
-        <Highlight {...defaultProps} theme={theme} code={code} language={language}>
+        <Highlight {...defaultProps} theme={theme.palette.mode === 'dark' ? nightOwl : dracula} code={code} language={language}>
             {({ className, style, tokens, getLineProps, getTokenProps }) => (
                 <Pre className={className} style={style}>
                     {tokens.map((line, i) => (
@@ -62,19 +65,22 @@ function HighlightedCode({ children: { className: language, children: code } }) 
     );
 }
 
-function CodeBlock({ children: { props: code } }) {
+function CodeBlock({ children }) {
     const CodeBlock = useRef(null);
     const timerID = useRef(null);
     const [copied, setCopied] = useState(false);
     const [hovered, setHovered] = useState(false);
 
+    let code = null;
+    if (typeof children === 'string')
+        code = { className: 'language-text', children };
+    else
+        code = children.props;
+
     return (
         <Box
             ref={CodeBlock}
-            sx={{
-                position: 'relative',
-                my: 3
-            }}
+            sx={{ position: 'relative', my: 3 }}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => {
                 setHovered(false);

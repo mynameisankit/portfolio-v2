@@ -5,6 +5,7 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
+import Stack from '@mui/material/Stack';
 //Icons
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
@@ -57,18 +58,19 @@ function TableOfContents({ toc }) {
             p: 1,
             mb: { xs: 4, md: 0 }
         }}>
-            <Box sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                color: 'text.primary'
-            }}>
+            <Stack
+                direction='row'
+                alignItems='center'
+                justifyContent='space-between'
+                sx={{ color: 'text.primary' }}
+                gap={1}
+            >
                 <Typography variant='h5' component='h5'>Table Of Contents</Typography>
                 <IconButton sx={{ color: 'inherit' }} onClick={() => setOpen(!open)}>
                     {open ? <ExpandLess /> : <ExpandMore />}
                 </IconButton>
-            </Box>
-            <Divider light sx={{ mb: 2 }} />
+            </Stack>
+            <Divider light sx={{ mt: 1, mb: 2 }} />
             <Collapse in={open} timeout='auto' unmountOnExit>
                 <TableOfContentsItems toc={toc} />
             </Collapse>
