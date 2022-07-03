@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import Stack from '@mui/material/Stack';
+//Hooks
+import useColorModeValue from '@/hooks/useColorModeValue';
 //Custom Components
 import ReactIcons from '@/components/common/ReactIcons';
 import Link from '@/components/common/Link';
@@ -39,10 +41,8 @@ function SocialShare({ title, href }) {
                             href={href}
                             sx={{
                                 backgroundColor,
-                                color: theme => theme.palette.mode === 'dark' ?
-                                    'text.primary' : 'text.secondary'
-                            }}
-                        >
+                                color: useColorModeValue('text.primary', 'text.secondary')
+                            }}>
                             <ReactIcons icon={label} />
                         </Link>
                     );

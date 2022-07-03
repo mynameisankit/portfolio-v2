@@ -8,13 +8,15 @@ import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+//Hooks
+import useColorModeValue from '@/components/hooks/useColorModeValue';
 //Utility Imports
 import dayjs from 'dayjs';
 //Custom Components
 import ReactIcons from '@/components/common/ReactIcons';
 import Link from '@/components/common/Link';
 
-function Post({ title, subTitle, date, abstract, url, tags, flippedProps }) {
+function Post({ title, subTitle, date, abstract, url, tags }) {
     const theme = useTheme();
 
     const isSmall = useMediaQuery((theme) => theme.breakpoints.down('md'));
@@ -31,7 +33,7 @@ function Post({ title, subTitle, date, abstract, url, tags, flippedProps }) {
                 boxShadow: 0,
                 borderRadius: 0,
                 '&:hover': {
-                    backgroundColor: [null, null, theme.palette.mode === 'dark' ? 'secondary.dark' : 'secondary.light'],
+                    backgroundColor: [null, null, useColorModeValue('secondary.light', 'secondary.dark')],
                     transform: [null, null, `scale(1.02)`]
                 },
                 transition: theme.transitions.create(['transform', 'background-color'])

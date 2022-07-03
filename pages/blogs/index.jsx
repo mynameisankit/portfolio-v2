@@ -27,6 +27,11 @@ import Section from '@/components/common/Section';
 import Post from '@/components/blogs/Post';
 import SearchBox from '@/components/blogs/SearchBox';
 import Header from '@/components/common/Header';
+//Hooks
+import useColorModeValue from '@/components/hooks/useColorModeValue';
+//Image
+import DecorativeImageLightMode from '@/images/blogs-light.png';
+import DecorativeImageDarkMode from '@/images/blogs-dark.png';
 
 //Sort in-place by date
 function sortByDate(data, order) {
@@ -145,9 +150,11 @@ function Blogs({ blogs, paginationSettings, fuzzySearchProps }) {
 
     return (
         <React.Fragment>
-            <Header>Blogs</Header>
-            <Section id='blogs' minHeight maxWidth={false} sx={{ display: 'block', py: theme.spacing(3) }}>
+            <Header backgroundImage={useColorModeValue(DecorativeImageLightMode, DecorativeImageDarkMode)}>
+                Blogs
+            </Header>
 
+            <Section id='blogs' minHeight maxWidth={false} sx={{ display: 'block', py: theme.spacing(3) }}>
                 <Grid container spacing={4} direction={isSmall ? 'column-reverse' : 'row'}>
 
                     {/* All Posts */}
@@ -158,7 +165,9 @@ function Blogs({ blogs, paginationSettings, fuzzySearchProps }) {
                         {currPage.length ?
                             currPage : (
                                 <Box>
-                                    <Typography gutterBottom variant='h4'>No articles with the tag &quot;{category}&quot; found</Typography>
+                                    <Typography gutterBottom variant='h4'>
+                                        No articles with the tag &quot;{category}&quot; found
+                                    </Typography>
                                 </Box>
                             )}
                     </Grid>

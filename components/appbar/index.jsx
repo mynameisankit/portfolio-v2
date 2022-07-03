@@ -9,7 +9,6 @@ import Switch from '@mui/material/Switch';
 import { styled } from '@mui/material/styles';
 //Theme
 import ColorModeContext from '@/styles/theme/ColorModeContext';
-import getDesignTokens from '@/styles/theme/getDesignTokens';
 //Utility
 import getRoute from '@/lib/getRoute';
 import startCase from 'lodash/fp/startCase';
@@ -17,23 +16,19 @@ import startCase from 'lodash/fp/startCase';
 import Link from '@/components/common/Link';
 import MenuButton from '@/components/appbar/MenuButton';
 import ReactIcons from '@/components/common/ReactIcons';
+//Hooks
+import useColorMode from '@/hooks/useColorMode';
 //Icons
 import CloseIcon from '@mui/icons-material/Close';
 
-const ModeSwitch = styled(Switch)({
+const ModeSwitch = styled(Switch)(({ theme }) => ({
     '& .MuiSwitch-thumb': {
-        backgroundColor: getDesignTokens('light').palette.primary.main
+        backgroundColor: theme.palette.primary.main
     },
-    '& .Mui-checked .MuiSwitch-thumb': {
-        backgroundColor: getDesignTokens('dark').palette.primary.main
-    },
-    '& .MuiSwitch-thumb': {
-        backgroundColor: getDesignTokens('light').palette.primary.dark
-    },
-    '& .Mui-checked  .MuiSwitch-thumb': {
-        backgroundColor: getDesignTokens('light').palette.primary.dark
+    '& .MuiSwitch-track': {
+        backgroundColor: theme.palette.primary.light
     }
-});
+}));
 
 function AppBar({ children: routes }) {
     const colorMode = useContext(ColorModeContext);
@@ -88,8 +83,7 @@ function AppBar({ children: routes }) {
                 onClose={() => setOpen(false)}
                 onOpen={() => setOpen(true)}
                 disableBackdropTransition={!iOS.current}
-                disableDiscovery={iOS.current}
-            >
+                disableDiscovery={iOS.current}>
                 <Box sx={{
                     display: 'flex',
                     flexDirection: 'column',
@@ -105,7 +99,10 @@ function AppBar({ children: routes }) {
                         left: (theme) => theme.spacing(2),
                         top: (theme) => theme.spacing(2),
                     }}>
-                        <ModeSwitch onChange={() => colorMode.toggleColorMode()} />
+                        <ModeSwitch
+                            onChange={() => colorMode.toggleColorMode()}
+                            checked={useColorMode()}
+                        />
                     </Box>
 
                     {/* Menu Close Button */}

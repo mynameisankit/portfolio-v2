@@ -13,11 +13,12 @@ import { styled, useTheme } from '@mui/material/styles';
 import { useForm, Controller } from 'react-hook-form';
 import emailjs from '@emailjs/browser';
 import camelCase from 'lodash/fp/camelCase';
+//Hooks
+import useColorModeValue from '@/hooks/useColorModeValue';
 //Custom Components
 import Section from '@/components/common/Section';
 //Image
-import DecorationDark from '@/images/contact-dark.jpg';
-import DecorationLight from '@/images/contact-light.jpg';
+import DecorativeImage from '@/images/contact.jpg';
 //Material-UI Icons
 import SendIcon from '@mui/icons-material/Send';
 
@@ -25,7 +26,7 @@ const TextField = styled(MuiTextField)(({ theme }) => ({
     '& label': {
         color: theme.palette.text.primary
     },
-    ...(theme.palette.mode === 'dark' && {
+    ...useColorModeValue({}, {
         '& .MuiFilledInput-root': {
             backgroundColor: theme.palette.secondary.light,
             borderRadius: '4px 4px 0 0',
@@ -137,17 +138,17 @@ function Contact() {
     return (
         <Section id='contact' maxWidth='md' minHeight>
             <Paper
-                elevation={theme.palette.mode === 'dark' ? 0 : 8}
+                elevation={useColorModeValue(8, 0)}
                 sx={{
                     display: 'flex',
-                    backgroundColor: theme.palette.mode === 'dark' ? 'secondary.main' : 'transparent',
-                    border: `1px solid ${theme.palette.mode === 'dark' ? 'none' : theme.palette.primary.main}`,
+                    backgroundColor: useColorModeValue('transparent', 'secondary.main'),
+                    border: `1px solid ${useColorModeValue(theme.palette.primary.main, 'none')}`,
                     borderRadius: 1,
                     color: 'text.primary'
                 }}>
                 <Box sx={{
                     py: 3, px: 4,
-                    width: { xs: 1, md: theme.palette.mode === 'dark' ? 0.7 : 1 }
+                    width: { xs: 1, md: useColorModeValue(1, 0.7) }
                 }}>
                     <Typography gutterBottom variant='h3'>Get In Touch ✉️</Typography>
                     <Typography variant='body1'>
@@ -257,32 +258,27 @@ function Contact() {
                         {isSubmitting && <CircularProgress color='primary' />}
                     </Box>
                 </Box>
-                {theme.palette.mode === 'dark' && (
-                    <Box sx={{
-                        position: 'relative',
-                        width: { xs: 0, md: 0.3 },
-                        '&::before': {
-                            content: '""',
-                            position: 'absolute',
-                            top: 0, left: 0,
-                            zIndex: 1,
-                            height: 1, width: 1,
-                            backgroundColor: 'rgba(0, 0, 0, 0.6)'
-                        },
-                    }}>
-                        <Image
-                            priority
-                            src={
-                                theme.palette.mode === 'dark' ?
-                                    DecorationDark :
-                                    DecorationLight
-                            }
-                            layout='fill'
-                            objectFit='cover'
-                            alt=""
-                        />
-                    </Box>
-                )}
+                <Box sx={{
+                    display: useColorModeValue('none', 'dark'),
+                    position: 'relative',
+                    width: { xs: 0, md: 0.3 },
+                    '&::before': {
+                        content: '""',
+                        position: 'absolute',
+                        top: 0, left: 0,
+                        zIndex: 1,
+                        height: 1, width: 1,
+                        backgroundColor: 'rgba(0, 0, 0, 0.6)'
+                    }
+                }}>
+                    <Image
+                        priority
+                        src={DecorativeImage}
+                        layout='fill'
+                        objectFit='cover'
+                        alt="Contact"
+                    />
+                </Box>
             </Paper>
 
             {/* Alerts */}

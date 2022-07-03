@@ -6,6 +6,8 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import { useTheme, alpha } from '@mui/material/styles';
+//Hooks
+import useColorModeValue from '@/components/hooks/useColorModeValue';
 //Custom Components
 import Link from '@/components/common/Link';
 //Icons
@@ -49,12 +51,10 @@ function SearchBox({ fuzzySearch }) {
                 color='secondary'
                 sx={{
                     '& label': {
-                        color: theme.palette.mode === 'dark' ?
-                            'text.secondary' : 'text.primary'
+                        color: useColorModeValue('text.primary', 'text.secondary')
                     },
                     '& .MuiFilledInput-root': {
-                        color: theme.palette.mode === 'dark' ?
-                            'text.secondary' : 'text.primary'
+                        color: useColorModeValue('text.primary', 'text.secondary')
                     }
                 }}
             />
@@ -71,8 +71,7 @@ function SearchBox({ fuzzySearch }) {
                             muiLinkProps={{ underline: 'none' }}
                             sx={{
                                 p: 2,
-                                color: theme.palette.mode === 'dark' ?
-                                    'text.secondary' : 'text.primary',
+                                color: useColorModeValue('text.primary', 'text.secondary'),
                                 backgroundColor: !idx && alpha(theme.palette.primary.light, 0.75),
                                 transition: theme.transitions.create(['background-color']),
                                 '&:hover': {

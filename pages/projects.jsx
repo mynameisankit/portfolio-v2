@@ -8,13 +8,20 @@ import { useTheme } from '@mui/material/styles';
 import Featured from '@/components/projects/Featured';
 import Projects from '@/components/projects/Projects';
 import Header from '@/components/common/Header';
+//Hooks
+import useColorModeValue from '@/components/hooks/useColorModeValue';
+//Image
+import DecorativeImageLightMode from '@/images/projects-light.png';
+import DecorativeImageDarkMode from '@/images/projects-dark.png';
 
 function ProjectsPage({ featured, projects }) {
     const theme = useTheme();
 
     return (
         <React.Fragment>
-            <Header>Projects</Header>
+            <Header backgroundImage={useColorModeValue(DecorativeImageLightMode, DecorativeImageDarkMode)}>
+                Projects
+            </Header>
             <Featured>
                 {featured}
             </Featured>

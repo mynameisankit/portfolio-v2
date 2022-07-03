@@ -1,26 +1,55 @@
 import React from 'react';
+import Image from 'next/image';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { useTheme } from '@mui/material/styles';
 
-function Header({ children: title }) {
-    const theme = useTheme();
-
+function Header({ children: title, backgroundImage }) {
     return (
         <Box sx={{
-            minHeight: {
-                xs: 300,
-                md: 500
-            },
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            background: `linear-gradient(90deg, ${theme.palette.background.default} 14px, transparent 1%) 50%, linear-gradient(${theme.palette.background.default} 14px, transparent 1%) 50%, ${theme.palette.secondary.main}`,
-            backgroundSize: '16px 16px',
-            mb: theme.spacing(4),
+            position: 'relative',
+            minHeight: [300, null, 500],
+            mb: 4
         }}>
-            <Typography variant='h1' component='h1'>{title}</Typography>
-        </Box>
+            {backgroundImage && (
+                <Box sx={{
+                    position: 'absolute',
+                    height: '140%', width: 1,
+                    zIndex: -1, top: -100,
+                    '&::before': {
+                        content: "''",
+                        position: 'absolute',
+                        height: 1, width: 1, zIndex: 1,
+                        background: theme => `linear-gradient(rgba(0, 0, 0, 0) 0%, ${theme.palette.background.default})`
+                    }
+                }}>
+                    <Box sx={{ position: 'relative', width: 1, height: 1 }}>
+                        <Image
+                            src={backgroundImage}
+                            layout='fill'
+                            objectFit='cover'
+                            alt="Blogs"
+                            priority
+                        />
+                    </Box>
+                </Box>
+            )}
+            <Box sx={{
+                position: 'absolute',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: 1, width: 1
+            }}>
+                <Typography
+                    variant='h1'
+                    component='h1'
+                    sx={{ textShadow: theme => `4px 4px ${theme.palette.primary.main}` }}
+                >
+                    {title}
+                </Typography>
+            </Box>
+        </Box >
     );
 }
 

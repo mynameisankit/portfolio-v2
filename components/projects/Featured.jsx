@@ -14,6 +14,8 @@ import Section from '@/components/common/Section';
 import ReactIcons from '@/components/common/ReactIcons';
 import Tooltip from '@/components/common/Tooltip';
 import Link from '@/components/common/Link';
+//Hooks
+import useColorModeValue from '@/hooks/useColorModeValue';
 
 const LinkButton = styled(Link)(({ theme }) => ({
     color: theme.palette.text.secondary,
@@ -67,10 +69,14 @@ function Project({ children: data, direction }) {
                         '&::before': {
                             content: "''",
                             position: 'absolute',
-                            height: '100%',
-                            width: 1,
+                            height: 1, width: 1,
                             zIndex: 1,
-                            backgroundColor: alpha(theme.palette.primary.main, isSmall ? 0.85 : 0.5),
+                            backgroundColor: alpha(
+                                theme.palette.primary.main,
+                                isSmall ?
+                                    0.85
+                                    : useColorModeValue(0.2, 0.5)
+                            ),
                             transition: theme.transitions.create(['background-color']),
                             backdropFilter: ['blur(2px)', null, 'none']
                         },
@@ -87,27 +93,28 @@ function Project({ children: data, direction }) {
                         />
                     </Box>
                 </Link>
-            </Box>
+            </Box >
 
             {/* Content */}
-            <Box sx={{
+            < Box sx={{
                 gridArea: configuration.content.gridArea,
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
                 position: 'relative',
                 zIndex: 1
-            }}>
+            }
+            }>
 
                 {/* Meta */}
-                <Typography
+                < Typography
                     variant='h6'
                     sx={{ mt: isSmall && 1 }}
                     gutterBottom
                     align={configuration.content.align}
                 >
                     Featured Project
-                </Typography>
+                </Typography >
                 <Typography
                     variant='h4'
                     sx={{ fontSize: isSmall && 23 }}
@@ -155,9 +162,9 @@ function Project({ children: data, direction }) {
                         </Tooltip>
                     ))}
                 </Stack>
-            </Box>
+            </Box >
 
-        </Box>
+        </Box >
     );
 }
 
@@ -168,7 +175,6 @@ function Featured(props) {
         <Section
             id='featured'
             maxWidth='lg'
-            heading="Some Things I've Built"
             gutterBottom={8}
         >
             <Grid container spacing={5}>
