@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { pdfjs } from 'react-pdf';
 // import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+// import 'react-pdf/dist/esm/Page/TextLayer.css';
 import { Document, Page } from 'react-pdf/dist/esm/entry.webpack5';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
