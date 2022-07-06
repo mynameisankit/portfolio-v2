@@ -1,29 +1,24 @@
-//Server Side Props
-import path from 'path';
-import getFiles from '@/lib/getFiles';
-//Client Side Props
 import React from 'react';
 //Custom Components
+import Header from '@/components/common/Header';
 import Section from '@/components/common/Section';
 import PdfViewer from '@/components/common/PdfViewer';
+import useColorModeValue from '@/components/hooks/useColorModeValue';
+//Image
+import DecorativeImageLightMode from '@/images/resume-light.jpg';
+import DecorativeImageDarkMode from '@/images/resume-dark.jpg';
 
-function Resume({ file }) {
+function Resume() {
     return (
-        <Section id='resume' maxWidth='lg'>
-            <PdfViewer file={file} />
-        </Section>
+        <React.Fragment>
+            <Header backgroundImage={useColorModeValue(DecorativeImageLightMode, DecorativeImageDarkMode)}>
+                My Resume
+            </Header>
+            <Section id='resume' maxWidth='lg'>
+                <PdfViewer data='resume.pdf' pagination />
+            </Section>
+        </React.Fragment>
     );
-}
-
-export async function getStaticProps() {
-    const CWD = process.cwd();
-    const file = getFiles(path.join(CWD, '/public/resume.pdf'), 'latin1');
-
-    return {
-        props: {
-            file
-        }
-    };
 }
 
 export default Resume;

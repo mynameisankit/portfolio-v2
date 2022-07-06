@@ -18,6 +18,9 @@ import Footer from '@/components/footer';
 import globalStyles from '@/styles/global';
 import 'cal-sans';
 import 'katex/dist/katex.css';
+//PDF (Note - Workaround for now)
+import '@/styles/react-pdf/TextLayer.css';
+import '@/styles/react-pdf/AnnotationLayer.css';
 //Theme
 import createTheme from '@/styles/theme/createTheme';
 import ColorModeContext from '@/styles/theme/ColorModeContext';
