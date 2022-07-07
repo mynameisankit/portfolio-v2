@@ -19,6 +19,12 @@ const blogs = {
             required: false
         },
         { 
+            label: 'Thumbnail', 
+            name: 'thumbnail', 
+            widget: 'image',
+            required: false
+        },
+        { 
             label: 'Abstract', 
             name: 'abstract', 
             widget: 'text',

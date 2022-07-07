@@ -26,7 +26,7 @@ function Section({ heading, caption, subtitle, children, maxWidth, minHeight, gu
                 justifyContent: 'center',
                 alignItems: 'center',
                 minHeight,
-                mb: theme.spacing(gutterBottom ? gutterBottom : 0),
+                mb: gutterBottom ? gutterBottom : 0,
                 ...sx
             }}
             {...rest}

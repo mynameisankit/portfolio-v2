@@ -17,6 +17,7 @@ import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 //Custom Components
+import Header from '@/components/common/Header';
 import Section from '@/components/common/Section';
 import MDXLayoutRenderer from '@/components/MDXComponents/MDXLayoutRenderer';
 import Comments from '@/components/blogs/Comments';
@@ -30,7 +31,7 @@ function Blog({ mdxSource, frontMatter, toc }) {
     const [loaded, setLoaded] = useState(false);
     useEffect(() => setLoaded(true), []);
 
-    const { title, abstract, tags, readingTime: { text: readingTime } } = frontMatter;
+    const { title, thumbnail, abstract, tags, readingTime: { text: readingTime } } = frontMatter;
 
     let { date: unformattedDate } = frontMatter;
     const date = dayjs(unformattedDate);
@@ -49,17 +50,25 @@ function Blog({ mdxSource, frontMatter, toc }) {
                 description={abstract}
             />
 
+            {thumbnail && (
+                <Header
+                    title={title}
+                    backgroundImage={`/${thumbnail}`}
+                />
+            )}
+
             {/* Meta-Data */}
             <Section id='meta' maxWidth='lg'>
+
                 <Box sx={{
                     py: 2,
                     px: { xs: 2, md: 0 },
                     textAlign: 'center'
                 }}>
+                    {!thumbnail && <Typography gutterBottom variant='h2' component='h1'>{title}</Typography>}
                     <Typography gutterBottom variant='subtitle1' component='h6'>
                         Published {loaded && `${diff[0]} ${diff[1]}`} ago on {date.format('DD MMMM YYYY')}
                     </Typography>
-                    <Typography gutterBottom variant='h2' component='h1'>{title}</Typography>
                     {abstract && (
                         <Typography paragraph variant='body1' gutterBottom align='justify'>
                             {abstract}

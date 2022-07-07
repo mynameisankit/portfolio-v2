@@ -1,7 +1,6 @@
 import React from 'react';
 import { useAudio } from 'react-use';
 import IconButton from '@mui/material/IconButton';
-import Box from '@mui/material/Box';
 //Material-UI Icons
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import StopCircleIcon from '@mui/icons-material/StopCircle';
@@ -25,7 +24,7 @@ function HeroPlay() {
     const Icon = playing ? StopCircleIcon : PlayCircleIcon;
 
     return (
-        <Box>
+        <React.Fragment>
             {audio}
             <IconButton
                 aria-label='Play Introduction Track'
@@ -36,7 +35,7 @@ function HeroPlay() {
             >
                 <Icon />
             </IconButton>
-        </Box>
+        </React.Fragment>
     );
 }
 

@@ -73,9 +73,9 @@ function App({ Component, emotionCache = clientSideEmotionCache, pageProps }) {
 
                     {/* Navbar */}
                     {route !== 'admin' && (
-                        <AppBar>
-                            {['about', 'projects', 'blogs']}
-                        </AppBar>
+                        <AppBar
+                            routes={['about', 'projects', 'blogs', { name: 'resume', type: 'button' }]}
+                        />
                     )}
 
                     {/* SEO and Page */}
@@ -90,7 +90,7 @@ function App({ Component, emotionCache = clientSideEmotionCache, pageProps }) {
 
                 </ThemeProvider>
             </ColorModeContext.Provider>
-        </CacheProvider>
+        </CacheProvider >
     );
 }
 

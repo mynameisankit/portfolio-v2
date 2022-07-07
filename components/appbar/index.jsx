@@ -55,7 +55,9 @@ const ModeSwitch = styled(Switch)(({ theme }) => ({
     }
 }));
 
-function AppBar({ children: routes }) {
+function AppBar(props) {
+    const routes = props.routes || props.children;
+
     const colorMode = useContext(ColorModeContext);
     const theme = useTheme();
     const router = useRouter();
@@ -90,8 +92,7 @@ function AppBar({ children: routes }) {
 
             <MuiAppBar color='transparent' sx={{
                 boxShadow: 0,
-                pt: [1, 0],
-                background: `linear-gradient(${alpha(theme.palette.background.default, 0.7)} 0%, rgba(0, 0, 0, 0)) 68%`
+                pt: [1, 0]
             }}>
                 <Toolbar
                     component={Stack}
@@ -154,15 +155,16 @@ function AppBar({ children: routes }) {
                     {/* Menu */}
                     <Stack alignItems='center' gap={2}>
                         {['Home', ...routes].map(route => {
-                            let url, name;
+                            let url, name, type = 'link';
 
                             if (route === 'Home') {
                                 url = '/';
                                 name = 'Home';
                             }
                             else if (route instanceof Object) {
-                                url = route.url;
+                                url = route.url || `/${route.name}`;
                                 name = route.name;
+                                type = route.type || type;
                             }
                             else {
                                 url = `/${route}`;
@@ -173,7 +175,13 @@ function AppBar({ children: routes }) {
                                 <Link
                                     key={url}
                                     href={url}
-                                    muiLinkProps={{
+                                    type={type}
+                                    buttonProps={type === 'button' && {
+                                        variant: 'outlined',
+                                        color: currentRoute === route.name ? 'primary' : 'secondary',
+                                        sx: { textTransform: 'none' }
+                                    }}
+                                    muiLinkProps={type === 'link' && {
                                         underline: 'none',
                                         color: currentRoute === route ?
                                             'primary.main' :

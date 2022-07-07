@@ -90,7 +90,7 @@ function PdfViewer({ data, pagination = false }) {
                     <Page
                         pageNumber={pageNumber}
                         renderForms={false}
-                        renderMode='svg'
+                        renderMode='canvas'
                         rotate={0}
                         scale={scale}
                     />
