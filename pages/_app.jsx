@@ -1,5 +1,5 @@
 //Client-side imports
-import React, { useState, useMemo, useEffect, useRef } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { DefaultSeo } from 'next-seo';
 import GlobalStyles from '@mui/material/GlobalStyles';
@@ -23,7 +23,7 @@ import '@/styles/react-pdf/TextLayer.css';
 import '@/styles/react-pdf/AnnotationLayer.css';
 //Theme
 import createTheme from '@/styles/theme/createTheme';
-import ColorModeContext from '@/styles/theme/ColorModeContext';
+import ColorModeContext from '@/styles/theme/colorModeContext';
 //SEO 
 import SEO from '@/next-seo.config';
 
