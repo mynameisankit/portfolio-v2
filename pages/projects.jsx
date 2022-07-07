@@ -19,9 +19,10 @@ function ProjectsPage({ featured, projects }) {
 
     return (
         <React.Fragment>
-            <Header backgroundImage={useColorModeValue(DecorativeImageLightMode, DecorativeImageDarkMode)}>
-                Projects
-            </Header>
+            <Header
+                title='Projects'
+                backgroundImage={useColorModeValue(DecorativeImageLightMode, DecorativeImageDarkMode)}
+            />
             <Featured>
                 {featured}
             </Featured>

@@ -93,31 +93,30 @@ function Project({ children: data, direction }) {
                         />
                     </Box>
                 </Link>
-            </Box >
+            </Box>
 
             {/* Content */}
-            < Box sx={{
-                gridArea: configuration.content.gridArea,
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                position: 'relative',
-                zIndex: 1
-            }
-            }>
+            <Stack
+                justifyContent='center'
+                sx={{
+                    gridArea: configuration.content.gridArea,
+                    position: 'relative',
+                    zIndex: 1
+                }}>
 
                 {/* Meta */}
-                < Typography
+                <Typography
                     variant='h6'
-                    sx={{ mt: isSmall && 1 }}
+                    sx={{ mt: isSmall && 1, color: isSmall ? 'text.secondary' : 'text.primary' }}
                     gutterBottom
                     align={configuration.content.align}
                 >
                     Featured Project
-                </Typography >
+                </Typography>
+
                 <Typography
                     variant='h4'
-                    sx={{ fontSize: isSmall && 23 }}
+                    sx={{ fontSize: isSmall && 23, color: isSmall ? 'text.secondary' : 'text.primary' }}
                     align={configuration.content.align}
                     gutterBottom
                 >
@@ -154,7 +153,7 @@ function Project({ children: data, direction }) {
                 <Stack
                     direction='row'
                     justifyContent={configuration.content.justifyContent}
-                    sx={{ mt: 2 }}
+                    sx={{ mt: 2, color: isSmall ? 'text.secondary' : 'text.primary' }}
                 >
                     {data.techStack?.map(tech => (
                         <Tooltip key={tech} title={tech} sx={{ mx: 1 }}>
@@ -162,15 +161,13 @@ function Project({ children: data, direction }) {
                         </Tooltip>
                     ))}
                 </Stack>
-            </Box >
+            </Stack>
 
-        </Box >
+        </Box>
     );
 }
 
-function Featured(props) {
-    const { children: data } = props;
-
+function Featured({ children: data }) {
     return (
         <Section
             id='featured'

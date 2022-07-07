@@ -2,13 +2,13 @@ import { red } from '@mui/material/colors';
 
 const darkPalette = {
     primary: {
-        main: '#B794F4',
+        main: '#B794F4'
     },
     secondary: {
-        main: '#2D3748',
+        main: '#2D3748'
     },
     error: {
-        main: red[500],
+        main: red[500]
     },
     background: {
         default: '#1A202C',

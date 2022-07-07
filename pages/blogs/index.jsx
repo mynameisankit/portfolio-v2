@@ -133,129 +133,115 @@ function Blogs({ blogs, paginationSettings, fuzzySearchProps }) {
         setCurrBlogs(newBlogs);
     }, [category, order, blogs]);
 
-    // Current Blogs
-    const currPage = [];
-    for (let i = ((page - 1) * rows); i < Math.min(currBlogs.length, page * rows); i++) {
-        const blog = currBlogs[i];
-        currPage.push(...[
-            <Post key={blog.title} {...blog} />,
-            <Divider component='div' key={i} sx={{
-                color: theme.palette.text.primary
-            }} />
-        ]);
-    }
-    currPage.pop();
-
     const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
 
     return (
         <React.Fragment>
-            <Header backgroundImage={useColorModeValue(DecorativeImageLightMode, DecorativeImageDarkMode)}>
-                Blogs
-            </Header>
+            <Header
+                title='Blogs'
+                backgroundImage={useColorModeValue(DecorativeImageLightMode, DecorativeImageDarkMode)}
+            />
 
-            <Section id='blogs' minHeight maxWidth={false} sx={{ display: 'block', py: theme.spacing(3) }}>
+            <Section id='blogs' minHeight={false} maxWidth={false} sx={{ pt: 3 }}>
                 <Grid container spacing={4} direction={isSmall ? 'column-reverse' : 'row'}>
 
                     {/* All Posts */}
-                    <Grid item xs={12} md={8} sx={{
-                        display: 'flex',
-                        flexDirection: 'column'
-                    }}>
-                        {currPage.length ?
-                            currPage : (
-                                <Box>
+                    <Grid
+                        item
+                        xs={12} md={8}
+                        divider={
+                            <Divider component='div' sx={{
+                                color: 'text.primary'
+                            }} />
+                        }>
+                        <Stack>
+                            {currBlogs.length
+                                ? (
+                                    currBlogs
+                                        .slice((page - 1) * rows, Math.min(currBlogs.length, page * rows))
+                                        .map(post => (
+                                            <Post key={post.title} {...post} />
+                                        ))
+                                ) : (
                                     <Typography gutterBottom variant='h4'>
                                         No articles with the tag &quot;{category}&quot; found
                                     </Typography>
-                                </Box>
-                            )}
+                                )}
+                        </Stack>
                     </Grid>
 
                     {/* Filters */}
-                    <Grid item xs={12} md={4} sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: theme.spacing(4),
-                        px: theme.spacing(2)
-                    }}>
+                    <Grid item xs={12} md={4} sx={{ px: 2 }}>
+                        <Stack gap={4}>
+                            <SearchBox fuzzySearch={fuzzySearch.current} />
 
-                        <SearchBox fuzzySearch={fuzzySearch.current} />
+                            {/* Tags */}
+                            <Box>
+                                <LabeledIcon icon={DragIndicatorIcon}>Tags</LabeledIcon>
+                                <Stack gap={2} flexWrap='wrap' direction='row'>
+                                    {Object.entries(tags.current).concat([['All']]).map(tag => {
+                                        const curr = tag[0];
 
-                        {/* Tags */}
-                        <Box>
-                            <LabeledIcon icon={DragIndicatorIcon}>Tags</LabeledIcon>
-                            <Box sx={{
-                                display: 'flex',
-                                gap: 2,
-                                flexWrap: 'wrap',
-                            }}>
-                                {Object.entries(tags.current).concat([['All']]).map(tag => {
-                                    const curr = tag[0];
-
-                                    return (
-                                        <Button
-                                            key={curr}
-                                            variant='contained'
-                                            startIcon={<ReactIcons icon={curr} />}
-                                            disabled={curr === category}
-                                            disableElevation
-                                            sx={{
-                                                '&.Mui-disabled': {
-                                                    color: 'text.primary',
-                                                    backgroundColor: 'secondary.light'
-                                                }
-                                            }}
-                                            onClick={() => dispatch({
-                                                type: 'button',
-                                                field: 'category',
-                                                payload: curr
-                                            })}>
-                                            {curr}
-                                        </Button>
-                                    );
-                                })}
-                            </Box>
-                        </Box>
-
-                        {/* Order Switch */}
-                        <Box>
-                            <LabeledIcon icon={SortIcon}>Sort</LabeledIcon>
-                            <Stack direction='row' spacing={1} alignItems='center'>
-                                <Typography>Newest</Typography>
-                                <Switch
-                                    sx={{
-                                        '.MuiSwitch-thumb': {
-                                            backgroundColor: order === 'newest' ?
-                                                theme.palette.primary.main :
-                                                theme.palette.secondary.main
-                                        },
-                                        '.MuiSwitch-track': {
-                                            backgroundColor: order === 'newest' ?
-                                                theme.palette.primary.main :
-                                                theme.palette.secondary.main
-                                        }
-                                    }}
-                                    checked={order === 'newest'}
-                                    onChange={event => dispatch({
-                                        type: 'switch',
-                                        field: 'sort',
-                                        payload: event.target.checked
+                                        return (
+                                            <Button
+                                                key={curr}
+                                                variant='contained'
+                                                startIcon={<ReactIcons icon={curr} />}
+                                                disabled={curr === category}
+                                                disableElevation
+                                                sx={{
+                                                    '&.Mui-disabled': {
+                                                        color: 'text.primary',
+                                                        backgroundColor: 'secondary.light'
+                                                    }
+                                                }}
+                                                onClick={() => dispatch({
+                                                    type: 'button',
+                                                    field: 'category',
+                                                    payload: curr
+                                                })}>
+                                                {curr}
+                                            </Button>
+                                        );
                                     })}
-                                />
-                                <Typography>Oldest</Typography>
-                            </Stack>
-                        </Box>
+                                </Stack>
+                            </Box>
 
+                            {/* Order Switch */}
+                            <Box>
+                                <LabeledIcon icon={SortIcon}>Sort</LabeledIcon>
+                                <Stack direction='row' spacing={1} alignItems='center'>
+                                    <Typography>Newest</Typography>
+                                    <Switch
+                                        sx={{
+                                            '.MuiSwitch-thumb': {
+                                                backgroundColor: order === 'newest' ?
+                                                    theme.palette.primary.main :
+                                                    theme.palette.secondary.main
+                                            },
+                                            '.MuiSwitch-track': {
+                                                backgroundColor: order === 'newest' ?
+                                                    theme.palette.primary.main :
+                                                    theme.palette.secondary.main
+                                            }
+                                        }}
+                                        checked={order === 'newest'}
+                                        onChange={event => dispatch({
+                                            type: 'switch',
+                                            field: 'sort',
+                                            payload: event.target.checked
+                                        })}
+                                    />
+                                    <Typography>Oldest</Typography>
+                                </Stack>
+                            </Box>
+
+                        </Stack>
                     </Grid>
                 </Grid>
 
                 {/* Pagination */}
-                <Box sx={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    pt: 3
-                }}>
+                <Stack direction='row' justifyContent='center' sx={{ pt: 3 }}>
                     <Pagination
                         count={Math.ceil(blogs ? blogs.length / paginationSettings.maxRows : 0)}
                         color='primary'
@@ -269,7 +255,7 @@ function Blogs({ blogs, paginationSettings, fuzzySearchProps }) {
                         })}
                         page={page}
                     />
-                </Box>
+                </Stack>
             </Section>
         </React.Fragment>
     );

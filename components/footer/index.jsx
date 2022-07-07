@@ -1,5 +1,6 @@
 import React from 'react';
 import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 //Custom Components
@@ -9,65 +10,41 @@ import ReactIcons from '@/components/common/ReactIcons';
 //Data
 import Links from '@/data/links.json';
 
-function FlexBox({ children, sx, ...rest }) {
-    return (
-        <Box
-            sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                gap: 1,
-                ...sx
-            }}
-            {...rest}
-        >
-            {children}
-        </Box>
-    );
-}
-
 function Footer() {
     return (
-        <Section id='footer' sx={{ mt: 4, mb: 2 }} minHeight={false} maxWidth={false}>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <FlexBox>
-                    <Typography variant='subtitle1'>Built With : </Typography>
+        <Section id='footer' minHeight={false} maxWidth={false}>
+            <Box sx={{
+                mt: 6, mb: 1,
+                display: 'flex',
+                flexDirection: ['column-reverse', null, 'row'],
+                justifyContent: 'space-between',
+                alignItems: 'center'
+            }}>
+
+                {/* Tech Stack */}
+                <Stack direction='row' alignItems='center'>
+                    <Typography variant='h6'>Built Using</Typography>
                     {[
                         { tech: 'Next.js', url: 'https://nextjs.org/' },
                         { tech: 'Material-UI', url: 'https://mui.com/' },
                         { tech: 'MDX', url: 'https://mdxjs.com/' },
                         { tech: 'NetlifyCMS', url: 'https://www.netlifycms.org/' }
-                    ].map(({ tech, url }, idx, arr) => (
-                        <React.Fragment key={tech}>
-                            <Link
-                                href={url}
-                                type='icon'
-                                buttonProps={{
-                                    size: 'medium'
-                                }}
-                            >
-                                <ReactIcons icon={tech} />
-                            </Link>
-                            {(idx + 1 != arr.length) && <Divider orientation='vertical' flexItem />}
-                        </React.Fragment>
+                    ].map(({ tech, url }) => (
+                        <Link key={tech} href={url} type='icon' buttonProps={{ size: 'large' }} >
+                            <ReactIcons icon={tech} />
+                        </Link>
                     ))}
-                </FlexBox>
-                <FlexBox>
-                    {Object.entries(Links).map(([platform, platformURL], idx, arr) => (
-                        <React.Fragment key={platform}>
-                            <Link
-                                href={platformURL}
-                                type='icon'
-                                buttonProps={{
-                                    size: 'medium'
-                                }}
-                            >
-                                <ReactIcons icon={platform} />
-                            </Link>
-                            {(idx + 1 != arr.length) && <Divider orientation='vertical' flexItem />}
-                        </React.Fragment>
+                </Stack>
+
+                {/* Social Media URLs */}
+                <Stack direction='row'>
+                    {Object.entries(Links).map(([platform, platformURL]) => (
+                        <Link key={platform} href={platformURL} type='icon' buttonProps={{ size: 'large' }} >
+                            <ReactIcons icon={platform} />
+                        </Link>
                     ))}
-                </FlexBox>
+                </Stack>
+
             </Box>
         </Section>
     );

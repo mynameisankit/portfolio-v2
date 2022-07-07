@@ -14,6 +14,7 @@ function Link({ children, sx, href, type, buttonProps, muiLinkProps, nextLinkPro
     if (!href)
         href = nextLinkProps?.href ? nextLinkProps.href : '/';
 
+    const isEmail = /^[a-zA-Z.0-9]+@[a-zA-Z.0-9]+\.[a-zA-Z]+$/g.test(href);
     const isAnchor = href.startsWith('#');
     const isInternalLink = href.startsWith('/');
 
@@ -27,6 +28,8 @@ function Link({ children, sx, href, type, buttonProps, muiLinkProps, nextLinkPro
         componentProps = muiLinkProps;
     }
 
+    if (isEmail)
+        href = `mailto:${href}`;
     if (!isInternalLink) {
         componentProps = {
             ...componentProps,
@@ -34,16 +37,15 @@ function Link({ children, sx, href, type, buttonProps, muiLinkProps, nextLinkPro
             ...(isAnchor && { href, onClick: (event) => scrollIntoView(event, href) })
         };
     }
-
-    if (sx)
-        componentProps = { ...componentProps, sx };
-
     if (!isAnchor)
         nextLinkProps = {
             ...nextLinkProps,
             passHref: true,
             href
         };
+
+    if (sx)
+        componentProps = { ...componentProps, sx };
 
     const component = (
         <BaseComponent {...componentProps} {...rest}>

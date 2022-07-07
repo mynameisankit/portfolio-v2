@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
-function Header({ children: title, backgroundImage }) {
+function Header({ children, title, backgroundImage }) {
     return (
         <Box sx={{
             position: 'relative',
@@ -46,7 +46,7 @@ function Header({ children: title, backgroundImage }) {
                     component='h1'
                     sx={{ textShadow: theme => `4px 4px ${theme.palette.primary.main}` }}
                 >
-                    {title}
+                    {children || title}
                 </Typography>
             </Box>
         </Box >

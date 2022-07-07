@@ -25,25 +25,24 @@ import '@/styles/react-pdf/AnnotationLayer.css';
 import createTheme from '@/styles/theme/createTheme';
 import ColorModeContext from '@/styles/theme/ColorModeContext';
 //SEO 
-import SEO from 'next-seo.config';
+import SEO from '@/next-seo.config';
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 
-function App(props) {
+function App({ Component, emotionCache = clientSideEmotionCache, pageProps }) {
     const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+    const router = useRouter();
 
     const [mode, setMode] = useState(prefersDarkMode ? 'dark' : 'light');
-    const router = useRouter();
-    const route = useRef(null);
-    const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+    const [route, setRoute] = useState('Home');
 
-    const handleRouteChange = () => {
-        route.current = getRoute(router.pathname);
+    const handleRouteChange = (url) => {
+        setRoute(getRoute(url));
     };
 
     useEffect(() => {
-        route.current = getRoute(router.pathname);
+        setRoute(getRoute(router.pathname));
         smoothscroll.polyfill();
 
         router.events.on('routeChangeComplete', handleRouteChange);
@@ -63,25 +62,32 @@ function App(props) {
     //Theme
     const theme = useMemo(() => createTheme(mode), [mode]);
 
-    const currentRoute = route.current;
     return (
         <CacheProvider value={emotionCache}>
             <ColorModeContext.Provider value={colorMode}>
                 <ThemeProvider theme={theme}>
-                    {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+
+                    {/* Styles */}
                     <CssBaseline />
                     <GlobalStyles styles={globalStyles} />
-                    {currentRoute !== 'admin' && (
+
+                    {/* Navbar */}
+                    {route !== 'admin' && (
                         <AppBar>
                             {['about', 'projects', 'blogs']}
                         </AppBar>
                     )}
+
+                    {/* SEO and Page */}
                     <DefaultSeo {...SEO} additionalMetaTags={[{
                         name: 'theme-color',
                         content: theme.palette.primary.main
                     }]} />
                     <Component {...pageProps} />
-                    {/* {currentRoute !== 'admin' && <Footer />} */}
+
+                    {/* Footer */}
+                    {route !== 'admin' && <Footer />}
+
                 </ThemeProvider>
             </ColorModeContext.Provider>
         </CacheProvider>

@@ -1,11 +1,11 @@
-import { red, grey } from '@mui/material/colors';
+import { red } from '@mui/material/colors';
 
 const lightPalette = {
     primary: {
         main: '#ff0055',
     },
     secondary: {
-        main: grey[300],
+        main: '#A8B0B3',
     },
     error: {
         main: red[500],

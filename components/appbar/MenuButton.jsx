@@ -1,7 +1,5 @@
 import React from 'react';
 import IconButton from '@mui/material/IconButton';
-//Hooks
-import useColorModeValue from '@/hooks/useColorModeValue';
 
 function MenuButton({ children, sx, ...rest }) {
     return (
@@ -9,7 +7,7 @@ function MenuButton({ children, sx, ...rest }) {
             sx={{
                 borderRadius: '100%',
                 backgroundColor: 'primary.main',
-                color: useColorModeValue('primary.contrastText', 'text.primary'),
+                color: 'primary.contrastText',
                 '&:hover': {
                     backgroundColor: 'primary.main'
                 },

@@ -22,12 +22,11 @@ function ProjectCard({ children: data }) {
 
     return (
         <Paper
+            component={Stack}
             sx={{
                 py: 3, px: 4,
                 backgroundColor: 'primary.main',
                 color: 'text.secondary',
-                display: 'flex',
-                flexDirection: 'column',
                 minHeight: {
                     sm: 300,
                     md: 330

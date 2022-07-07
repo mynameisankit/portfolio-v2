@@ -41,7 +41,7 @@ function SocialShare({ title, href }) {
                             href={href}
                             sx={{
                                 backgroundColor,
-                                color: useColorModeValue('text.primary', 'text.secondary')
+                                color: useColorModeValue('text.secondary', 'text.primary')
                             }}>
                             <ReactIcons icon={label} />
                         </Link>

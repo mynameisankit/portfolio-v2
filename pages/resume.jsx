@@ -11,9 +11,10 @@ import DecorativeImageDarkMode from '@/images/resume-dark.jpg';
 function Resume() {
     return (
         <React.Fragment>
-            <Header backgroundImage={useColorModeValue(DecorativeImageLightMode, DecorativeImageDarkMode)}>
-                My Resume
-            </Header>
+            <Header
+                title='My Resume'
+                backgroundImage={useColorModeValue(DecorativeImageLightMode, DecorativeImageDarkMode)}
+            />
             <Section id='resume' maxWidth='lg'>
                 <PdfViewer data='resume.pdf' pagination />
             </Section>

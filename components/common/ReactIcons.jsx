@@ -20,6 +20,7 @@ const IconsMapping = {
     'linkedin': Mui.LinkedIn,
     'github': Mui.GitHub,
     'facebook': Mui.Facebook,
+    'email': Mui.Email,
     'meteor': Si.SiMeteor,
     'mongodb': Si.SiMongodb,
     'externallink': Fa.FaExternalLinkAlt,

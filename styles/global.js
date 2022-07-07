@@ -1,14 +1,20 @@
 const globalStyles = (theme) => ({
+    '*': {
+        scrollbarColor: `${theme.palette.primary.main} ${theme.palette.secondary.main}`,
+        scrollbarWidth: 'thin'
+    },
     '::-webkit-scrollbar': {
-        backgroundColor: 'transparent',
+        backgroundColor: theme.palette.secondary.main,
         width: 7
     },
     '::-webkit-scrollbar-thumb': {
-        background: '#888',
+        backgroundColor: theme.palette.primary.main,
+        transition: theme.transitions.create(['background-color']),
         borderRadius: 2,
+        cursor: 'grab'
     },
     '::-webkit-scrollbar-thumb:hover': {
-        background: '#555'
+        backgroundColor: theme.palette.primary.dark
     },
     '::selection': {
         color: theme.palette.mode === 'dark' ?

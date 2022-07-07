@@ -12,6 +12,8 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 //Custom Components
 import Link from '@/components/common/Link';
+//Hooks
+import useColorModeValue from '@/hooks/useColorModeValue';
 
 //Recursively render the items
 function TableOfContentsItems({ toc }) {
@@ -31,12 +33,15 @@ function TableOfContentsItems({ toc }) {
                         }}
                         muiLinkProps={{ underline: 'none' }}
                     >
-                        <Box sx={{ display: 'flex', alignItems: 'center', mb: 1.2 }}>
+                        <Stack direction='row' sx={{
+                            mb: 1.2,
+                            color: useColorModeValue('text.secondary', 'text.primary')
+                        }}>
                             <ArrowRightIcon />
-                            <Typography variant='h6' component='h6' sx={{ fontSize: 'inherit' }}>
+                            <Typography variant='h6' component='h6'>
                                 {value}
                             </Typography>
-                        </Box>
+                        </Stack>
                     </Link>
                     <TableOfContentsItems toc={children} />
                 </Box>
@@ -53,16 +58,16 @@ function TableOfContents({ toc }) {
 
     return (
         <Paper sx={{
-            backgroundColor: 'secondary.main',
+            backgroundColor: useColorModeValue('primary.main', 'secondary.main'),
+            color: useColorModeValue('text.secondary', 'text.primary'),
             float: { xs: 'none', md: 'right' },
-            p: 1,
+            p: 1, pl: 2,
             mb: { xs: 4, md: 0 }
         }}>
             <Stack
                 direction='row'
                 alignItems='center'
                 justifyContent='space-between'
-                sx={{ color: 'text.primary' }}
                 gap={1}
             >
                 <Typography variant='h5' component='h5'>Table Of Contents</Typography>
@@ -70,8 +75,14 @@ function TableOfContents({ toc }) {
                     {open ? <ExpandLess /> : <ExpandMore />}
                 </IconButton>
             </Stack>
-            <Divider light sx={{ mt: 1, mb: 2 }} />
             <Collapse in={open} timeout='auto' unmountOnExit>
+                <Divider
+                    component='div'
+                    sx={{
+                        mt: 1, mb: 2,
+                        borderColor: useColorModeValue('text.secondary', 'text.primary')
+                    }}
+                />
                 <TableOfContentsItems toc={toc} />
             </Collapse>
         </Paper>
