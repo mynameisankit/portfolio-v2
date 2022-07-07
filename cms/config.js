@@ -4,7 +4,7 @@ import Featured from './featured';
 import Projects from './projects';
 import Blogs from './blogs';
 //File Based Schemas
-import Links from './Links';
+import Links from './links';
 
 const config = {
     cms_manual_init: true,
