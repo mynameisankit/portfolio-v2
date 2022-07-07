@@ -9,7 +9,7 @@ import MuiAppBar from '@mui/material/AppBar';
 import Switch from '@mui/material/Switch';
 import { styled, alpha, useTheme } from '@mui/material/styles';
 //Theme
-import ColorModeContext from '@/styles/theme/ColorModeContext';
+import ColorModeContext from '@/styles/theme/colorModeContext';
 //Utility
 import getRoute from '@/lib/getRoute';
 import startCase from 'lodash/fp/startCase';
