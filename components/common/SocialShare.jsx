@@ -14,6 +14,7 @@ function SocialShare({ title, href }) {
             url.current = window.location.href;
     });
 
+    const textColor = useColorModeValue('text.secondary', 'text.primary');
     return (
         <Stack direction='row' justifyContent='center' spacing={2}>
             {
@@ -41,7 +42,7 @@ function SocialShare({ title, href }) {
                             href={href}
                             sx={{
                                 backgroundColor,
-                                color: useColorModeValue('text.secondary', 'text.primary')
+                                color: textColor
                             }}>
                             <ReactIcons icon={label} />
                         </Link>

@@ -50,6 +50,9 @@ function Project({ children: data, direction }) {
         },
     };
 
+    let opacity = useColorModeValue(0.2, 0.5);
+    if (isSmall)
+        opacity = 0.85;
     return (
         <Box sx={{
             display: 'grid',
@@ -71,12 +74,7 @@ function Project({ children: data, direction }) {
                             position: 'absolute',
                             height: 1, width: 1,
                             zIndex: 1,
-                            backgroundColor: alpha(
-                                theme.palette.primary.main,
-                                isSmall ?
-                                    0.85
-                                    : useColorModeValue(0.2, 0.5)
-                            ),
+                            backgroundColor: alpha(theme.palette.primary.main, opacity),
                             transition: theme.transitions.create(['background-color']),
                             backdropFilter: ['blur(2px)', null, 'none']
                         },

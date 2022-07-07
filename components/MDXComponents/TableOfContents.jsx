@@ -17,8 +17,7 @@ import useColorModeValue from '@/hooks/useColorModeValue';
 
 //Recursively render the items
 function TableOfContentsItems({ toc }) {
-    if (!toc?.length)
-        return null;
+    const textColor = useColorModeValue('text.secondary', 'text.primary');
 
     return (
         <React.Fragment>
@@ -35,7 +34,7 @@ function TableOfContentsItems({ toc }) {
                     >
                         <Stack direction='row' sx={{
                             mb: 1.2,
-                            color: useColorModeValue('text.secondary', 'text.primary')
+                            color: textColor
                         }}>
                             <ArrowRightIcon />
                             <Typography variant='h6' component='h6'>
@@ -43,7 +42,7 @@ function TableOfContentsItems({ toc }) {
                             </Typography>
                         </Stack>
                     </Link>
-                    <TableOfContentsItems toc={children} />
+                    {children.length && <TableOfContentsItems toc={children} />}
                 </Box>
             ))}
         </React.Fragment>
@@ -53,13 +52,16 @@ function TableOfContentsItems({ toc }) {
 function TableOfContents({ toc }) {
     const [open, setOpen] = useState(true);
 
+    const backgroundColor = useColorModeValue('primary.main', 'secondary.main');
+    const textColor = useColorModeValue('text.secondary', 'text.primary');
+
     if (!toc.length)
         return null;
 
     return (
         <Paper sx={{
-            backgroundColor: useColorModeValue('primary.main', 'secondary.main'),
-            color: useColorModeValue('text.secondary', 'text.primary'),
+            backgroundColor,
+            color: textColor,
             float: { xs: 'none', md: 'right' },
             p: 1, pl: 2,
             mb: { xs: 4, md: 0 }
@@ -80,7 +82,7 @@ function TableOfContents({ toc }) {
                     component='div'
                     sx={{
                         mt: 1, mb: 2,
-                        borderColor: useColorModeValue('text.secondary', 'text.primary')
+                        borderColor: textColor
                     }}
                 />
                 <TableOfContentsItems toc={toc} />

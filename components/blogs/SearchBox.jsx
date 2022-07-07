@@ -26,6 +26,7 @@ function SearchBox({ fuzzySearch }) {
         setResults(fuzzySearch?.search(query));
     }, [query]);
 
+    const textColor = useColorModeValue('text.primary', 'text.secondary');
     return (
         <Paper
             elevation={0}
@@ -51,10 +52,10 @@ function SearchBox({ fuzzySearch }) {
                 color='secondary'
                 sx={{
                     '& label': {
-                        color: useColorModeValue('text.primary', 'text.secondary')
+                        color: textColor
                     },
                     '& .MuiFilledInput-root': {
-                        color: useColorModeValue('text.primary', 'text.secondary')
+                        color: textColor
                     }
                 }}
             />
@@ -71,7 +72,7 @@ function SearchBox({ fuzzySearch }) {
                             muiLinkProps={{ underline: 'none' }}
                             sx={{
                                 p: 2,
-                                color: useColorModeValue('text.primary', 'text.secondary'),
+                                color: textColor,
                                 backgroundColor: !idx && alpha(theme.palette.primary.light, 0.75),
                                 transition: theme.transitions.create(['background-color']),
                                 '&:hover': {
