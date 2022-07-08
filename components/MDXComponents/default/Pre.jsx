@@ -1,8 +1,11 @@
 import React, { useState, useRef } from 'react';
 import Highlight, { defaultProps } from 'prism-react-renderer';
 import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import { styled, useTheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
+//Hooks
+import useColorModeValue from '@/components/hooks/useColorModeValue';
 //Material-UI Icons
 import FileCopyIcon from '@mui/icons-material/FileCopy';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
@@ -20,7 +23,8 @@ const Pre = styled('pre')(({ theme }) => ({
     paddingRight: theme.spacing(2),
     [theme.breakpoints.down('md')]: {
         overflowX: 'scroll'
-    }
+    },
+    marginTop: 0
 }));
 
 const Line = styled('div')({
@@ -40,13 +44,15 @@ const LineContent = styled('span')({
 });
 
 function HighlightedCode({ children: { className: language, children: code } }) {
-    const theme = useTheme();
+    language = (language.split('-')[1]);
+    if (language.includes(':'))
+        language = language.split(':')[0];
 
-    language = language.split('-')[1];
     code = code.trim();
 
+    const highlightTheme = useColorModeValue(nightOwl, dracula);
     return (
-        <Highlight {...defaultProps} theme={theme.palette.mode === 'dark' ? nightOwl : dracula} code={code} language={language}>
+        <Highlight {...defaultProps} theme={highlightTheme} code={code} language={language}>
             {({ className, style, tokens, getLineProps, getTokenProps }) => (
                 <Pre className={className} style={style}>
                     {tokens.map((line, i) => (
@@ -73,10 +79,16 @@ function CodeBlock({ children }) {
 
     let code = null;
     if (typeof children === 'string')
-        code = { className: 'language-text', children };
+        code = { className: 'language-plaintext', children };
     else
         code = children.props;
 
+    const language = code.className;
+    let filename = null;
+    if (language.includes(':'))
+        filename = language.substr(language.indexOf(':') + 1);
+
+    const highlightTheme = useColorModeValue(nightOwl, dracula);
     return (
         <Box
             ref={CodeBlock}
@@ -91,6 +103,8 @@ function CodeBlock({ children }) {
                     timerID.current = null;
                 }
             }}>
+
+            {/* Copy Button */}
             {hovered && (
                 <Box
                     onClick={() => {
@@ -114,7 +128,7 @@ function CodeBlock({ children }) {
                     sx={{
                         position: 'absolute',
                         right: 0, top: 0,
-                        mr: 1, mt: 1
+                        mr: 1, mt: 5
                     }}>
                     <IconButton
                         size='large'
@@ -123,7 +137,23 @@ function CodeBlock({ children }) {
                     </IconButton>
                 </Box>
             )}
+
+            {/* Filename */}
+            {filename && (
+                <Box sx={{
+                    backgroundColor: highlightTheme.plain.backgroundColor,
+                    color: highlightTheme.plain.color,
+                    pl: 2, py: 1
+                }}>
+                    <Typography component='h6' variant='h6'>
+                        {filename}
+                    </Typography>
+                </Box>
+            )}
+
+            {/* Code */}
             <HighlightedCode>{code}</HighlightedCode>
+
         </Box>
     );
 }

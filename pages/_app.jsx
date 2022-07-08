@@ -74,7 +74,7 @@ function App({ Component, emotionCache = clientSideEmotionCache, pageProps }) {
                     {/* Navbar */}
                     {route !== 'admin' && (
                         <AppBar
-                            routes={['about', 'projects', 'blogs', { name: 'resume', type: 'button' }]}
+                            routes={['about', 'projects', 'blogs', 'snippets', 'resume']}
                         />
                     )}
 

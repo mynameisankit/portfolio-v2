@@ -7,6 +7,7 @@ import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import Toolbar from '@mui/material/Toolbar';
 import MuiAppBar from '@mui/material/AppBar';
 import Switch from '@mui/material/Switch';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { styled, alpha, useTheme } from '@mui/material/styles';
 //Theme
 import ColorModeContext from '@/styles/theme/colorModeContext';
@@ -19,6 +20,7 @@ import MenuButton from '@/components/appbar/MenuButton';
 import ReactIcons from '@/components/common/ReactIcons';
 //Hooks
 import useColorMode from '@/hooks/useColorMode';
+import useColorModeValue from '../hooks/useColorModeValue';
 //Icons
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -61,6 +63,7 @@ function AppBar(props) {
     const colorMode = useContext(ColorModeContext);
     const theme = useTheme();
     const router = useRouter();
+    const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
 
     const [open, setOpen] = useState(false);
 
@@ -87,27 +90,84 @@ function AppBar(props) {
         };
     }, []);
 
+    const RoutesList = ['Home', ...routes].map(route => {
+        let url, name;
+
+        if (route === 'Home') {
+            url = '/';
+            name = 'Home';
+        }
+        else {
+            url = `/${route}`;
+            name = route;
+        }
+
+        return (
+            <Link
+                key={url} href={url} type='link'
+                muiLinkProps={{
+                    underline: 'none',
+                    color: currentRoute === name ?
+                        'primary.main' : 'text.primary',
+                    sx: {
+                        transition: theme.transitions.create(['color']),
+                        '&:hover': {
+                            color: 'primary.light'
+                        }
+                    }
+                }}>
+                <Typography variant={isSmall ? 'h2' : 'h6'} component='h1'>
+                    {startCase(name)}
+                </Typography>
+            </Link>
+        );
+    });
+
+    const backgroundLinearGradient = useColorModeValue(
+        `linear-gradient(${alpha(theme.palette.background.default, 0.9)} 40%, ${alpha(theme.palette.background.default, 0)})`,
+        `linear-gradient(${theme.palette.background.default} 0%, ${alpha(theme.palette.background.default, 0)})`
+    );
     return (
         <React.Fragment>
 
             <MuiAppBar color='transparent' sx={{
                 boxShadow: 0,
-                pt: [1, 0]
+                pt: [1, 0],
+                background: !isSmall ?
+                    backgroundLinearGradient
+                    : 'none'
             }}>
                 <Toolbar
                     component={Stack}
                     direction='row'
-                    justifyContent='space-between'
                     alignItems='center'
+                    justifyContent='space-between'
                 >
-                    <MenuButton aria-label='Menu' onClick={() => setOpen(true)}>
-                        <ReactIcons icon='Menu' fontSize='large' />
-                    </MenuButton>
+                    {isSmall && (
+                        <MenuButton aria-label='Menu' onClick={() => setOpen(true)}>
+                            <ReactIcons icon='Menu' fontSize='large' />
+                        </MenuButton>
+                    )}
+
                     <Link href='/' muiLinkProps={{ underline: 'none' }}>
                         <Typography variant='h6' component='h6'>
                             Ankit Kumar
                         </Typography>
                     </Link>
+
+                    {!isSmall && (
+                        <Stack direction='row' gap={4}>
+                            {RoutesList}
+                        </Stack>
+                    )}
+
+                    {!isSmall && (
+                        <ModeSwitch
+                            onChange={() => colorMode.toggleColorMode()}
+                            checked={useColorMode()}
+                        />
+                    )}
+
                 </Toolbar>
             </MuiAppBar>
 
@@ -131,7 +191,6 @@ function AppBar(props) {
                         height: '100vh'
                     }}
                 >
-                    {/* Color Mode Switch */}
                     <Box sx={{
                         position: 'absolute',
                         left: 6, top: 6
@@ -154,51 +213,7 @@ function AppBar(props) {
 
                     {/* Menu */}
                     <Stack alignItems='center' gap={2}>
-                        {['Home', ...routes].map(route => {
-                            let url, name, type = 'link';
-
-                            if (route === 'Home') {
-                                url = '/';
-                                name = 'Home';
-                            }
-                            else if (route instanceof Object) {
-                                url = route.url || `/${route.name}`;
-                                name = route.name;
-                                type = route.type || type;
-                            }
-                            else {
-                                url = `/${route}`;
-                                name = route;
-                            }
-
-                            return (
-                                <Link
-                                    key={url}
-                                    href={url}
-                                    type={type}
-                                    buttonProps={type === 'button' && {
-                                        variant: 'outlined',
-                                        color: currentRoute === route.name ? 'primary' : 'secondary',
-                                        sx: { textTransform: 'none' }
-                                    }}
-                                    muiLinkProps={type === 'link' && {
-                                        underline: 'none',
-                                        color: currentRoute === route ?
-                                            'primary.main' :
-                                            'secondary.main',
-                                        sx: {
-                                            transition: theme.transitions.create(['color']),
-                                            '&:hover': {
-                                                color: 'primary.light'
-                                            }
-                                        }
-                                    }}>
-                                    <Typography variant='h2' component='h1'>
-                                        {startCase(name)}
-                                    </Typography>
-                                </Link>
-                            );
-                        })}
+                        {RoutesList}
                     </Stack>
                 </Stack>
             </SwipeableDrawer>

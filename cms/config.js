@@ -1,10 +1,11 @@
 //Schemas
 //Folder Based Schemas
-import Featured from './featured';
-import Projects from './projects';
-import Blogs from './blogs';
+import Featured from '@/cms/featured';
+import Projects from '@/cms/projects';
+import Blogs from '@/cms/blogs';
+import Snippets from '@/cms/snippets';
 //File Based Schemas
-import Links from './links';
+import Links from '@/cms/links';
 
 const config = {
     cms_manual_init: true,
@@ -19,14 +20,15 @@ const config = {
         Featured,
         Projects,
         Blogs,
+        Snippets,
         {
             label: 'Common Data',
             name: 'common',
             files: [
                 Links
-            ],
+            ]
         }
-    ],
+    ]
 };
 
 export default config;

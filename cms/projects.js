@@ -39,8 +39,8 @@ const projects = {
             name: 'techStack',
             widget: 'list',
             default: ["HTML", "CSS", "JavaScript"]
-        },
-    ],
+        }
+    ]
 };
 
 export default projects;

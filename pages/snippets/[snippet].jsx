@@ -10,25 +10,24 @@ import { NextSeo } from 'next-seo';
 //Custom Components
 import Post from '@/components/common/PostsLayout/Post';
 
-
-function Blog({ mdxSource, frontMatter, toc }) {
+function Snippet({ mdxSource, frontMatter, toc }) {
     const { title, abstract } = frontMatter;
 
     return (
         <React.Fragment>
             <NextSeo
-                title={`${title} | Blogs | Portfolio v2`}
+                title={`${title} | Snippets | Portfolio v2`}
                 description={abstract}
             />
 
             <Post
                 mdxSource={mdxSource}
                 frontMatter={frontMatter}
-                tagsPropName='tags'
+                tagsPropName='technology'
                 toc={toc}
                 back={{
-                    href: '/blogs',
-                    name: 'blogs'
+                    href: '/snippets',
+                    name: 'snippets'
                 }}
             />
         </React.Fragment>
@@ -36,11 +35,11 @@ function Blog({ mdxSource, frontMatter, toc }) {
 }
 
 export async function getStaticProps({ params }) {
-    const { blog: title } = params;
+    const { snippet: title } = params;
 
-    const ROOT = path.join(process.cwd(), 'data', 'blogs');
+    const ROOT = path.join(process.cwd(), 'data', 'snippets');
 
-    let filePath = path.join(ROOT, `${title}.md`);
+    let filePath = path.join(ROOT, `${title}.md`); 
     if (!fs.existsSync(filePath))
         filePath = path.join(ROOT, `${title}.mdx`);
 
@@ -53,13 +52,13 @@ export async function getStaticProps({ params }) {
 
 export async function getStaticPaths() {
     //Generate routes for all blog pages
-    const ROOT = path.join(process.cwd(), 'data', 'blogs');
+    const ROOT = path.join(process.cwd(), 'data', 'snippets');
     const files = getFrontMatter(getFiles(ROOT));
 
     return {
-        paths: files.map(file => ({ params: { blog: file.url } })),
+        paths: files.map(file => ({ params: { snippet: file.url } })),
         fallback: false
     };
 }
 
-export default Blog;
+export default Snippet;

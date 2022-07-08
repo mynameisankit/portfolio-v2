@@ -6,45 +6,42 @@ import getFiles from '@/lib/getFiles';
 import getFrontMatter from '@/lib/util/getFrontMatter';
 //Client Side Imports
 import React from 'react';
-import Divider from '@mui/material/Divider';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 //Custom Components
-import Post from '@/components/blogs/Post';
-import Header from '@/components/common/Header';
+import Snippet from '@/components/snippets/Snippet';
 import PostsLayout from '@/components/common/PostsLayout';
-//Hooks
-import useColorModeValue from '@/components/hooks/useColorModeValue';
+import Header from '@/components/common/Header';
 //Image
-import DecorativeImageLightMode from '@/images/blogs-light.png';
-import DecorativeImageDarkMode from '@/images/blogs-dark.png';
+import DecorativeImage from '@/images/snippets.jpg';
 
-function Blogs({ blogs, paginationSettings, fuzzySearchProps }) {
+function Snippets({ snippets, fuzzySearchProps, paginationSettings }) {
+    const theme = useTheme();
+    const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
+
     return (
         <React.Fragment>
             <Header
-                title='Blogs'
-                backgroundImage={useColorModeValue(DecorativeImageLightMode, DecorativeImageDarkMode)}
+                title='Snippets'
+                backgroundImage={DecorativeImage}
             />
             <PostsLayout
-                posts={blogs}
-                tagsPropName='tags'
+                posts={snippets}
+                tagsPropName='technology'
                 paginationSettings={paginationSettings}
                 fuzzySearchProps={fuzzySearchProps}
-                divider={
-                    <Divider component='div' sx={{
-                        color: 'text.primary'
-                    }} />
-                }
+                direction={isSmall ? 'column' : 'row'}
             >
-                {data => <Post {...data} />}
+                {data => <Snippet {...data} />}
             </PostsLayout>
         </React.Fragment>
     );
 }
 
 export async function getStaticProps() {
-    const ROOT = path.join(process.cwd(), 'data', 'blogs');
+    const ROOT = path.join(process.cwd(), 'data', 'snippets');
     const files = getFrontMatter(getFiles(ROOT));
-    files.forEach(file => file.url = `/blogs/${file.url}`);
+    files.forEach(file => file.url = `/snippets/${file.url}`);
 
     //Page Settings
     const paginationSettings = {
@@ -53,7 +50,7 @@ export async function getStaticProps() {
 
     //Fuzzy Search
     const options = {
-        keys: ['title', 'tags']
+        keys: ['title', 'technology']
     };
 
     // Create the Fuse index
@@ -61,7 +58,7 @@ export async function getStaticProps() {
 
     return {
         props: {
-            blogs: files,
+            snippets: files,
             fuzzySearchProps: {
                 index: JSON.stringify(fuzzySearchIndex),
                 options
@@ -71,4 +68,4 @@ export async function getStaticProps() {
     };
 }
 
-export default Blogs;
+export default Snippets;

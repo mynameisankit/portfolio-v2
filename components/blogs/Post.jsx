@@ -23,6 +23,7 @@ function Post({ title, subTitle, date, abstract, url, tags }) {
     const ActionArea = isSmall ? React.Fragment : CardActionArea;
 
     const META_THRESHOLD = 350;
+    const backgroundColor = useColorModeValue('secondary.light', 'secondary.dark');
 
     const content = (
         <Card
@@ -30,15 +31,15 @@ function Post({ title, subTitle, date, abstract, url, tags }) {
                 backgroundColor: 'transparent',
                 backgroundImage: 'none',
                 border: 'none',
-                boxShadow: 0,
                 borderRadius: 0,
                 '&:hover': {
-                    backgroundColor: [null, null, useColorModeValue('secondary.light', 'secondary.dark')],
+                    backgroundColor: [null, null, backgroundColor],
                     transform: [null, null, `scale(1.02)`]
                 },
                 transition: theme.transitions.create(['transform', 'background-color'])
             }}
-            elevation={5}>
+            elevation={0}
+        >
             <ActionArea {...(!isSmall && { sx: { height: 1 } })}>
                 <CardContent
                     sx={{

@@ -11,6 +11,7 @@ function MDXLayoutRenderer({ mdxSource, layout, toc, frontMatter, ...rest }) {
         <React.Fragment>
             {/* Table Of Contents */}
             <TableOfContents toc={toc} />
+            
             {/* Body */}
             <MDXLayout components={DefaultComponents} {...rest} />
         </React.Fragment>

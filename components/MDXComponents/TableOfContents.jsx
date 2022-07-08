@@ -19,6 +19,9 @@ import useColorModeValue from '@/hooks/useColorModeValue';
 function TableOfContentsItems({ toc }) {
     const textColor = useColorModeValue('text.secondary', 'text.primary');
 
+    if (!toc.length)
+        return null;
+
     return (
         <React.Fragment>
             {toc.map(({ value, depth, url, children }) => (
@@ -42,7 +45,7 @@ function TableOfContentsItems({ toc }) {
                             </Typography>
                         </Stack>
                     </Link>
-                    {children.length && <TableOfContentsItems toc={children} />}
+                    <TableOfContentsItems toc={children} />
                 </Box>
             ))}
         </React.Fragment>

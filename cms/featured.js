@@ -39,8 +39,8 @@ const featured = {
             name: 'techStack',
             widget: 'list',
             default: ["HTML", "CSS", "JavaScript"]
-        },
-    ],
+        }
+    ]
 };
 
 export default featured;
