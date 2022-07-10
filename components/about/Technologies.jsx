@@ -5,14 +5,7 @@ import Section from '@/components/common/Section';
 import Tooltip from '@/components/common/Tooltip';
 import ReactIcons from '@/components/common/ReactIcons';
 
-function Technologies() {
-    const technologies = [
-        'HTML', 'CSS', 'C', 'CPP', 'JavaScript', 'Java',
-        'Python', 'Bash', 'MySQL', 'PostgreSQL', 'AWS',
-        'React', 'Next.js', 'Material-UI', 'Node.js', 'Express.js',
-        'Git', 'Pandas', 'NumPy', 'Firebase', 'Bootstrap', 'SQLite'
-    ];
-
+function Technologies({ children: data }) {
     return (
         <Section
             id='tools'
@@ -22,7 +15,7 @@ function Technologies() {
             caption='This is a list of technologies that I have worked on or currently learning.'
         >
             <Grid container spacing={2}>
-                {technologies.map(tech => (
+                {data?.map(tech => (
                     <Grid item md={2} key={tech} sx={{ textAlign: 'center' }}>
                         <Tooltip title={tech}>
                             <ReactIcons icon={tech} sx={{ fontSize: 50 }} />

@@ -7,19 +7,21 @@ import Section from '@/components/common/Section';
 import Link from '@/components/common/Link';
 import ReactIcons from '@/components/common/ReactIcons';
 //Data
-import Links from '@/data/links.json';
+import UserData from '@/data/user_data.json';
 
 function Footer() {
+    const socialMediaLinks = UserData.socialMediaLinks;
+
     return (
         <Section id='footer' minHeight={false} maxWidth={false}>
-            <Box sx={{
-                mt: 6, mb: 1,
-                display: 'flex',
-                flexDirection: ['column-reverse', null, 'row'],
-                justifyContent: 'space-between',
-                alignItems: 'center'
-            }}>
 
+            <Stack justifyContent='space-between' alignItems='center' sx={{
+                mt: 6, mb: 2,
+                flexDirection: {
+                    xs: 'column-reverse',
+                    md: 'row'
+                }
+            }}>
                 {/* Tech Stack */}
                 <Stack direction='row' alignItems='center'>
                     <Typography variant='h6'>Built Using</Typography>
@@ -37,14 +39,16 @@ function Footer() {
 
                 {/* Social Media URLs */}
                 <Stack direction='row'>
-                    {Object.entries(Links).map(([platform, platformURL]) => (
-                        <Link key={platform} href={platformURL} type='icon' buttonProps={{ size: 'large' }} >
-                            <ReactIcons icon={platform} />
-                        </Link>
-                    ))}
+                    {socialMediaLinks &&
+                        Object.entries(socialMediaLinks).map(([platform, platformURL]) => (
+                            <Link key={platform} href={platformURL} type='icon' buttonProps={{ size: 'large' }} >
+                                <ReactIcons icon={platform} />
+                            </Link>
+                        ))
+                    }
                 </Stack>
+            </Stack>
 
-            </Box>
         </Section>
     );
 }

@@ -5,6 +5,9 @@ const featured = {
     create: true,
     extension: 'json',
     slug: '{{fields.title}}_{{year}}-{{month}}-{{day}}',
+    editor: {
+        preview: false
+    },
     fields: [
         {
             label: 'Title',

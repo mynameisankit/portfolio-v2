@@ -1,8 +1,11 @@
+//Server Side Imports
+import path from 'path';
+import getJSON from '@/lib/getJSON';
+//Client-Side Imports
 import React from 'react';
 //Hooks
 import useColorModeValue from '@/components/hooks/useColorModeValue';
 //Custom Components
-import Colophon from '@/components/about/Colophon';
 import Education from '@/components/about/Education';
 import Tools from '@/components/about/Tools';
 import Technologies from '@/components/about/Technologies';
@@ -12,20 +15,37 @@ import Header from '@/components/common/Header';
 import DecorativeImageLightMode from '@/images/about-light.jpg';
 import DecorativeImageDarkMode from '@/images/about-dark.jpg';
 
-function About() {
+function About({ userData }) {
     return (
         <React.Fragment>
             <Header
                 title='About Me'
                 backgroundImage={useColorModeValue(DecorativeImageLightMode, DecorativeImageDarkMode)}
             />
-            <Colophon />
-            <Education />
-            <Tools />
-            <Technologies />
-            <Journey />
+            <Education>
+                {userData.education}
+            </Education>
+            <Tools>
+                {userData.tools}
+            </Tools>
+            <Technologies>
+                {userData.technologies}
+            </Technologies>
+            <Journey>
+                {userData.journey}
+            </Journey>
         </React.Fragment>
     );
+}
+
+export async function getStaticProps() {
+    const CWD = process.cwd();
+
+    return {
+        props: {
+            userData: getJSON(path.join(CWD, 'data', 'user_data.json'))
+        }
+    };
 }
 
 export default About;

@@ -2,11 +2,8 @@ import React from 'react';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { useTheme } from '@mui/material/styles';
 
 function Section({ heading, caption, subtitle, children, maxWidth, minHeight, gutterBottom, sx, ...rest }) {
-    const theme = useTheme();
-
     if (minHeight !== undefined) {
         if (typeof minHeight === 'boolean') {
             if (minHeight)

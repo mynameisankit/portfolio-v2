@@ -11,7 +11,7 @@ function Tooltip({ title, sx, children }) {
             disableFocusListener
             interactive
             title={(
-                <Typography variant='subtitle2' component='subtitle2'>
+                <Typography variant='subtitle2' component='p'>
                     {title}
                 </Typography>
             )}
@@ -28,7 +28,7 @@ function Tooltip({ title, sx, children }) {
                         backgroundColor: 'secondary.main',
                         color: 'secondary.contrastText',
                         userSelect: 'none',
-                        boxShadow: 24
+                        boxShadow: 2
                     }
                 }
             }}>

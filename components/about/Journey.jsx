@@ -33,40 +33,7 @@ function JourneyItem({ year, title, description, icon, isLast }) {
     );
 }
 
-function Journey() {
-    const journey = [
-        {
-            year: '2020',
-            title: 'Became a convener @ IIITG Programming Club',
-            description: 'Helped in creating IIITG Open Source Community involving many project and took a lot of sessions',
-            icon: 'Laptop'
-        },
-        {
-            year: '2020',
-            title: 'Started writing articles on Web development',
-            description: 'Wrote my first ever blog with the thought of giving back to the community while I learn',
-            icon: 'Laptop'
-        },
-        {
-            year: '2019',
-            title: 'Joined IIIT-Guwahati as a Computer Science and Engineering Student',
-            description: 'Learned a lot of things',
-            icon: 'Laptop'
-        },
-        {
-            year: '2019',
-            title: 'Passed High School',
-            description: 'Found gems as friends here',
-            icon: 'Book'
-        },
-        {
-            year: '2019',
-            title: 'Entered High School',
-            description: 'Spent most of time studying and developed discipline',
-            icon: 'Book'
-        }
-    ];
-
+function Journey({ children: data }) {
     return (
         <Section
             id='timeline'
@@ -75,7 +42,7 @@ function Journey() {
             heading='My Journey'
         >
             <Timeline position='alternate'>
-                {journey.map((item, idx, arr) => <JourneyItem key={item.title} {...item} isLast={idx === arr.length - 1} />)}
+                {data?.map((item, idx, arr) => <JourneyItem key={item.title} {...item} isLast={idx === arr.length - 1} />)}
             </Timeline>
         </Section>
     );

@@ -43,7 +43,7 @@ const LineContent = styled('span')({
     display: 'table-cell'
 });
 
-function HighlightedCode({ children: { className: language, children: code } }) {
+function HighlightedCode({ children: { className: language, children: code }, showLines = true }) {
     language = (language.split('-')[1]);
     if (language.includes(':'))
         language = language.split(':')[0];
@@ -57,7 +57,7 @@ function HighlightedCode({ children: { className: language, children: code } }) 
                 <Pre className={className} style={style}>
                     {tokens.map((line, i) => (
                         <Line key={i} {...getLineProps({ line, key: i })}>
-                            <LineNo>{i + 1}</LineNo>
+                            {showLines && <LineNo>{i + 1}</LineNo>}
                             <LineContent>
                                 {line.map((token, key) => (
                                     <span key={key} {...getTokenProps({ token, key })} />
@@ -71,7 +71,7 @@ function HighlightedCode({ children: { className: language, children: code } }) 
     );
 }
 
-function CodeBlock({ children }) {
+function CodeBlock({ children, showCopyButton = true, showLines = true }) {
     const CodeBlock = useRef(null);
     const timerID = useRef(null);
     const [copied, setCopied] = useState(false);
@@ -105,7 +105,7 @@ function CodeBlock({ children }) {
             }}>
 
             {/* Copy Button */}
-            {hovered && (
+            {hovered && showCopyButton && (
                 <Box
                     onClick={() => {
                         setCopied(true);
@@ -128,7 +128,7 @@ function CodeBlock({ children }) {
                     sx={{
                         position: 'absolute',
                         right: 0, top: 0,
-                        mr: 1, mt: 5
+                        mr: 1, mt: 1
                     }}>
                     <IconButton
                         size='large'
@@ -143,7 +143,7 @@ function CodeBlock({ children }) {
                 <Box sx={{
                     backgroundColor: highlightTheme.plain.backgroundColor,
                     color: highlightTheme.plain.color,
-                    pl: 2, py: 1
+                    pl: 2, pt: 2
                 }}>
                     <Typography component='h6' variant='h6'>
                         {filename}
@@ -152,7 +152,9 @@ function CodeBlock({ children }) {
             )}
 
             {/* Code */}
-            <HighlightedCode>{code}</HighlightedCode>
+            <HighlightedCode showLines={showLines}>
+                {code}
+            </HighlightedCode>
 
         </Box>
     );

@@ -23,7 +23,21 @@ const MDXComponents = {
     a: Link,
     img: Image,
     pre: Pre,
-    code: Pre
+    code: ({ children, ...rest }) => (
+        <Typography
+            component='span'
+            variant='body1'
+            sx={{
+                display: 'inline-block',
+                backgroundColor: 'secondary.main',
+                contrastText: 'text.main',
+                px: 1, borderRadius: 4
+            }}
+            {...rest}
+        >
+            {children}
+        </Typography>
+    )
 };
 
 export default MDXComponents;

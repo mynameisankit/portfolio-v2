@@ -6,6 +6,9 @@ const snippets = {
     extension: 'md',
     slug: '{{fields.title}}',
     preview_path: 'http://localhost:3000/snippets',
+    editor: {
+        preview: false
+    },
     fields: [
         {
             label: 'Title',

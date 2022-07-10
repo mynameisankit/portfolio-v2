@@ -22,17 +22,26 @@ function SocialShare({ title, href }) {
                     {
                         href: `https://twitter.com/intent/tweet?text=${title}&url=${url.current}`,
                         label: 'Twitter',
-                        backgroundColor: '#1DA1F2'
+                        backgroundColor: {
+                            normal: '#1DA1F2',
+                            hover: '#0a6fae',
+                        }
                     },
                     {
                         href: `https://www.facebook.com/sharer/sharer.php?u=${url.current}`,
                         label: 'Facebook',
-                        backgroundColor: '#4267B2'
+                        backgroundColor: {
+                            normal: '#4267B2',
+                            hover: '#273C68',
+                        }
                     },
                     {
                         href: `https://www.linkedin.com/shareArticle?url=${url.current}&title=${title}`,
                         label: 'LinkedIn',
-                        backgroundColor: '#2867B2'
+                        backgroundColor: {
+                            normal: '#2867B2',
+                            hover: '#133053',
+                        }
                     }
                 ].map(({ href, label, backgroundColor }) => {
                     return (
@@ -41,8 +50,12 @@ function SocialShare({ title, href }) {
                             key={label}
                             href={href}
                             sx={{
-                                backgroundColor,
-                                color: textColor
+                                backgroundColor: backgroundColor.normal,
+                                color: textColor,
+                                transitions: theme => theme.transitions.create(['background-color']),
+                                '&:hover': {
+                                    backgroundColor: backgroundColor.hover
+                                }
                             }}>
                             <ReactIcons icon={label} />
                         </Link>

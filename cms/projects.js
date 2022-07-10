@@ -6,6 +6,9 @@ const projects = {
     extension: 'json',
     slug: '{{fields.title}}-{{year}}-{{month}}-{{day}}',
     preview_path: 'http://localhost:3000/projects',
+    editor: {
+        preview: false
+    },
     fields: [
         {
             label: 'Title',

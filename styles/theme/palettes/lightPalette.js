@@ -5,7 +5,7 @@ const lightPalette = {
         main: '#ff0055',
     },
     secondary: {
-        main: '#A8B0B3',
+        main: '#BEC4C6',
     },
     error: {
         main: red[500],

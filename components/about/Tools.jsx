@@ -11,42 +11,7 @@ import Link from '@/components/common/Link';
 //Material-UI Icons
 import LinkIcon from '@mui/icons-material/Link';
 
-function Tools() {
-    const tools = [
-        {
-            title: 'Visual Studio Code',
-            description: 'A lightweight customizable text editor with a lot of plugins',
-            url: 'https://code.visualstudio.com/',
-            use: 'Editor'
-        }, {
-            title: 'WSL',
-            description: 'A extension for windows which simulates linux terminal',
-            url: 'https://ubuntu.com/wsl',
-            use: 'Terminal'
-        }, {
-            title: 'Notion',
-            description: 'A very easy-to-use note taking app with a lot of features',
-            url: 'https://notion.so/',
-            use: 'Note Taking'
-        }, {
-            title: 'Discord',
-            description: 'A very robust communication app',
-            url: 'https://discord.com/',
-            use: 'Messaging'
-        }, {
-            title: 'Yarn',
-            description: 'A much better and easy to use package manager',
-            url: 'https://yarnpkg.com/',
-            use: 'Package Manager'
-        },
-        {
-            title: 'Github',
-            description: 'The best and most popular code hosting platform out there!',
-            url: 'https://github.com/',
-            use: 'Code Hosting'
-        }
-    ];
-
+function Tools({ children: data }) {
     return (
         <Section
             id='tools'
@@ -56,7 +21,7 @@ function Tools() {
             caption='This is my list of software tools that I use frequently. I do my best at updating it whenever a change occurs.'
         >
             <Grid container spacing={5}>
-                {tools?.map(({ title, description, url, use }) => (
+                {data?.map(({ title, description, url, use }) => (
                     <Grid item xs={12} md={6} key={title}>
                         <Card
                             media={<ReactIcons sx={{ fontSize: 40 }} icon={title} />}

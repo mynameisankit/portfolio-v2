@@ -12,7 +12,7 @@ function Header({ children, title, backgroundImage }) {
         <Box sx={{
             position: 'relative',
             minHeight: [300, 500],
-            mb: 4
+            mb: 5
         }}>
             {backgroundImage && (
                 <Box sx={{

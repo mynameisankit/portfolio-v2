@@ -63,7 +63,7 @@ function AppBar(props) {
     const colorMode = useContext(ColorModeContext);
     const theme = useTheme();
     const router = useRouter();
-    const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
+    const isSmall = useMediaQuery(theme.breakpoints.down('md'));
 
     const [open, setOpen] = useState(false);
 
@@ -123,19 +123,19 @@ function AppBar(props) {
         );
     });
 
+    const backgroundColor = theme.palette.background.default;
     const backgroundLinearGradient = useColorModeValue(
-        `linear-gradient(${alpha(theme.palette.background.default, 0.9)} 40%, ${alpha(theme.palette.background.default, 0)})`,
-        `linear-gradient(${theme.palette.background.default} 0%, ${alpha(theme.palette.background.default, 0)})`
+        `linear-gradient(${alpha(backgroundColor, 0.75)} 50%, rgba(0, 0, 0, 0))`,
+        `linear-gradient(${backgroundColor} 0%, ${alpha(backgroundColor, 0)})`
     );
+
     return (
         <React.Fragment>
 
             <MuiAppBar color='transparent' sx={{
                 boxShadow: 0,
                 pt: [1, 0],
-                background: !isSmall ?
-                    backgroundLinearGradient
-                    : 'none'
+                background: backgroundLinearGradient
             }}>
                 <Toolbar
                     component={Stack}
@@ -170,8 +170,7 @@ function AppBar(props) {
 
                 </Toolbar>
             </MuiAppBar>
-
-            <Toolbar sx={{ mt: 1 }} />
+            <Toolbar />
 
             <SwipeableDrawer
                 anchor='left'

@@ -14,6 +14,7 @@ import getRoute from '@/lib/getRoute';
 //Custom Components
 import AppBar from '@/components/appbar';
 import Footer from '@/components/footer';
+import Loader from '@/components/loader';
 //Styles
 import globalStyles from '@/styles/global';
 import 'cal-sans';
@@ -31,7 +32,7 @@ import SEO from '@/next-seo.config';
 const clientSideEmotionCache = createEmotionCache();
 
 function App({ Component, emotionCache = clientSideEmotionCache, pageProps }) {
-    const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+    const prefersDarkMode = useMediaQuery('dark');
     const router = useRouter();
 
     const [mode, setMode] = useState(prefersDarkMode ? 'dark' : 'light');
@@ -71,10 +72,12 @@ function App({ Component, emotionCache = clientSideEmotionCache, pageProps }) {
                     <CssBaseline />
                     <GlobalStyles styles={globalStyles} />
 
+                    <Loader />
+
                     {/* Navbar */}
                     {route !== 'admin' && (
                         <AppBar
-                            routes={['about', 'projects', 'blogs', 'snippets', 'resume']}
+                            routes={['about', 'projects', 'blogs', 'snippets', 'resume', 'contact']}
                         />
                     )}
 
@@ -83,14 +86,14 @@ function App({ Component, emotionCache = clientSideEmotionCache, pageProps }) {
                         name: 'theme-color',
                         content: theme.palette.primary.main
                     }]} />
+
                     <Component {...pageProps} />
 
-                    {/* Footer */}
                     {route !== 'admin' && <Footer />}
 
                 </ThemeProvider>
             </ColorModeContext.Provider>
-        </CacheProvider >
+        </CacheProvider>
     );
 }
 

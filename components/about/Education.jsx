@@ -21,7 +21,7 @@ function EducationBlock({ children: { image, name, degree, branch, duration, lin
                 <NextImage
                     layout='fill'
                     objectFit='fill'
-                    src={image}
+                    src={`/${image}`}
                 />
             }
             content={
@@ -46,26 +46,7 @@ function EducationBlock({ children: { image, name, degree, branch, duration, lin
     );
 }
 
-function Education() {
-    const data = [
-        {
-            image: '/images/iiitg-logo.png',
-            name: 'Indian Institute of Information Technology, Guwahati',
-            degree: 'Bachelors in Technolgy (B. Tech)',
-            branch: 'Computer Science and Engineering',
-            duration: '2019 - 2023',
-            link: 'https://www.iiitg.ac.in/'
-        },
-        {
-            image: '/images/afs-vn.jpg',
-            name: 'Air Force School Viman Nagar, Pune',
-            degree: 'Higher Secondary Education',
-            branch: 'Mathematics, Physics, Chemistry and C++',
-            duration: '2016 - 2018',
-            link: 'http://www.airforceschoolpune.ac.in/'
-        }
-    ];
-
+function Education({ children: data }) {
     return (
         <Section
             id='education'
@@ -74,7 +55,7 @@ function Education() {
             heading='Education'
         >
             <Grid container spacing={5}>
-                {data.map(item => (
+                {data?.map(item => (
                     <Grid key={item.name} item xs={12}>
                         <EducationBlock>{item}</EducationBlock>
                     </Grid>

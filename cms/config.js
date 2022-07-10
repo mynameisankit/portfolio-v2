@@ -5,7 +5,7 @@ import Projects from '@/cms/projects';
 import Blogs from '@/cms/blogs';
 import Snippets from '@/cms/snippets';
 //File Based Schemas
-import Links from '@/cms/links';
+import UserData from '@/cms/file/user_data';
 
 const config = {
     cms_manual_init: true,
@@ -22,10 +22,10 @@ const config = {
         Blogs,
         Snippets,
         {
-            label: 'Common Data',
-            name: 'common',
+            label: 'User Data',
+            name: 'user',
             files: [
-                Links
+                UserData
             ]
         }
     ]
