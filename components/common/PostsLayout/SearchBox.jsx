@@ -24,7 +24,7 @@ function SearchBox({ fuzzySearch }) {
             return;
 
         setResults(fuzzySearch?.search(query));
-    }, [query]);
+    }, [query, fuzzySearch]);
 
     const textColor = useColorModeValue('text.primary', 'text.secondary');
     return (

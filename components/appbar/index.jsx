@@ -128,6 +128,7 @@ function AppBar(props) {
         `linear-gradient(${alpha(backgroundColor, 0.75)} 50%, rgba(0, 0, 0, 0))`,
         `linear-gradient(${backgroundColor} 0%, ${alpha(backgroundColor, 0)})`
     );
+    const mode = useColorMode();
 
     return (
         <React.Fragment>
@@ -164,7 +165,7 @@ function AppBar(props) {
                     {!isSmall && (
                         <ModeSwitch
                             onChange={() => colorMode.toggleColorMode()}
-                            checked={useColorMode()}
+                            checked={mode}
                         />
                     )}
 

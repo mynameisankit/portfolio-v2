@@ -10,8 +10,6 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import MuiIconButton from '@mui/material/IconButton';
 import Paper from '@mui/material/Paper';
-import Divider from '@mui/material/Divider';
-import useColorModeValue from '@/components/hooks/useColorModeValue';
 import { styled, useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 //Icons
@@ -45,7 +43,7 @@ function PdfViewer({ data, pagination = false }) {
         }
 
         return file;
-    }, []);
+    }, [data]);
 
     const [numPages, setNumPages] = useState(0);
     const [pageNumber, setPageNumber] = useState(1);

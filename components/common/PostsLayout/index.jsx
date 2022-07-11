@@ -78,7 +78,7 @@ function PostsLayout({ posts, tagsPropName, paginationSettings, fuzzySearchProps
         //Fuzzy Search Init
         const { index, options } = fuzzySearchProps;
         fuzzySearch.current = new Fuse(posts, options, Fuse.parseIndex(JSON.parse(index)));
-    }, []);
+    }, [fuzzySearchProps, posts, tagsPropName]);
 
     const { page, rows, category, order } = settings;
 
