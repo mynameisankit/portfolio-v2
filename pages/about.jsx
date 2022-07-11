@@ -3,6 +3,7 @@ import path from 'path';
 import getJSON from '@/lib/getJSON';
 //Client-Side Imports
 import React from 'react';
+import { NextSeo } from 'next-seo';
 //Hooks
 import useColorModeValue from '@/components/hooks/useColorModeValue';
 //Custom Components
@@ -18,6 +19,11 @@ import DecorativeImageDarkMode from '@/images/about-dark.jpg';
 function About({ userData }) {
     return (
         <React.Fragment>
+            <NextSeo
+                title={`About | ankitkumar.live`}
+                description='About Me'
+            />
+
             <Header
                 title='About Me'
                 backgroundImage={useColorModeValue(DecorativeImageLightMode, DecorativeImageDarkMode)}

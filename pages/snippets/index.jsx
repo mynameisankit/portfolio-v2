@@ -6,6 +6,7 @@ import getFiles from '@/lib/getFiles';
 import getFrontMatter from '@/lib/util/getFrontMatter';
 //Client Side Imports
 import React from 'react';
+import { NextSeo } from 'next-seo';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 //Custom Components
@@ -21,10 +22,16 @@ function Snippets({ snippets, fuzzySearchProps, paginationSettings }) {
 
     return (
         <React.Fragment>
+            <NextSeo
+                title={`Snippets | ankitkumar.live`}
+                description='A collection of code snippets written by me and found on the Internet'
+            />
+
             <Header
                 title='Snippets'
                 backgroundImage={DecorativeImage}
             />
+
             <PostsLayout
                 posts={snippets}
                 tagsPropName='technology'

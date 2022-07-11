@@ -6,6 +6,7 @@ import getFiles from '@/lib/getFiles';
 import getFrontMatter from '@/lib/util/getFrontMatter';
 //Client Side Imports
 import React from 'react';
+import { NextSeo } from 'next-seo';
 import Divider from '@mui/material/Divider';
 //Custom Components
 import Post from '@/components/blogs/Post';
@@ -20,10 +21,16 @@ import DecorativeImageDarkMode from '@/images/blogs-dark.png';
 function Blogs({ blogs, paginationSettings, fuzzySearchProps }) {
     return (
         <React.Fragment>
+            <NextSeo
+                title={`Blogs | ankitkumar.live`}
+                description='My Blog'
+            />
+            
             <Header
                 title='Blogs'
                 backgroundImage={useColorModeValue(DecorativeImageLightMode, DecorativeImageDarkMode)}
             />
+
             <PostsLayout
                 posts={blogs}
                 tagsPropName='tags'
@@ -45,6 +52,7 @@ function Blogs({ blogs, paginationSettings, fuzzySearchProps }) {
             >
                 {data => <Post {...data} />}
             </PostsLayout>
+
         </React.Fragment>
     );
 }

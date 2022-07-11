@@ -5,15 +5,19 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/material/styles';
 
-function Header({ children, title, backgroundImage }) {
+function Header({ children, title, backgroundImage, sx, ...rest }) {
     const theme = useTheme();
 
     return (
-        <Box sx={{
-            position: 'relative',
-            minHeight: [300, 500],
-            mb: 5
-        }}>
+        <Box
+            sx={{
+                position: 'relative',
+                minHeight: [300, 500],
+                mb: 5,
+                ...sx
+            }}
+            {...rest}
+        >
             {backgroundImage && (
                 <Box sx={{
                     position: 'absolute',
@@ -38,7 +42,7 @@ function Header({ children, title, backgroundImage }) {
                     </Box>
                 </Box>
             )}
-            
+
             <Stack justifyContent='center' alignItems='center' sx={{
                 position: 'absolute',
                 height: 1, width: 1,

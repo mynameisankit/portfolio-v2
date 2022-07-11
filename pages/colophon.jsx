@@ -4,6 +4,7 @@ import getFiles from '@/lib/getFiles';
 import serialize from '@/lib/serialize';
 //Client Side Imports
 import React from 'react';
+import { NextSeo } from 'next-seo';
 import Typography from '@mui/material/Typography';
 //Custom Components
 import Section from '@/components/common/Section';
@@ -11,10 +12,18 @@ import MDXLayoutRenderer from '@/components/MDXComponents/MDXLayoutRenderer';
 
 function Colophon({ mdxSource }) {
     return (
-        <Section maxWidth='md' minHeight>
-            <Typography variant='h2' component='h1' gutterBottom>Colophon</Typography>
-            <MDXLayoutRenderer mdxSource={mdxSource} />
-        </Section>
+        <React.Fragment>
+            <NextSeo
+                title={`Colophon | ankitkumar.live`}
+                description='Colophon'
+            />
+            
+            <Section maxWidth='md' minHeight>
+                <Typography variant='h2' component='h1' gutterBottom>Colophon</Typography>
+                <MDXLayoutRenderer mdxSource={mdxSource} />
+            </Section>
+
+        </React.Fragment>
     );
 }
 

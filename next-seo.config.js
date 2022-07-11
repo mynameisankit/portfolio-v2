@@ -1,10 +1,11 @@
 const SEO = {
-    title: 'Ankit Kumar | Portfolio v2',
+    title: 'Home | ankitkumar.live',
+    description: `Ankit Kumar's Portfolio`,
     openGraph: {
         type: 'website',
         locale: 'en_IE',
-        url: 'http://localhost:3000/',
-        site_name: 'Ankit Kumar | Portfolio v2',
+        url: 'https://www.ankit-kumar.live',
+        site_name: 'ankitkumar.live',
     },
     twitter: {
         handle: '@bizzare_kumar',

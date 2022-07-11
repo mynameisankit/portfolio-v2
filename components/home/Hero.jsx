@@ -12,9 +12,13 @@ import DecorativeImageDarkMode from '@/images/home-dark.jpg';
 
 function Hero() {
     return (
-        <Header backgroundImage={useColorModeValue(DecorativeImageLightMode, DecorativeImageDarkMode)}>
+        <Header
+            backgroundImage={useColorModeValue(DecorativeImageLightMode, DecorativeImageDarkMode)}
+            sx={{
+                height: '80vh'
+            }}>
             <Typography component='div' align='left'>
-                <Typography variant='h4' component='h4' gutterBottom>
+                <Typography variant='h4' component='p' gutterBottom>
                     Hi, my name is
                 </Typography>
 

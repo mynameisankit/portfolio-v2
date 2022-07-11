@@ -3,6 +3,7 @@ import path from 'path';
 import getJSON from '@/lib/getJSON';
 //Client-Side Imports
 import React from 'react';
+import { NextSeo } from 'next-seo';
 import { useTheme } from '@mui/material/styles';
 //Custom Components
 import Featured from '@/components/projects/Featured';
@@ -19,16 +20,24 @@ function ProjectsPage({ featured, projects }) {
 
     return (
         <React.Fragment>
+            <NextSeo
+                title={`Projects | ankitkumar.live`}
+                description='My Projects'
+            />
+
             <Header
                 title='Projects'
                 backgroundImage={useColorModeValue(DecorativeImageLightMode, DecorativeImageDarkMode)}
             />
+
             <Featured>
                 {featured}
             </Featured>
+
             <Projects sx={{ py: theme.spacing(8) }}>
                 {projects}
             </Projects>
+
         </React.Fragment>
     );
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
+import { NextSeo } from 'next-seo';
 import Typography from '@mui/material/Typography';
 //Custom Components
 import Section from '@/components/common/Section';
@@ -25,9 +26,15 @@ const CMS = dynamic(() =>
 function AdminPage() {
     return (
         <React.Fragment>
+            <NextSeo
+                nofollow
+                noindex
+            />
+
             <Head>
                 <title>Portfolio v2 | Admin Panel</title>
             </Head>
+
             <CMS />
         </React.Fragment>
     );

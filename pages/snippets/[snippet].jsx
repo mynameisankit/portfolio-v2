@@ -16,8 +16,16 @@ function Snippet({ mdxSource, frontMatter, toc }) {
     return (
         <React.Fragment>
             <NextSeo
-                title={`${title} | Snippets | Portfolio v2`}
+                title={`${title} | Snippets | ankitkumar.live`}
                 description={abstract}
+                openGraph={{
+                    type: 'article',
+                    article: {
+                        publishedTime: frontMatter.date,
+                        authors: ['https://http://www.ankit-kumar.live/'],
+                        tags: [frontMatter.technology]
+                    }
+                }}
             />
 
             <Post
@@ -39,7 +47,7 @@ export async function getStaticProps({ params }) {
 
     const ROOT = path.join(process.cwd(), 'data', 'snippets');
 
-    let filePath = path.join(ROOT, `${title}.md`); 
+    let filePath = path.join(ROOT, `${title}.md`);
     if (!fs.existsSync(filePath))
         filePath = path.join(ROOT, `${title}.mdx`);
 

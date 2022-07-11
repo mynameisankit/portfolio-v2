@@ -54,6 +54,9 @@ function SearchBox({ fuzzySearch }) {
                     '& label': {
                         color: textColor
                     },
+                    '& label.Mui-focused': {
+                        color: textColor
+                    },
                     '& .MuiFilledInput-root': {
                         color: textColor
                     }
