@@ -1,6 +1,6 @@
 ---
 title: Creating Table Of Contents
-abstract: Something
+abstract: Create a table of contents given an array of headings coupled with their depth.
 technology: javascript
 date: 2021-11-26T08:36:14.228Z
 ---
