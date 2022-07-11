@@ -2,7 +2,7 @@
   "title": "IIITG Technical Board",
   "abstract": "A SPA(Single Page Application) for the technical board and clubs of my institute, which uses client-side data fetching strategy using firebase firestore and firebase API. The application also has a dashboard to add and edit the content of the club pages using input forms and Drag and Drop ImageUploads.",
   "thumbnail": "images/admin-panel.png",
-  "github": "github.com/IIITG-Open-Source/Technical-Board-Portal",
+  "github": "https://github.com/IIITG-Open-Source/Technical-Board-Portal",
   "techStack": [
     "JavaScript",
     "React.js",
