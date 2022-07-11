@@ -1,0 +1,8 @@
+{
+  "techStack": [
+    "C"
+  ],
+  "title": "C-Shell",
+  "github_repo": "https://github.com/mynameisankit/c-shell",
+  "abstract": "A UNIX-based shell that executes single-line user commands as well as script files."
+}
