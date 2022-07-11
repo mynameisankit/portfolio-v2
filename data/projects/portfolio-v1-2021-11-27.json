@@ -1,7 +1,7 @@
 {
   "title": "Portfolio v1",
   "abstract": "The first iteration of my personal portfolio.",
-  "github_repo": "portfolio-v1",
+  "github_repo": "https://github.com/mynameisankit/portfolio-v1",
   "extLink": "https://mynameisankit.github.io/portfolio-v1/",
   "techStack": [
     "HTML",

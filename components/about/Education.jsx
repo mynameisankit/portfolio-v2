@@ -51,7 +51,7 @@ function Education({ children: data }) {
         <Section
             id='education'
             maxWidth='lg'
-            gutterBottom={8}
+            gutterBottom={20}
             heading='Education'
         >
             <Grid container spacing={5}>

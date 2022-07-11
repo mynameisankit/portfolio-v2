@@ -48,8 +48,11 @@ function Loader() {
                 backgroundColor: 'background.default',
                 zIndex: theme.zIndex.tooltip,
                 height: '100vh', width: '100vw',
-                left: complete ? '100%' : 0,
-                transition: theme.transitions.create(['left'])
+                opacity: complete ? 0 : 1,
+                pointerEvents: complete ? 'none' : 'auto',
+                transition: theme.transitions.create(['opacity'], {
+                    duration: complete ? theme.transitions.duration.standard : 0
+                })
             }}>
             <CircularProgress size={60} />
             <Typography variant='h4' component='h4'>

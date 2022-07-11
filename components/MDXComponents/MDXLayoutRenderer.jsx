@@ -4,13 +4,13 @@ import DefaultComponents from '@/components/MDXComponents/default';
 //Custom Components
 import TableOfContents from '@/components/MDXComponents/TableOfContents';
 
-function MDXLayoutRenderer({ mdxSource, layout, toc, frontMatter, ...rest }) {
+function MDXLayoutRenderer({ mdxSource, toc, ...rest }) {
     const MDXLayout = useMemo(() => getMDXComponent(mdxSource), [mdxSource]);
 
     return (
         <React.Fragment>
             {/* Table Of Contents */}
-            <TableOfContents toc={toc} />
+            <TableOfContents toc={toc ? toc : []} />
             
             {/* Body */}
             <MDXLayout components={DefaultComponents} {...rest} />

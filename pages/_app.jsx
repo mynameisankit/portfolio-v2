@@ -8,7 +8,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider } from '@emotion/react';
 import createEmotionCache from '@/styles/createEmotionCache';
 import smoothscroll from 'smoothscroll-polyfill';
-import useMediaQuery from '@mui/material/useMediaQuery';
 //Utility
 import getRoute from '@/lib/getRoute';
 //Custom Components
@@ -32,10 +31,9 @@ import SEO from '@/next-seo.config';
 const clientSideEmotionCache = createEmotionCache();
 
 function App({ Component, emotionCache = clientSideEmotionCache, pageProps }) {
-    const prefersDarkMode = useMediaQuery('dark');
     const router = useRouter();
 
-    const [mode, setMode] = useState(prefersDarkMode ? 'dark' : 'light');
+    const [mode, setMode] = useState('dark');
     const [route, setRoute] = useState('Home');
 
     const handleRouteChange = (url) => {

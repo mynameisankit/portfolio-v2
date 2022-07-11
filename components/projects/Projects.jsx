@@ -41,22 +41,22 @@ function ProjectCard({ children: data }) {
                 display: 'flex',
                 flexDirection: 'row',
                 alignItems: 'center',
+                color: 'primary.contrastText'
             }}>
                 <FolderOpenOutlinedIcon fontSize='large' />
                 <Stack
                     direction='row'
                     justifyContent='flex-end'
                     alignItems='center'
-                    sx={{ color: 'primary.contrastText' }}
                     flexGrow={2}
                 >
                     {data.github_repo && (
-                        <LinkButton type='icon' href={`https://github.com/mynameisankit/${data.github_repo}`}>
+                        <LinkButton type='icon' href={data.github_repo} color='inherit'>
                             <GitHubIcon fontSize='large' />
                         </LinkButton>
                     )}
                     {data.extLink && (
-                        <LinkButton type='icon' href={data.extLink}>
+                        <LinkButton type='icon' href={data.extLink} color='inherit'>
                             <LinkIcon fontSize='large' />
                         </LinkButton>
                     )}

@@ -6,6 +6,7 @@ import Blogs from '@/cms/blogs';
 import Snippets from '@/cms/snippets';
 //File Based Schemas
 import UserData from '@/cms/file/user_data';
+import Colophon from '@/cms/file/colophon';
 
 const config = {
     cms_manual_init: true,
@@ -26,6 +27,13 @@ const config = {
             name: 'user',
             files: [
                 UserData
+            ]
+        },
+        {
+            label: 'Colophon',
+            name: 'colophon',
+            files: [
+                Colophon
             ]
         }
     ]

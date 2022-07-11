@@ -10,7 +10,7 @@ function Technologies({ children: data }) {
         <Section
             id='tools'
             maxWidth='sm'
-            gutterBottom={6}
+            gutterBottom={24}
             heading='Technologies'
             caption='This is a list of technologies that I have worked on or currently learning.'
         >

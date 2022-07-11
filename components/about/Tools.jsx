@@ -16,7 +16,7 @@ function Tools({ children: data }) {
         <Section
             id='tools'
             maxWidth='lg'
-            gutterBottom={8}
+            gutterBottom={24}
             heading='Tools'
             caption='This is my list of software tools that I use frequently. I do my best at updating it whenever a change occurs.'
         >

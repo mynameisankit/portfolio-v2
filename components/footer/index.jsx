@@ -1,5 +1,5 @@
 import React from 'react';
-import Box from '@mui/material/Box';
+import dayjs from 'dayjs';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 //Custom Components
@@ -13,29 +13,17 @@ function Footer() {
     const socialMediaLinks = UserData.socialMediaLinks;
 
     return (
-        <Section id='footer' minHeight={false} maxWidth={false}>
+        <Section
+            id='footer'
+            minHeight={false}
+            maxWidth={false}
+        >
 
-            <Stack justifyContent='space-between' alignItems='center' sx={{
-                mt: 6, mb: 2,
-                flexDirection: {
-                    xs: 'column-reverse',
-                    md: 'row'
-                }
-            }}>
-                {/* Tech Stack */}
-                <Stack direction='row' alignItems='center'>
-                    <Typography variant='h6'>Built Using</Typography>
-                    {[
-                        { tech: 'Next.js', url: 'https://nextjs.org/' },
-                        { tech: 'Material-UI', url: 'https://mui.com/' },
-                        { tech: 'MDX', url: 'https://mdxjs.com/' },
-                        { tech: 'NetlifyCMS', url: 'https://www.netlifycms.org/' }
-                    ].map(({ tech, url }) => (
-                        <Link key={tech} href={url} type='icon' buttonProps={{ size: 'large' }} >
-                            <ReactIcons icon={tech} />
-                        </Link>
-                    ))}
-                </Stack>
+            <Stack
+                justifyContent='center'
+                alignItems='center'
+                direction='column'
+                sx={{ mt: 6, mb: 2 }}>
 
                 {/* Social Media URLs */}
                 <Stack direction='row'>
@@ -47,6 +35,21 @@ function Footer() {
                         ))
                     }
                 </Stack>
+
+                <Stack direction='row' gap={2}>
+                    <Typography variant='body1'>
+                        Copyright © {dayjs().year()}
+                    </Typography>
+
+                    <Typography variant='body1'>
+                        •
+                    </Typography>
+
+                    <Link href='/colophon'>
+                        Colophon
+                    </Link>
+                </Stack>
+
             </Stack>
 
         </Section>
