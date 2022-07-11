@@ -5,8 +5,6 @@ technology: javascript
 date: 2021-11-26T08:36:14.228Z
 ---
 
-Hello I am a ``code`` block
-
 ```js:createTree.js
 function createTree(toc) {
     const stk = [];

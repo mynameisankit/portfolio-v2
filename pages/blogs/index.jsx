@@ -34,6 +34,14 @@ function Blogs({ blogs, paginationSettings, fuzzySearchProps }) {
                         color: 'text.primary'
                     }} />
                 }
+                postsProp={{
+                    container: {
+                        spacing: 0
+                    },
+                    item: {
+                        xs: 12
+                    }
+                }}
             >
                 {data => <Post {...data} />}
             </PostsLayout>

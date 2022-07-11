@@ -37,7 +37,7 @@ function reducer(state, action) {
         return state;
 }
 
-function PostsLayout({ posts, tagsPropName, paginationSettings, fuzzySearchProps, render, children, divider, ...rest }) {
+function PostsLayout({ posts, postsProp, tagsPropName, paginationSettings, fuzzySearchProps, render, children, divider }) {
     const theme = useTheme();
     const Render = render || children;
 
@@ -99,20 +99,27 @@ function PostsLayout({ posts, tagsPropName, paginationSettings, fuzzySearchProps
                     item
                     xs={12} md={8}
                     divider={divider}>
-                    <Stack {...rest}>
+
+                    <Grid container {...postsProp.container}>
                         {Render && currPosts.length
                             ? (
                                 currPosts
                                     .slice((page - 1) * rows, Math.min(currPosts.length, page * rows))
                                     .map(post => (
-                                        <Render key={post.title} {...post} />
+                                        <Grid item key={post.title} {...postsProp.item}>
+                                            <Render {...post} />
+                                        </Grid>
                                     ))
                             ) : (
                                 <Typography gutterBottom variant='h4'>
-                                    No posts with the tag &quot;{category}&quot; found
+                                    {category === 'All' ?
+                                        `No Posts Found` :
+                                        `No posts with the tag &quot;{category}&quot; found`
+                                    }
                                 </Typography>
                             )}
-                    </Stack>
+                    </Grid>
+
                 </Grid>
 
                 {/* Filters */}

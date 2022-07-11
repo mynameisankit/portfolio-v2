@@ -30,7 +30,16 @@ function Snippets({ snippets, fuzzySearchProps, paginationSettings }) {
                 tagsPropName='technology'
                 paginationSettings={paginationSettings}
                 fuzzySearchProps={fuzzySearchProps}
-                direction={isSmall ? 'column' : 'row'}
+                postsProp={{
+                    container: {
+                        direction: isSmall ? 'column' : 'row',
+                        spacing: 4
+                    },
+                    item: {
+                        xs: 12,
+                        md: 6
+                    }
+                }}
             >
                 {data => <Snippet {...data} />}
             </PostsLayout>
