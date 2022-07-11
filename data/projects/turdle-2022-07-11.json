@@ -1,0 +1,10 @@
+{
+  "techStack": [
+    "React.js",
+    "Ink.js"
+  ],
+  "title": "Turdle",
+  "abstract": "Wordle for the Command Line",
+  "github_repo": "https://github.com/mynameisankit/turdle",
+  "extLink": "https://www.npmjs.com/package/turdle"
+}
