@@ -1,6 +1,5 @@
 {
   "techStack": [
-    "JavaScript",
     "React.js",
     "Next.js",
     "Material-UI",
@@ -8,7 +7,7 @@
     "MDX"
   ],
   "title": "Portfolio v2",
-  "abstract": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vehicula vestibulum quam gravida fringilla. Sed lectus purus, hendrerit at massa et, ullamcorper lobortis lacus. Vivamus sit amet elementum elit. Aliquam fringilla tellus at nisl accumsan vehicula. Suspendisse potenti.",
+  "abstract": "My portfolio-cum-blog which uses MDX leveraging the use of React components with the ease and simplicity of markdown to generate blog pages. The content can be dynamically added using NetlifyCMS which uses Github Repository as remote storage. The data is parsed at build time using Next.js getStaticProps to create a static website eliminating the overhead of maintaining a separate database and server.",
   "thumbnail": "images/construction.jpg",
   "github": "https://github.com/mynameisankit/portfolio-v2"
 }
