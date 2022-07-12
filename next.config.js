@@ -6,6 +6,6 @@ module.exports = withPlaiceholder({
     compiler: {
         removeConsole: {
             exclude: ['error'],
-        },
+        }
     }
 });

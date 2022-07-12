@@ -63,7 +63,7 @@ function AppBar(props) {
     const colorMode = useContext(ColorModeContext);
     const theme = useTheme();
     const router = useRouter();
-    const isSmall = useMediaQuery(theme.breakpoints.down('md'));
+    const isSmall = useMediaQuery(theme.breakpoints.down('lg'));
 
     const [open, setOpen] = useState(false);
 
@@ -134,8 +134,7 @@ function AppBar(props) {
         <React.Fragment>
 
             <MuiAppBar color='transparent' sx={{
-                boxShadow: 0,
-                pt: [1, 0],
+                boxShadow: 0, pt: 1,
                 background: backgroundLinearGradient
             }}>
                 <Toolbar
@@ -193,7 +192,7 @@ function AppBar(props) {
                 >
                     <Box sx={{
                         position: 'absolute',
-                        left: 6, top: 6
+                        left: 10, top: 10
                     }}>
                         <ModeSwitch
                             onChange={() => colorMode.toggleColorMode()}
@@ -204,7 +203,7 @@ function AppBar(props) {
                     {/* Menu Close Button */}
                     <Box sx={{
                         position: 'absolute',
-                        right: 6, top: 6
+                        right: 10, top: 10
                     }}>
                         <MenuButton aria-label='Close Menu' onClick={() => setOpen(false)} sx={{ boxShadow: 0 }}>
                             <CloseIcon fontSize='large' />

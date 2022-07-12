@@ -272,11 +272,11 @@ function Contact() {
                     }
                 }}>
                     <Image
-                        priority
                         src={DecorativeImage}
                         layout='fill'
                         objectFit='cover'
-                        alt="Contact"
+                        alt='Contact'
+                        placeholder='blur'
                     />
                 </Box>
             </Paper>

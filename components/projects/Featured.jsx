@@ -83,11 +83,11 @@ function Project({ children: data, direction }) {
                         }
                     }}>
                         <Image
-                            src={`/${data.thumbnail}`}
+                            {...(data.thumbnail)}
                             layout='fill'
                             objectFit='cover'
                             alt={`${data.name} Project Image`}
-                            priority
+                            placeholder='blur'
                         />
                     </Box>
                 </Link>

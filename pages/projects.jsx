@@ -1,6 +1,7 @@
 //Server Side Imports
 import path from 'path';
 import getJSON from '@/lib/getJSON';
+import { getPlaiceholder } from 'plaiceholder';
 //Client-Side Imports
 import React from 'react';
 import { NextSeo } from 'next-seo';
@@ -44,9 +45,17 @@ function ProjectsPage({ featured, projects }) {
 
 export async function getStaticProps() {
     const CWD = process.cwd();
+
+    const featured = getJSON(path.join(CWD, 'data', 'featured'));
+    
+    for (const data of featured) {
+        const { base64: blurDataURL, img: { src } } = await getPlaiceholder(`/${data.thumbnail}`);
+        data.thumbnail = { blurDataURL, src };
+    }
+
     return {
         props: {
-            featured: getJSON(path.join(CWD, 'data', 'featured')),
+            featured,
             projects: getJSON(path.join(CWD, 'data', 'projects'))
         }
     };

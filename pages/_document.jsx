@@ -18,6 +18,7 @@ export default class MyDocument extends Document {
                         crossOrigin="anonymous"
                     />
                     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+                    <link rel='shortcut icon' href='/favicon.jpeg' />
                 </Head>
                 <body>
                     <Main />

@@ -19,7 +19,7 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
 const IconButton = styled(MuiIconButton)(({ theme }) => ({
-    
+
 }));
 
 const Document = styled(ReactPDFDocument)({
@@ -53,97 +53,92 @@ function PdfViewer({ data, pagination = false }) {
     const prev = () => setPageNumber(pageNumber - 1);
 
     const isBetweenLgAndXl = useMediaQuery(theme.breakpoints.up('lg'));
-    const isBetweenMdAndLg = useMediaQuery(theme.breakpoints.between('md', 'lg'));
-    const isBetweenSmAndMd = useMediaQuery(theme.breakpoints.between('sm', 'md'));
+    const isBelowMd = useMediaQuery(theme.breakpoints.down('md'));
 
     let scale;
     if (isBetweenLgAndXl)
-        scale = 1.8;
-    else if (isBetweenMdAndLg)
-        scale = 1.5;
-    else if (isBetweenSmAndMd)
-        scale = 1;
+        scale = 2;
     else
-        scale = 0.8;
+        scale = 1.4
 
     return (
         <Box
             onMouseOver={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
         >
-            <Paper elevation={5} sx={{
-                position: 'relative',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center'
-            }}>
-                <Document
-                    file={file}
-                    onLoadSuccess={({ numPages }) => setNumPages(numPages)}
-                    onLoadError={(error) => console.log(error)}
-                    externalLinkRel='noopener noreferrer'
-                    externalLinkTarget='_blank'
-                >
-                    <Page
-                        pageNumber={pageNumber}
-                        renderForms={false}
-                        renderMode='canvas'
-                        rotate={0}
-                        scale={scale}
-                    />
-                </Document>
+            {!isBelowMd && (
+                <Box sx={{
+                    position: 'relative',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    py: 2
+                }}>
+                    <Document
+                        file={file}
+                        onLoadSuccess={({ numPages }) => setNumPages(numPages)}
+                        onLoadError={(error) => console.log(error)}
+                        externalLinkRel='noopener noreferrer'
+                        externalLinkTarget='_blank'
+                    >
+                        <Page
+                            pageNumber={pageNumber}
+                            renderForms={false}
+                            renderMode='canvas'
+                            rotate={0}
+                            scale={scale}
+                        />
+                    </Document>
 
-                <Stack
-                    component={Paper}
-                    elevation={10}
-                    direction='row'
-                    justifyContent='center'
-                    alignItems='center'
-                    spacing={2}
-                    sx={{
-                        mt: 2,
-                        position: 'absolute',
-                        bottom: 50,
-                        userSelect: 'none',
-                        opacity: (pagination && hover) ? 1 : 0,
-                        transition: theme.transitions.create(['opacity']),
-                        backgroundColor: theme.palette.background.default
-                    }}
-                >
-                    <IconButton disabled={pageNumber === 1} onClick={prev} size='large'>
-                        <KeyboardArrowLeftIcon fontSize='inherit' />
-                    </IconButton>
-                    <Typography variant='h6' component='h6'>
-                        Page {Math.min(pageNumber, numPages)} of {numPages}
-                    </Typography>
-                    <IconButton disabled={pageNumber === numPages || !numPages} onClick={next} size='large'>
-                        <KeyboardArrowRightIcon fontSize='inherit' />
-                    </IconButton>
-                </Stack>
+                    <Stack
+                        component={Paper}
+                        elevation={10}
+                        direction='row'
+                        justifyContent='center'
+                        alignItems='center'
+                        spacing={2}
+                        sx={{
+                            mt: 2,
+                            position: 'absolute',
+                            bottom: 80,
+                            userSelect: 'none',
+                            opacity: (pagination && hover) ? 1 : 0,
+                            transition: theme.transitions.create(['opacity']),
+                            backgroundColor: theme.palette.background.default
+                        }}
+                    >
+                        <IconButton disabled={pageNumber === 1} onClick={prev} size='large'>
+                            <KeyboardArrowLeftIcon fontSize='inherit' />
+                        </IconButton>
+                        <Typography variant='h6' component='h6'>
+                            Page {Math.min(pageNumber, numPages)} of {numPages}
+                        </Typography>
+                        <IconButton disabled={pageNumber === numPages || !numPages} onClick={next} size='large'>
+                            <KeyboardArrowRightIcon fontSize='inherit' />
+                        </IconButton>
+                    </Stack>
 
-                <Button
-                    variant='contained'
-                    size='large'
-                    sx={{
-                        position: 'absolute',
-                        bottom: -20
-                    }}
-                    onClick={() => {
-                        {/* TODO: ISSUE - Not Working */ }
-                        if (file instanceof Object) {
-                            const blob = new Blob([file.data], { type: 'application/pdf' });
-                            saveAs(blob, `${file.name}.pdf`);
-                        }
-                        else
-                            saveAs(file, file);
-                    }}
-                >
-                    <Typography variant='h5' component='h5'>
-                        Download PDF
-                    </Typography>
-                </Button>
-            </Paper>
+                    <Button
+                        variant='contained'
+                        size='large'
+                        sx={{ position: 'absolute', bottom: 0 }}
+                        onClick={() => {
+                            {/* TODO: ISSUE - Not Working */ }
+                            if (file instanceof Object) {
+                                const blob = new Blob([file.data], { type: 'application/pdf' });
+                                saveAs(blob, `${file.name}.pdf`);
+                            }
+                            else
+                                saveAs(file, file);
+                        }}
+                    >
+                        <Typography variant='h5' component='h5'>
+                            Download PDF
+                        </Typography>
+                    </Button>
+                </Box>
+            )}
         </Box>
     );
 }

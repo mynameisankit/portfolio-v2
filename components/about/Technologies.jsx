@@ -6,6 +6,7 @@ import Tooltip from '@/components/common/Tooltip';
 import ReactIcons from '@/components/common/ReactIcons';
 
 function Technologies({ children: data }) {
+    //Optimize for phone view
     return (
         <Section
             id='tools'

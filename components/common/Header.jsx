@@ -33,10 +33,11 @@ function Header({ children, title, backgroundImage, sx, ...rest }) {
                 }}>
                     <Box sx={{ position: 'relative', width: 1, height: 1 }}>
                         <Image
+                            placeholder='blur'
                             src={backgroundImage}
                             layout='fill'
                             objectFit='cover'
-                            alt="Blogs"
+                            alt='Blogs'
                             priority
                         />
                     </Box>

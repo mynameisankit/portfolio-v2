@@ -10,6 +10,7 @@ import DecorativeImageLightMode from '@/images/resume-light.jpg';
 import DecorativeImageDarkMode from '@/images/resume-dark.jpg';
 
 function Resume() {
+    //Optimize for phone
     return (
         <React.Fragment>
             <NextSeo

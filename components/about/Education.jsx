@@ -15,6 +15,7 @@ function EducationBlock({ children: { image, name, degree, branch, duration, lin
     const theme = useTheme();
     const breakpoint = useMediaQuery(theme.breakpoints.down('md'));
 
+    //Optimize for phone view
     return (
         <Card
             media={

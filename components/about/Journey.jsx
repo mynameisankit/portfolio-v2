@@ -12,6 +12,7 @@ import Section from '@/components/common/Section';
 import ReactIcons from '@/components/common/ReactIcons';
 
 function JourneyItem({ year, title, description, icon, isLast }) {
+    //TODO: Optimize for phone view
     return (
         <TimelineItem>
             <TimelineOppositeContent sx={{ m: 'auto 0' }} variant='h6'>
