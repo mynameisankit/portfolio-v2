@@ -6,8 +6,8 @@ import ContactForm from '@/components/contact';
 //Hooks
 import useColorModeValue from '@/components/hooks/useColorModeValue';
 //Images
-import DecorativeImageLightMode from '@/images/contact-light.jpg';
-import DecorativeImageDarkMode from '@/images/contact-dark.jpg';
+import DecorativeImageLightMode from '@/images/contact-light.webp';
+import DecorativeImageDarkMode from '@/images/contact-dark.webp';
 
 function Contact() {
     return (

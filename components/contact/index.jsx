@@ -18,7 +18,7 @@ import useColorModeValue from '@/hooks/useColorModeValue';
 //Custom Components
 import Section from '@/components/common/Section';
 //Image
-import DecorativeImage from '@/images/contact.jpg';
+import DecorativeImage from '@/images/contact.webp';
 //Material-UI Icons
 import SendIcon from '@mui/icons-material/Send';
 

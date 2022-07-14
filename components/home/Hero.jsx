@@ -7,8 +7,8 @@ import HeroPlay from '@/components/home/HeroPlay';
 //Hooks
 import useColorModeValue from '@/hooks/useColorModeValue';
 //Images
-import DecorativeImageLightMode from '@/images/home-light.jpg';
-import DecorativeImageDarkMode from '@/images/home-dark.jpg';
+import DecorativeImageLightMode from '@/images/home-light.webp';
+import DecorativeImageDarkMode from '@/images/home-dark.webp';
 
 function Hero() {
     return (

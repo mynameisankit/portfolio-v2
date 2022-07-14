@@ -1,4 +1,5 @@
 import React from 'react';
+import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 //Custom Components
 import Pre from './Pre';
@@ -16,7 +17,7 @@ const MDXComponents = {
         ), {})
     ),
     p: ({ children, ...rest }) => (
-        <Typography component='p' variant='body1' sx={{ mb: 3 }} {...rest}>
+        <Typography variant='body1' sx={{ mb: 3 }} {...rest}>
             {children}
         </Typography>
     ),
@@ -37,6 +38,23 @@ const MDXComponents = {
         >
             {children}
         </Typography>
+    ),
+    Blockquote: ({ children, ...rest }) => (
+        <Stack
+            sx={{
+                p: 2, mb: 2, borderRadius: 1,
+                direction: 'row',
+                backgroundColor: 'secondary.main',
+                borderLeft: 4,
+                borderColor: 'primary.main',
+                fontStyle: 'italic',
+            }}
+            {...rest}
+        >
+            <Typography variant='subtitle1'>
+                &ldquo;{children}&ldquo;
+            </Typography>
+        </Stack>
     )
 };
 

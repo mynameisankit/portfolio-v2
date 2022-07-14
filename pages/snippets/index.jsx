@@ -14,7 +14,7 @@ import Snippet from '@/components/snippets/Snippet';
 import PostsLayout from '@/components/common/PostsLayout';
 import Header from '@/components/common/Header';
 //Image
-import DecorativeImage from '@/images/snippets.jpg';
+import DecorativeImage from '@/images/snippets.webp';
 
 function Snippets({ snippets, fuzzySearchProps, paginationSettings }) {
     const theme = useTheme();

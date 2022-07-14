@@ -13,8 +13,8 @@ import Header from '@/components/common/Header';
 //Hooks
 import useColorModeValue from '@/components/hooks/useColorModeValue';
 //Image
-import DecorativeImageLightMode from '@/images/projects-light.png';
-import DecorativeImageDarkMode from '@/images/projects-dark.png';
+import DecorativeImageLightMode from '@/images/projects-light.webp';
+import DecorativeImageDarkMode from '@/images/projects-dark.webp';
 
 function ProjectsPage({ featured, projects }) {
     const theme = useTheme();

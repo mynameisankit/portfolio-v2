@@ -6,7 +6,7 @@
     "MySQL"
   ],
   "title": "Real Estate Management System",
-  "thumbnail": "images/real-estate-management.png",
+  "thumbnail": "images/real-estate-management.webp",
   "github": "https://github.com/mynameisankit/real-estate-management-system",
   "abstract": "A website where users can buy and sell properties with data visualization features for the admins to observe the performance of agents. The app uses a mix of Static Site Generation(SSG) and Server Side Rendering(SSR) to generate pages."
 }

@@ -8,6 +8,6 @@
   ],
   "title": "Portfolio v2",
   "abstract": "My portfolio-cum-blog which uses MDX leveraging the use of React components with the ease and simplicity of markdown to generate blog pages. The content can be dynamically added using NetlifyCMS which uses Github Repository as remote storage. The data is parsed at build time using Next.js getStaticProps to create a static website eliminating the overhead of maintaining a separate database and server.",
-  "thumbnail": "images/portfolio-v2.png",
+  "thumbnail": "images/portfolio-v2.webp",
   "github": "https://github.com/mynameisankit/portfolio-v2"
 }

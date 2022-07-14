@@ -15,8 +15,8 @@ import PostsLayout from '@/components/common/PostsLayout';
 //Hooks
 import useColorModeValue from '@/components/hooks/useColorModeValue';
 //Image
-import DecorativeImageLightMode from '@/images/blogs-light.png';
-import DecorativeImageDarkMode from '@/images/blogs-dark.png';
+import DecorativeImageLightMode from '@/images/blogs-light.webp';
+import DecorativeImageDarkMode from '@/images/blogs-dark.webp';
 
 function Blogs({ blogs, paginationSettings, fuzzySearchProps }) {
     return (

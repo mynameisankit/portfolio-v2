@@ -13,8 +13,8 @@ import Technologies from '@/components/about/Technologies';
 import Journey from '@/components/about/Journey';
 import Header from '@/components/common/Header';
 //Images
-import DecorativeImageLightMode from '@/images/about-light.jpg';
-import DecorativeImageDarkMode from '@/images/about-dark.jpg';
+import DecorativeImageLightMode from '@/images/about-light.webp';
+import DecorativeImageDarkMode from '@/images/about-dark.webp';
 
 function About({ userData }) {
     return (

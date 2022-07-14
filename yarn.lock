@@ -7347,6 +7347,13 @@ remark-mdx-frontmatter@^1.1.1:
     js-yaml "^4.0.0"
     toml "^3.0.0"
 
+remark-mdx-images@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/remark-mdx-images/-/remark-mdx-images-1.0.3.tgz#c20b42c74eaca413b3ca104b43d391ffaed1e9ab"
+  integrity sha512-+0/EV3SvO9PUaUGlPphM3n5cMsnQE57n2tMwZMiT6YlTKjVr/FuhOynt6WQGEes7enpL3WpbJuycfWGLrH6S5w==
+  dependencies:
+    unist-util-visit "^2.0.0"
+
 remark-parse@^10.0.0:
   version "10.0.1"
   resolved "https://registry.yarnpkg.com/remark-parse/-/remark-parse-10.0.1.tgz#6f60ae53edbf0cf38ea223fe643db64d112e0775"

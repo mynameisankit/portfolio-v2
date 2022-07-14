@@ -6,8 +6,8 @@ import Section from '@/components/common/Section';
 import PdfViewer from '@/components/common/PdfViewer';
 import useColorModeValue from '@/components/hooks/useColorModeValue';
 //Image
-import DecorativeImageLightMode from '@/images/resume-light.jpg';
-import DecorativeImageDarkMode from '@/images/resume-dark.jpg';
+import DecorativeImageLightMode from '@/images/resume-light.webp';
+import DecorativeImageDarkMode from '@/images/resume-dark.webp';
 
 function Resume() {
     //Optimize for phone
