@@ -1,11 +1,11 @@
 {
   "socialMediaLinks": {
-    "github": "https://github.com/mynameisankit/",
+    "github": "https://github.com/mynameisankit",
     "twitter": "https://twitter.com/bizzare_kumar",
     "email": "ankit.kumar19@iiitg.ac.in",
-    "linkedin": "https://www.linkedin.com/in/mynameisankit/",
-    "instagram": "https://www.instagram.com/bizzare.kumar/",
-    "facebook": "https://www.facebook.com/my.name.is.ankit.Kumar/"
+    "linkedin": "https://www.linkedin.com/in/mynameisankit",
+    "instagram": "https://www.instagram.com/bizzare.kumar",
+    "facebook": "https://www.facebook.com/my.name.is.ankit.Kumar"
   },
   "technologies": [
     "HTML",
@@ -36,7 +36,7 @@
       "name": "Indian Institute of Information Technology, Guwahati",
       "degree": "Bachelors in Technolgy (B. Tech)",
       "branch": "Computer Science and Engineering",
-      "image": "images/iiitg-logo.png",
+      "image": "images/iiitg-logo.webp",
       "duration": "2019 - 2023",
       "link": "https://www.iiitg.ac.in/"
     },
@@ -44,7 +44,7 @@
       "name": "Air Force School Viman Nagar, Pune",
       "branch": "Higher Secondary Education",
       "degree": "Mathematics, Physics, Chemistry and C++",
-      "image": "images/afs-vn.jpg",
+      "image": "images/afs-vn.webp",
       "duration": "2016 - 2018",
       "link": "http://www.airforceschoolpune.ac.in/"
     }
@@ -103,18 +103,12 @@
     {
       "year": "2019",
       "title": "Joined IIIT-Guwahati as a Computer Science and Engineering Student",
-      "description": "Learned a lot of things",
+      "description": "Learning a lot of things",
       "icon": "Laptop"
     },
     {
       "title": "Passed High School",
-      "year": "2019",
-      "description": "Found gems as friends here",
-      "icon": "Book"
-    },
-    {
-      "year": "2019",
-      "title": "Entered High School",
+      "year": "2018",
       "description": "Spent most of my time studying and developed discipline",
       "icon": "Book"
     }
