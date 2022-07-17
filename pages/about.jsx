@@ -20,7 +20,7 @@ function About({ userData }) {
     return (
         <React.Fragment>
             <NextSeo
-                title={`About | ankitkumar.live`}
+                title='About'
                 description='About Me'
             />
 

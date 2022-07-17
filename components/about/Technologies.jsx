@@ -17,9 +17,9 @@ function Technologies({ children: data }) {
         >
             <Grid container spacing={2}>
                 {data?.map(tech => (
-                    <Grid item md={2} key={tech} sx={{ textAlign: 'center' }}>
+                    <Grid item xs={3} sm={2} key={tech} sx={{ textAlign: 'center' }}>
                         <Tooltip title={tech}>
-                            <ReactIcons icon={tech} sx={{ fontSize: 50 }} />
+                            <ReactIcons icon={tech} sx={{ fontSize: [40, 50] }} />
                         </Tooltip>
                     </Grid>
                 ))}

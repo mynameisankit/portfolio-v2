@@ -33,8 +33,8 @@ const education = {
             required: true
         },
         {
-            label: 'Link',
-            name: 'link',
+            label: 'URL',
+            name: 'url',
             widget: 'string',
             required: true
         }

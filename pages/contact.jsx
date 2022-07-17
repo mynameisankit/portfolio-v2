@@ -13,7 +13,7 @@ function Contact() {
     return (
         <React.Fragment>
             <NextSeo
-                title={`Contact | ankitkumar.live`}
+                title='Contact'
                 description='Contact Me'
             />
 

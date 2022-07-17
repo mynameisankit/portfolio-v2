@@ -14,7 +14,7 @@ function Resume() {
     return (
         <React.Fragment>
             <NextSeo
-                title={`Resume | ankitkumar.live`}
+                title='Resume'
                 description='My Resume'
             />
 

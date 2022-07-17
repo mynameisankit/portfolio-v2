@@ -38,7 +38,7 @@
       "branch": "Computer Science and Engineering",
       "image": "images/iiitg-logo.webp",
       "duration": "2019 - 2023",
-      "link": "https://www.iiitg.ac.in/"
+      "url": "https://www.iiitg.ac.in/"
     },
     {
       "name": "Air Force School Viman Nagar, Pune",
@@ -46,7 +46,7 @@
       "degree": "Mathematics, Physics, Chemistry and C++",
       "image": "images/afs-vn.webp",
       "duration": "2016 - 2018",
-      "link": "http://www.airforceschoolpune.ac.in/"
+      "url": "http://www.airforceschoolpune.ac.in/"
     }
   ],
   "tools": [

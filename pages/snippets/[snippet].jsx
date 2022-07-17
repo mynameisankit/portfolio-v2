@@ -16,7 +16,7 @@ function Snippet({ mdxSource, frontMatter, toc }) {
     return (
         <React.Fragment>
             <NextSeo
-                title={`${title} | Snippets | ankitkumar.live`}
+                title={`${title} | Snippets`}
                 description={abstract}
                 openGraph={{
                     type: 'article',

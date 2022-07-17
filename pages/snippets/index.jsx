@@ -23,7 +23,7 @@ function Snippets({ snippets, fuzzySearchProps, paginationSettings }) {
     return (
         <React.Fragment>
             <NextSeo
-                title={`Snippets | ankitkumar.live`}
+                title='Snippets'
                 description='A collection of code snippets written by me and found on the Internet'
             />
 
@@ -44,7 +44,7 @@ function Snippets({ snippets, fuzzySearchProps, paginationSettings }) {
                     },
                     item: {
                         xs: 12,
-                        md: 6
+                        lg: 6
                     }
                 }}
             >

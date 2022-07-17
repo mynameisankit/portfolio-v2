@@ -13,7 +13,7 @@ function Colophon({ mdxSource }) {
     return (
         <React.Fragment>
             <NextSeo
-                title={`Colophon | ankitkumar.live`}
+                title='Colophon'
                 description='Colophon'
             />
             

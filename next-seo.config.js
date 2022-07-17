@@ -1,5 +1,5 @@
 const SEO = {
-    title: 'Home | ankitkumar.live',
+    titleTemplate: '%s | ankit-kumar.live',
     description: `Ankit Kumar's Portfolio`,
     openGraph: {
         type: 'website',

@@ -4,20 +4,17 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-//Material-UI Icons
-import LinkIcon from '@mui/icons-material/Link';
 //Custom Components
 import Section from '@/components/common/Section';
-import Link from '@/components/common/Link';
 import Card from '@/components/about/Card';
 
-function EducationBlock({ children: { image, name, degree, branch, duration, link } }) {
+function EducationBlock({ children: { image, name, degree, branch, duration, url } }) {
     const theme = useTheme();
     const breakpoint = useMediaQuery(theme.breakpoints.down('md'));
 
-    //Optimize for phone view
     return (
         <Card
+            url={url}
             media={
                 <NextImage
                     layout='fill'
@@ -38,11 +35,11 @@ function EducationBlock({ children: { image, name, degree, branch, duration, lin
                     </Typography>
                 </React.Fragment>
             }
-            links={
-                <Link type='icon' href={link}>
-                    <LinkIcon fontSize='large' sx={{ color: 'text.primary' }} />
-                </Link>
-            }
+            sx={{
+                media: {
+                    height: 100
+                }
+            }}
         />
     );
 }

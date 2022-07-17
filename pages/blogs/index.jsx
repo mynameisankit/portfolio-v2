@@ -22,7 +22,7 @@ function Blogs({ blogs, paginationSettings, fuzzySearchProps }) {
     return (
         <React.Fragment>
             <NextSeo
-                title={`Blogs | ankitkumar.live`}
+                title='Blogs'
                 description='My Blog'
             />
             

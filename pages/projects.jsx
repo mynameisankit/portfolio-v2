@@ -22,7 +22,7 @@ function ProjectsPage({ featured, projects }) {
     return (
         <React.Fragment>
             <NextSeo
-                title={`Projects | ankitkumar.live`}
+                title='Projects'
                 description='My Projects'
             />
 

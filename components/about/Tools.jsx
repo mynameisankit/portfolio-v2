@@ -7,9 +7,6 @@ import Chip from '@mui/material/Chip';
 import Card from '@/components/about/Card';
 import Section from '@/components/common/Section';
 import ReactIcons from '@/components/common/ReactIcons';
-import Link from '@/components/common/Link';
-//Material-UI Icons
-import LinkIcon from '@mui/icons-material/Link';
 
 function Tools({ children: data }) {
     return (
@@ -24,6 +21,7 @@ function Tools({ children: data }) {
                 {data?.map(({ title, description, url, use }) => (
                     <Grid item xs={12} md={6} key={title}>
                         <Card
+                            url={url}
                             media={<ReactIcons sx={{ fontSize: 40 }} icon={title} />}
                             content={
                                 <React.Fragment>
@@ -38,11 +36,12 @@ function Tools({ children: data }) {
                                     </Typography>
                                 </React.Fragment>
                             }
-                            links={
-                                <Link type='icon' href={url}>
-                                    <LinkIcon fontSize='large' sx={{ color: 'text.primary' }} />
-                                </Link>
-                            }
+                            sx={{
+                                card: {
+                                    pl: 2, pt: 0,
+                                    flexDirection: 'row',
+                                }
+                            }}
                         />
                     </Grid>
                 ))}

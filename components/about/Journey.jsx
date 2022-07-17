@@ -1,40 +1,35 @@
 import React from 'react';
-import Timeline from '@mui/lab/Timeline';
-import TimelineItem from '@mui/lab/TimelineItem';
-import TimelineSeparator from '@mui/lab/TimelineSeparator';
-import TimelineConnector from '@mui/lab/TimelineConnector';
-import TimelineContent from '@mui/lab/TimelineContent';
-import TimelineDot from '@mui/lab/TimelineDot';
-import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
+import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 //Custom Components
 import Section from '@/components/common/Section';
+import Card from '@/components/about/Card';
 import ReactIcons from '@/components/common/ReactIcons';
 
-function JourneyItem({ year, title, description, icon, isLast }) {
+function JourneyItem({ title, description, icon }) {
     //TODO: Optimize for phone view
     return (
-        <TimelineItem>
-            <TimelineOppositeContent sx={{ m: 'auto 0' }} variant='h6'>
-                {year}
-            </TimelineOppositeContent>
-            <TimelineSeparator>
-                <TimelineDot color='primary'>
-                    <ReactIcons icon={icon} />
-                </TimelineDot>
-                {!isLast && <TimelineConnector sx={{ bgcolor: 'primary.main' }} />}
-            </TimelineSeparator>
-            <TimelineContent>
-                <Typography variant='h5' component='span'>
-                    {title}
-                </Typography>
-                {description && (<Typography>{description}</Typography>)}
-            </TimelineContent>
-        </TimelineItem>
+        <Card
+            media={<ReactIcons sx={{ fontSize: 40 }} icon={icon} />}
+            content={
+                <React.Fragment>
+                    <Typography variant={'h5'} component='h5'>
+                        {title}
+                    </Typography>
+                    <Typography variant={'body1'} component='p'>
+                        {description}
+                    </Typography>
+                </React.Fragment>
+            }
+        />
     );
 }
 
 function Journey({ children: data }) {
+    data?.sort((a, b) => {
+        return b.year - a.year;
+    });
+
     return (
         <Section
             id='timeline'
@@ -42,9 +37,28 @@ function Journey({ children: data }) {
             gutterBottom={4}
             heading='My Journey'
         >
-            <Timeline position='alternate'>
-                {data?.map((item, idx, arr) => <JourneyItem key={item.title} {...item} isLast={idx === arr.length - 1} />)}
-            </Timeline>
+            <Grid container spacing={3}>
+                {data?.reduce((acc, curr, idx, arr) => {
+                    const prev = idx ? arr[idx - 1] : {};
+
+                    if (!idx || curr.year !== prev.year)
+                        acc.push(
+                            <Grid key={idx} item xs={12}>
+                                <Typography variant='h5' sx={{ textDecoration: 'underline' }}>
+                                    {curr.year}
+                                </Typography>
+                            </Grid>
+                        );
+
+                    acc.push(
+                        <Grid item xs={12} key={curr.title}>
+                            <JourneyItem {...curr} />
+                        </Grid>
+                    );
+
+                    return acc;
+                }, [])}
+            </Grid>
         </Section>
     );
 }

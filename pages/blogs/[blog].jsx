@@ -17,7 +17,7 @@ function Blog({ mdxSource, frontMatter, toc }) {
     return (
         <React.Fragment>
             <NextSeo
-                title={`${title} | Blogs | ankitkumar.live`}
+                title={`${title} | Blogs`}
                 description={abstract}
                 openGraph={{
                     type: 'article',

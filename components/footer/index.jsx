@@ -37,17 +37,15 @@ function Footer() {
                 </Stack>
 
                 <Stack direction='row' gap={2}>
-                    <Typography variant='body1'>
-                        Copyright © {dayjs().year()}
-                    </Typography>
-
-                    <Typography variant='body1'>
+                    <Typography component='div' variant='body1'>
+                        Copyright © {dayjs().year()} 
+                        {' '}
                         •
+                        {' '}
+                        <Link href='/colophon'>
+                            Colophon
+                        </Link>
                     </Typography>
-
-                    <Link href='/colophon'>
-                        Colophon
-                    </Link>
                 </Stack>
 
             </Stack>
