@@ -75,7 +75,8 @@ const IconsMapping = {
     'html': Si.SiHtml5,
     'laptop': Bs.BsLaptop,
     'book': Bi.BiBook,
-    'menu': Gi.GiHamburgerMenu
+    'menu': Gi.GiHamburgerMenu,
+    'work': Mui.Work
 };
 
 function ReactIcons({ icon, ...rest }) {

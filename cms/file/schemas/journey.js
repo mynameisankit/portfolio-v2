@@ -25,7 +25,7 @@ const journey = {
             label: 'Description',
             name: 'description',
             widget: 'text',
-            required: true
+            required: false
         },
         {
             label: 'Icon',

@@ -7,7 +7,6 @@ import Card from '@/components/about/Card';
 import ReactIcons from '@/components/common/ReactIcons';
 
 function JourneyItem({ title, description, icon }) {
-    //TODO: Optimize for phone view
     return (
         <Card
             media={<ReactIcons sx={{ fontSize: 40 }} icon={icon} />}
@@ -16,9 +15,11 @@ function JourneyItem({ title, description, icon }) {
                     <Typography variant={'h5'} component='h5'>
                         {title}
                     </Typography>
-                    <Typography variant={'body1'} component='p'>
-                        {description}
-                    </Typography>
+                    {description && (
+                        <Typography variant={'body1'} component='p'>
+                            {description}
+                        </Typography>
+                    )}
                 </React.Fragment>
             }
         />
