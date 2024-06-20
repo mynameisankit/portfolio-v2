@@ -1,0 +1,116 @@
+{
+    "socialMediaLinks": {
+      "github": "https://github.com/mynameisankit",
+      "twitter": "https://twitter.com/bizzare_kumar",
+      "email": "ankit.kumar19@iiitg.ac.in",
+      "linkedin": "https://www.linkedin.com/in/mynameisankit",
+      "instagram": "https://www.instagram.com/bizzare.kumar",
+      "facebook": "https://www.facebook.com/my.name.is.ankit.Kumar"
+    },
+    "technologies": [
+      "HTML",
+      "CSS",
+      "C",
+      "CPP",
+      "JavaScript",
+      "Java",
+      "Python",
+      "Bash",
+      "MySQL",
+      "PostgreSQL",
+      "AWS",
+      "React",
+      "Next.js",
+      "Material-UI",
+      "Node.js",
+      "Express.js",
+      "Git",
+      "Pandas",
+      "NumPy",
+      "Firebase",
+      "Bootstrap",
+      "SQLite"
+    ],
+    "education": [
+      {
+        "name": "Indian Institute of Information Technology, Guwahati",
+        "degree": "Bachelors in Technolgy (B. Tech)",
+        "branch": "Computer Science and Engineering",
+        "image": "images/iiitg-logo.webp",
+        "duration": "2019 - 2023",
+        "url": "https://www.iiitg.ac.in/"
+      },
+      {
+        "name": "Air Force School Viman Nagar, Pune",
+        "branch": "Higher Secondary Education",
+        "degree": "Mathematics, Physics, Chemistry and C++",
+        "image": "images/afs-vn.webp",
+        "duration": "2016 - 2018",
+        "url": "http://www.airforceschoolpune.ac.in/"
+      }
+    ],
+    "tools": [
+      {
+        "title": "Visual Studio Code",
+        "description": "A lightweight customizable text editor with a lot of plugins",
+        "url": "https://code.visualstudio.com/",
+        "useCase": "Editor"
+      },
+      {
+        "title": "WSL",
+        "description": "A extension for windows which simulates linux terminal",
+        "url": "https://ubuntu.com/wsl",
+        "useCase": "Terminal"
+      },
+      {
+        "title": "Notion",
+        "description": "A very easy-to-use note taking app with a lot of features",
+        "url": "https://notion.so/",
+        "useCase": "Note Taking"
+      },
+      {
+        "title": "Discord",
+        "description": "A very robust communication app",
+        "url": "https://discord.com/",
+        "useCase": "Messaging"
+      },
+      {
+        "title": "Yarn",
+        "description": "A much better and easy to use package manager",
+        "url": "https://yarnpkg.com/",
+        "useCase": "Package Manager"
+      },
+      {
+        "title": "Github",
+        "description": "The best and most popular code hosting platform out there!",
+        "url": "https://github.com/",
+        "useCase": "Code Hosting"
+      }
+    ],
+    "journey": [
+      {
+        "title": "Became a convener @ IIITG Programming Club",
+        "year": "2020",
+        "description": "Helped in creating IIITG Open Source Community involving many projects and took a lot of sessions",
+        "icon": "Laptop"
+      },
+      {
+        "title": "Started writing articles on Web development",
+        "year": "2020",
+        "description": "Wrote my first ever blog with the thought of giving back to the community while I learn",
+        "icon": "Laptop"
+      },
+      {
+        "year": "2019",
+        "title": "Joined IIIT-Guwahati as a Computer Science and Engineering Student",
+        "description": "Learning a lot of things",
+        "icon": "Laptop"
+      },
+      {
+        "title": "Passed High School",
+        "year": "2018",
+        "description": "Spent most of my time studying and developed discipline",
+        "icon": "Book"
+      }
+    ]
+  }

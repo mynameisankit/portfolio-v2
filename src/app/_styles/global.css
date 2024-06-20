@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  font-size: 10px;
+}
+
+@layer base {
+  a {
+    @apply text-28;
+  }
+
+  h1 {
+    @apply text-36;
+  }
+
+  h2 {
+    @apply text-28;
+  }
+
+  h3 {
+    @apply text-20;
+  }
+
+  p {
+    @apply text-16;
+  }
+}

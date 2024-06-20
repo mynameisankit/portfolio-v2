@@ -1,0 +1,13 @@
+@tailwind components;
+
+@layer components {
+  .tooltip {
+    @apply !bg-primary;
+    @apply !text-primary;
+    @apply border border-solid border-primary;
+  }
+
+  .arrow {
+    @apply border border-solid border-primary;
+  }
+}
